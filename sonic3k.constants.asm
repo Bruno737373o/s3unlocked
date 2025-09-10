@@ -941,9 +941,10 @@ Special_stage_override_flag = Debug_mode_flag+1	; Liliam: level select - access 
 			ds.l 1				; unused
 Level_select_flag		ds.b 1
 Slow_motion_flag		ds.b 1
-Debug_cheat_flag		ds.w 1			; set if the debug cheat's been entered
-Level_select_cheat_counter	ds.w 1			; progress entering level select cheat, unused
-Debug_mode_cheat_counter	ds.w 1			; progress entering debug mode cheat, unused
+Debug_cheat_flag		ds.b 1			; set if the debug cheat's been entered
+Debug_cheat_input_counter	ds.b 1		; Liliam: ported from S3 - restore level select cheats
+Cheat_input_counter		ds.w 1			; progress entering cheat codes
+Cheat_input_counter2		ds.w 1			; progress entering cheat codes
 Competition_mode		ds.w 1
 P1_character			ds.b 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P2_character			ds.b 1
