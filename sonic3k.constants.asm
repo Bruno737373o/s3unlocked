@@ -5,6 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 ; universally followed object conventions:
+code =			  0 ; longword
 render_flags =		  4 ; bitfield ; refer to SCHG for details
 height_pixels =		  6 ; byte
 width_pixels =		  7 ; byte
@@ -77,6 +78,7 @@ top_solid_bit =		$46 ; byte ; the bit to check for top solidity (either $C or $E
 lrb_solid_bit =		$47 ; byte ; the bit to check for left/right/bottom solidity (either $D or $F)
 ; ---------------------------------------------------------------------------
 ; conventions followed by some/most bosses:
+boss_saved_mus =	$26	; byte ; used primarily by loc_85CA4 which is used by cutscene knuckles, and most of the boss objects
 boss_hitcount2 =	$29
 ; ---------------------------------------------------------------------------
 ; when childsprites are activated (i.e. bit #6 of render_flags set)
@@ -243,6 +245,29 @@ PSG_input =			$C00011
 ; ---------------------------------------------------------------------------
 
 ; RAM addresses
+
+; SRAM addresses
+; Notes: SRAM in Sonic 3 Alone and Sonic 3 & Knuckles is 1KB in size.
+; Both games use odd 8-bit addresses for saving.
+	phase $200001
+SRAM_start	=		*
+	ds.b	$10	; unused
+SRAM_competition	ds.b $2A*4	; $A8 bytes
+	ds.b	4	; unused
+SRAM_competition_backup	ds.b	$2A*4	; $A8 bytes
+	ds.b	4	; unused
+SRAM_S3game	ds.b	$1A*4	; $68 bytes
+	ds.b	$24	; unused
+SRAM_S3game_backup	ds.b	$1A*4	; $68 bytes
+	ds.b	$24 ; unused
+SRAM_SKgame	ds.b	$2A*4	; $A8 bytes
+	ds.b	4	; unused
+SRAM_SKgame_backup	ds.b	$2A*4	; $A8 bytes
+	ds.b	$2A	; unused
+SRAM_end	=		*
+	dephase
+
+; M68K RAM addresses
 
 Sprite_table_alternate =	ramaddr(   $FF7880 ) ; $280 bytes ; alternate sprite table for player 1 in competition mode
 Sprite_table_P2 =		ramaddr(   $FF7B00 ) ; $280 bytes ; sprite table for player 2 in competition mode
@@ -1119,13 +1144,13 @@ mus_ProtoCredits		ds.b 1		; $F9
 ; Sound commands list.
 
 ;	phase $E1
-mus__FirstCmd =			*		; ID of the first sound command
-mus_FadeOut			ds.b 1		; $FA - fade out music
-mus_Stop			ds.b 1		; $FB - stop music and sound effects
-mus_MutePSG			ds.b 1		; $FC - mute all PSG channels
-mus_StopSFX			ds.b 1		; $FD - stop all sound effects
-mus_StopSEGA =			$FE		; $FE - Stop SEGA sound
-mus_SEGA =			$FF		; $FF - Play SEGA sound
+cmd__First =			*		; ID of the first sound command
+cmd_FadeOut			ds.b 1		; $FA - fade out music
+cmd_Stop			ds.b 1		; $FB - stop music and sound effects
+cmd_MutePSG			ds.b 1		; $FC - mute all PSG channels
+cmd_StopSFX			ds.b 1		; $FD - stop all sound effects
+cmd_StopSEGA =			$FE		; $FE - Stop SEGA sound
+cmd_SEGA =			$FF		; $FF - Play SEGA sound
 	dephase
 ; ---------------------------------------------------------------------------
 ; Music ID's list. These do not affect the sound driver, be careful.

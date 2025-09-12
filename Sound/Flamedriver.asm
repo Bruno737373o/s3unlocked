@@ -395,8 +395,8 @@ DACID__End	= SndID__End
 	endif
 
 	ifndef FadeID__First
-		ifdef mus__FirstCmd
-FadeID__First			= mus__FirstCmd
+		ifdef cmd__First
+FadeID__First			= cmd__First
 		else
 			ifdef flg__First
 FadeID__First			= flg__First
@@ -408,8 +408,8 @@ FadeID__First			= 0E1h
 	endif
 
 	ifndef FadeID__End
-		ifdef mus__EndCmd
-FadeID__End				= mus__EndCmd
+		ifdef cmd__End
+FadeID__End				= cmd__End
 		else
 			ifdef flg__Last
 FadeID__End				= flg__Last
@@ -421,8 +421,8 @@ FadeID__End				= 0E6h
 	endif
 
 	ifndef MusID_StopSega
-		ifdef mus_StopSEGA
-MusID_StopSega			= mus_StopSEGA
+		ifdef cmd_StopSEGA
+MusID_StopSega			= cmd_StopSEGA
 		else
 			ifndef MusID_StopSega
 MusID_StopSega			= 0FEh
@@ -431,8 +431,8 @@ MusID_StopSega			= 0FEh
 	endif
 
 	ifndef MusID_SegaSound
-		ifdef mus_SEGA
-MusID_SegaSound			= mus_SEGA
+		ifdef cmd_SEGA
+MusID_SegaSound			= cmd_SEGA
 		else
 			ifdef sfx_Sega
 MusID_SegaSound			= sfx_Sega
