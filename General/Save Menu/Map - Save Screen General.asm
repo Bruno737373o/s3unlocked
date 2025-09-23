@@ -34,7 +34,6 @@ Map_SaveScreen_:
 		dc.w word_D100-Map_SaveScreen_
 		dc.w word_D108-Map_SaveScreen_
 		dc.w word_D110-Map_SaveScreen_
-		dc.w word_D118-Map_SaveScreen_
 		dc.w Map_SaveScreen_KnucklesEncore-Map_SaveScreen_
 		dc.w Map_SaveScreen_AmyEncore-Map_SaveScreen_
 		dc.w Map_SaveScreen_Amy-Map_SaveScreen_
@@ -132,12 +131,12 @@ word_D02A:	dc.w 1
 word_D032:	dc.w 1
 		dc.b  $FF,   0, $61,  $A,   0,   7
 word_D03A:	dc.w 6
-		dc.b  $88,  $F,	$63, $1B, $FF, $D8
-		dc.b  $88,  $F,	$63, $2B, $FF, $F8
-		dc.b  $88,   7,	$63, $3B,   0, $18
-		dc.b  $A8,  $E,	$63, $43, $FF, $D8
-		dc.b  $A8,  $E,	$63, $4F, $FF, $F8
-		dc.b  $A8,   6,	$63, $5B,   0, $18
+		dc.b  $88,  $F,	$62, $7D, $FF, $D8
+		dc.b  $88,  $F,	$62, $8D, $FF, $F8
+		dc.b  $88,   7,	$62, $9D,   0, $18
+		dc.b  $A8,  $E,	$62, $A5, $FF, $D8
+		dc.b  $A8,  $E,	$62, $B1, $FF, $F8
+		dc.b  $A8,   6,	$62, $BD,   0, $18
 word_D060:	dc.w 6
 		dc.b  $88,  $F, $61,  $B, $FF, $D8
 		dc.b  $88,  $F, $61, $1B, $FF, $F8
@@ -176,13 +175,6 @@ word_D108:	dc.w 1
 		dc.b  $FF,   5, $61, $F1, $FF, $ED
 word_D110:	dc.w 1
 		dc.b  $FF,   5, $61, $F5,   0,   3
-word_D118:	dc.w 6
-		dc.b  $88,  $F,	$62, $7D, $FF, $D8
-		dc.b  $A8,  $E,	$62, $8D, $FF, $D8
-		dc.b  $88,  $F,	$62, $99, $FF, $F8
-		dc.b  $A8,  $E,	$62, $A9, $FF, $F8
-		dc.b  $88,   7,	$62, $B5,   0, $18
-		dc.b  $A8,   6,	$62, $BD,   0, $18
 Map_SaveScreen_KnucklesEncore:
 		dc.w 3
 		dc.b  $D8,   8, $28, $99, $FF, $F5
