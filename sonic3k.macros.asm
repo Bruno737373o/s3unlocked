@@ -216,6 +216,12 @@ tribyte macro val
 	endif
     endm
 
+sstagepaldata macro color1, color2, bgcolor1, bgcolor2, bgcolor3
+	dc.w color1, color1, color1, color1, color2, color2, color2, color2
+	dc.w color1, color1, color1, color1, color2, color2, color2, color2
+	dc.w bgcolor1, bgcolor2, bgcolor3
+    endm
+
 ; macro to define a palette script pointer
 palscriptptr	macro header, data
 	dc.w data-header, 0
