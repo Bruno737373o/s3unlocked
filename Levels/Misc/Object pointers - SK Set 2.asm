@@ -18,7 +18,7 @@
 		dc.l Obj_MHZMushroomPlatform		; 17
 		dc.l Obj_MHZMushroomParachute		; 18
 		dc.l Obj_MHZMushroomCatapult		; 19
-		dc.l Obj_Updraft			; 20
+		dc.l Obj_MHZSSZUpdraft			; 20
 		dc.l Obj_LRZCorkscrew			; 21
 		dc.l Obj_LRZWallRide			; 22
 		dc.l Obj_LRZSinkingRock			; 23
@@ -37,7 +37,7 @@
 		dc.l Obj_AutomaticTunnel		; 36
 		dc.l Obj_LRZChainedPlatforms		; 37
 		dc.l Obj_AutoSpin			; 38
-		dc.l Obj_S2LavaMarker			; 39
+		dc.l Obj_PhotoPiece			; 39	; Liliam: gallery - photo piece object
 		dc.l Obj_InvisibleBlock			; 40
 		dc.l Obj_LRZFlameThrower		; 41
 		dc.l Obj_CorkFloor			; 42

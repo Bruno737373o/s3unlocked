@@ -37,7 +37,7 @@
 		dc.l Obj_AutomaticTunnel		; 36
 		dc.l Obj_ICZTeleporter			; 37	; Liliam: move ICZ1 intro teleporter to layout
 		dc.l Obj_AutoSpin			; 38
-		dc.l Obj_S2LavaMarker			; 39
+		dc.l Obj_PhotoPiece			; 39	; Liliam: gallery - photo piece object
 		dc.l Obj_InvisibleBlock			; 40
 		dc.l Obj_AIZDisappearingFloor		; 41
 		dc.l Obj_CorkFloor			; 42
@@ -72,12 +72,12 @@
 		dc.l Obj_CNZCylinder			; 71
 		dc.l Obj_CNZVacuumTube			; 72
 		dc.l Obj_CNZGiantWheel			; 73
-		dc.l Obj_Bumper				; 74
+		dc.l Obj_CNZBumper			; 74
 		dc.l Obj_CNZTriangleBumpers		; 75
 		dc.l Obj_CNZSpiralTube			; 76
 		dc.l Obj_CNZBarberPoleSprite		; 77
 		dc.l Obj_CNZWireCage			; 78
-		dc.l Obj_SinkingMud			; 79
+		dc.l Obj_MGZSinkingMud			; 79
 		dc.l Obj_MGZTwistingLoop		; 80
 		dc.l Obj_FloatingPlatform		; 81
 		dc.l Obj_MGZLBZSmashingPillar		; 82
@@ -108,7 +108,7 @@
 		dc.l Obj_InvisibleHurtBlockVertical	; 107
 		dc.l Obj_TensionBridge			; 108
 		dc.l Obj_HCZWaterSplash			; 109
-		dc.l Obj_WaterDrop			; 110
+		dc.l Obj_HCZWaterDrop			; 110
 		dc.l Obj_FBZWireCage			; 111
 		dc.l Obj_FBZWireCageStationary		; 112
 		dc.l Obj_FBZFloatingPlatform		; 113
