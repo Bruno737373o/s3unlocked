@@ -21,8 +21,6 @@ Map_GumballBonus_:
 		dc.w word_615DC-Map_GumballBonus_
 		dc.w word_6160E-Map_GumballBonus_
 		dc.w word_61628-Map_GumballBonus_
-		dc.w word_61630-Map_GumballBonus_
-		dc.w word_6165C-Map_GumballBonus_
 word_614BA:	dc.w 3
 		dc.b  $E4,   6, $A0,   0, $FF, $F8
 		dc.b  $FC,   4, $A0,   2, $FF, $F8
@@ -78,36 +76,32 @@ word_615B4:	dc.w 1
 		dc.b  $F0,  $F, $20, $C0, $FF, $F0
 word_615BC:	dc.w 1
 		dc.b  $F0,  $F, $20, $D0, $FF, $F0
-word_615C4:	dc.w 1
-		dc.b  $F0,  $F, $20, $E0, $FF, $F0
-word_615CC:	dc.w 1
-		dc.b  $F0,  $F, $20, $F0, $FF, $F0
+word_615C4:	dc.w 3
+		dc.b  $E4,   6, $A8,   0, $FF, $F8
+		dc.b  $FC,   4, $A8,   2, $FF, $F8
+		dc.b    4,   6, $A8,   0, $FF, $F8
+word_615CC:	dc.w 6
+		dc.b    0,  $F, $60, $60, $FF, $C8
+		dc.b    0,  $F, $60, $70, $FF, $F0
+		dc.b    0,  $F, $20, $B0,   0, $18
+		dc.b    0,  $F, $20, $80, $FF, $D8
+		dc.b    0,  $F, $20, $C0,   0,   8
+		dc.b  $F0,  $F, $20, $D0, $FF, $E8
 word_615D4:	dc.w 1
-		dc.b  $F0,   3,   1,   0, $FF, $FC
+		dc.b  $F0,   3,   0, $E0, $FF, $FC
 word_615DC:	dc.w 8
-		dc.b  $F0,  $D,   1,   4, $FF, $C0
-		dc.b  $F0,  $D,   1,   4, $FF, $E0
-		dc.b  $F0,  $D,   1,   4,   0,   0
-		dc.b  $F0,  $D,   1,   4,   0, $20
-		dc.b    0,  $D,   1,   4, $FF, $C0
-		dc.b    0,  $D,   1,   4, $FF, $E0
-		dc.b    0,  $D,   1,   4,   0,   0
-		dc.b    0,  $D,   1,   4,   0, $20
+		dc.b  $F0,  $D,   0, $E4, $FF, $C0
+		dc.b  $F0,  $D,   0, $E4, $FF, $E0
+		dc.b  $F0,  $D,   0, $E4,   0,   0
+		dc.b  $F0,  $D,   0, $E4,   0, $20
+		dc.b    0,  $D,   0, $E4, $FF, $C0
+		dc.b    0,  $D,   0, $E4, $FF, $E0
+		dc.b    0,  $D,   0, $E4,   0,   0
+		dc.b    0,  $D,   0, $E4,   0, $20
 word_6160E:	dc.w 4
 		dc.b  $E8,  $A,   8, $38,   0,   0
 		dc.b  $F0,   5,   8, $41, $FF, $F0
 		dc.b    0,   5,   8, $45,   0,   0
 		dc.b    0,  $A,   8, $49, $FF, $E8
 word_61628:	dc.w 1
-		dc.b  $F8,   5,   1,   4, $FF, $F8
-word_61630:	dc.w 7
-		dc.b    0,  $F, $E0, $60, $FF, $C8
-		dc.b    0,  $F, $E0, $70, $FF, $F0
-		dc.b    0,  $F, $A0, $B0,   0, $18
-		dc.b    0,  $F, $A0, $80, $FF, $D8
-		dc.b    0,  $F, $A0, $C0,   0,   8
-		dc.b  $F0,  $F, $A0, $D0, $FF, $E8
-		dc.b  $F0,  $F, $20, $E0,   0, $18
-word_6165C:	dc.w 2
-		dc.b  $18,   3,   7, $C0,   0,   8
-		dc.b  $18,   3,   2, $5F,   0,   0
+		dc.b  $F8,   5,   0, $E4, $FF, $F8
