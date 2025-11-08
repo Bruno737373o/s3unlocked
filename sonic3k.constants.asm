@@ -608,8 +608,8 @@ Nem_frame_patterns_left		ds.w 1			; the number of patterns remaining to be decom
 Tails_CPU_interact		ds.w 1			; RAM address of the last object Tails stood on while controlled by AI
 Tails_CPU_idle_timer		ds.w 1			; counts down while controller 2 is idle, when it reaches 0 the AI takes over
 Tails_CPU_flight_timer		ds.w 1			; counts up while Tails is respawning, when it reaches 300 he drops into the level
+Tails_CPU_facing_timer		ds.b 1		; Liliam: Tails AI - bias facing direction when respawning
 Tails_CPU_pos_table_offset	ds.b 1		; Liliam: Tails AI - track live position
-			ds.b 1				; unused
 Tails_CPU_routine		ds.w 1			; Tails' current AI routine in a Sonic and Tails game
 Tails_CPU_target_X		ds.w 1			; Tails' target x-position
 Tails_CPU_target_Y		ds.w 1			; Tails' target y-position
