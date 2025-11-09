@@ -523,7 +523,7 @@ Ctrl_1_pressed			ds.b 1			; buttons being pressed newly this frame
 Ctrl_2 =			*			; both held and pressed
 Ctrl_2_held			ds.b 1
 Ctrl_2_pressed			ds.b 1
-_tempF608		ds.b 6				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+_tempF608		ds.b 6				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles
 
 VDP_reg_1_command		ds.w 1			; AND the lower byte by $BF and write to VDP control port to disable display, OR by $40 to enable
 			ds.l 1				; unused
@@ -705,8 +705,7 @@ Camera_stored_max_X_pos		ds.w 1			; the target camera maximum x-position
 Camera_stored_min_X_pos		ds.w 1			; the target camera minimum x-position
 Camera_stored_min_Y_pos		ds.w 1			; the target camera minimum y-position
 Camera_stored_max_Y_pos		ds.w 1			; the target camera maximum y-position
-Slotted_object_bits		ds.w 1			; bits to determine which slots are used for slotted objects
-			ds.b 6				; unused
+Slotted_object_bits		ds.b 8			; bits to determine which slots are used for slotted objects
 _unkFAA2			ds.b 1
 _unkFAA3			ds.b 1
 _unkFAA4			ds.w 1
@@ -774,8 +773,7 @@ Debug_object			ds.b 1			; the current position in the debug mode object list
 Debug_monitor_subtype		ds.b 1		; Liliam: allow selection of debug monitor contents
 Debug_placement_mode =		*			; both routine and type
 Debug_placement_routine		ds.b 1
-;Debug_placement_type
-				ds.b 1		; Liliam: move debug frame cycling mode to negative
+			ds.b 1			; Liliam: move debug frame cycling mode to negative
 Debug_camera_delay		ds.b 1
 Debug_camera_speed		ds.b 1
 V_int_run_count			ds.l 1			; the number of times V-int has run
@@ -877,8 +875,9 @@ Competition_total_laps		ds.b 1			; total number of laps in competition mode (typ
 			ds.b 1				; unused
 Competition_current_lap		ds.b 1			; current lap number for player 1 in competition mode
 Competition_current_lap_2P	ds.b 1			; current lap number for player 2 in competition mode
-Loser_time_left			ds.b 1			; left over from Sonic 2
-			ds.b $23			; unused
+Collected_holograms_array	ds.l 1		; Liliam: Metal Sonic hologram object
+Collected_photo_piece_array	ds.b $F		; Liliam: gallery - photo piece object
+			ds.b $11			; unused
 Results_screen_2P		ds.w 1			; left over from Sonic 2
 Perfect_rings_left		ds.w 1			; left over from Sonic 2
 Perfect_rings_flag		ds.w 1			; unknown
@@ -909,33 +908,28 @@ Level_select_option		ds.w 1			; the current selected option in the level select
 Sound_test_sound		ds.w 1
 Title_screen_option		ds.b 1
 			ds.b 1				; unused
-_tempFF88		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+_tempFF88		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles
 Competition_settings =		*			; both items and game type
 Competition_items		ds.b 1			; 0 = Enabled, FF = Disabled.
 Competition_type		ds.b 1			; 0 = grand prix, 3 = match race, -1 = time attack
-_tempFF8C		ds.b 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+_tempFF8C		ds.b 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles
 			ds.b 1				; unused
 Total_bonus_countup		ds.w 1			; the total points to be added due to various bonuses this frame in the end of level results screen
 Current_music			ds.w 1
 Collected_special_ring_array	ds.l 1			; each bit indicates a special stage entry ring in the current zone
 Saved2_status_secondary		ds.b 1
 Respawn_table_keep		ds.b 1			; if set, respawn table is not reset during level load
-_tempFF98		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+_tempFF98		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles
 Saved_apparent_zone_and_act	ds.w 1
 Saved2_apparent_zone_and_act	ds.w 1
 
-;Blue_spheres_header_flag
-;Blue_spheres_mode
-;Blue_spheres_menu_flag
 Blue_spheres_saved_level	ds.l 1		; Liliam: blue sphere - load saved level on startup
 Blue_spheres_current_stage	ds.b 4			; the layout parts that make up the current stage
 Blue_spheres_current_level	ds.l 1			; number shown at the top of the full game menu
 Blue_spheres_option		ds.b 1			; 0 = level, 1 = start, 2 = code
-;Blue_spheres_progress_flag
 Blue_spheres_menu_flag		ds.b 1			; 0 = single stage, 1 = normal, bit 7 set = entering a code
 Blue_spheres_difficulty		ds.b 1			; value currently displayed
 Blue_spheres_target_difficulty	ds.b 1			; value read from the layout
-;SK_alone_flag
 			ds.w 1			; Liliam: removed S&K alone mode
 Emerald_counts =		*			; both Chaos and Super emeralds
 Chaos_emerald_count		ds.b 1
@@ -1067,6 +1061,7 @@ sfx_EncoreSwapBlocked =		sfx_SmallBumpers
 sfx_EncoreRespawn =		sfx_Signpost
 sfx_AirCountdown =		sfx_TunnelBooster
 sfx_CombineRing =		sfx_Shield
+sfx_HologramCollected =		sfx_SuperEmerald
 sfx_RotateStocks =		sfx_Shield
 
 ; ---------------------------------------------------------------------------

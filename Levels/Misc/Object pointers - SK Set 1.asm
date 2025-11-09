@@ -130,7 +130,7 @@
 		dc.l Obj_EggCapsule			; 129
 		dc.l Obj_CutsceneKnuckles		; 130
 		dc.l Obj_CutsceneButton			; 131
-		dc.l Obj_AIZPlaneIntro			; 132
+		dc.l Obj_MetalSonicHologram		; 132	; Liliam: Metal Sonic hologram object
 		dc.l Obj_SSEntryRing			; 133
 		dc.l Obj_GumballMachine			; 134
 		dc.l Obj_GumballTriangleBumper		; 135
