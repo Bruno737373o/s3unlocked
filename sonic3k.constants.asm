@@ -1059,10 +1059,7 @@ Encore_HUD_stocks_scroll =	Reserved_object_3+$32
 sfx_EncoreSwap =		sfx_PulleyGrab
 sfx_EncoreSwapBlocked =		sfx_SmallBumpers
 sfx_EncoreRespawn =		sfx_Signpost
-sfx_AirCountdown =		sfx_TunnelBooster
-sfx_CombineRing =		sfx_Shield
-sfx_HologramCollected =		sfx_SuperEmerald
-sfx_RotateStocks =		sfx_Shield
+sfx_Splash2 =			sfx_Splash
 
 ; ---------------------------------------------------------------------------
 ; Art tile stuff
@@ -1452,33 +1449,9 @@ ArtTile_DashDust                      = $07E0
 ArtTile_DashDust_P2                   = $07F0
 
 ; ---------------------------------------------------------------------------
-; Liliam: add extra music tracks
-
-	phase $E7
-mus__FirstExtra =		*
-mus_Credits			ds.b 1		; $E7
-mus_CreditsK			ds.b 1		; $E8
-mus_KnucklesK			ds.b 1		; $E9
-mus_ExtraLifeK			ds.b 1		; $EA
-mus_InvincibilityK		ds.b 1		; $EB
-mus_HyperTheme			ds.b 1		; $EC
-mus_S1Boss			ds.b 1		; $ED
-mus_S2Boss			ds.b 1		; $EE
-mus_EncoreBonus			ds.b 1		; $EF
-mus_HighFive			ds.b 1		; $F0
-mus_ProtoMenu			ds.b 1		; $F1
-mus_ProtoKnuckles		ds.b 1		; $F2
-mus_ProtoCNZ1			ds.b 1		; $F3
-mus_ProtoCNZ2			ds.b 1		; $F4
-mus_ProtoICZ1			ds.b 1		; $F5
-mus_ProtoICZ2			ds.b 1		; $F6
-mus_ProtoLBZ1			ds.b 1		; $F7
-mus_ProtoLBZ2			ds.b 1		; $F8
-mus_ProtoCredits		ds.b 1		; $F9
-; ---------------------------------------------------------------------------
 ; Sound commands list.
 
-;	phase $E1
+	phase $FA
 cmd__First =			*		; ID of the first sound command
 cmd_FadeOut			ds.b 1		; $FA - fade out music
 cmd_Stop			ds.b 1		; $FB - stop music and sound effects
@@ -1543,13 +1516,10 @@ mus_FinalBoss			ds.b 1		; $30
 mus_Drowning			ds.b 1		; $31
 mus_Ending			ds.b 1		; $32
 mus__End =			*		; next ID after last music
-mus__Gap = mus__First-mus__End+mus__FirstExtra	; gap between last music and extra music
-	dephase
 
 ; ---------------------------------------------------------------------------
 ; Sound effect ID's list. These do not affect the sound driver, be careful.
 
-	phase $33
 sfx__First =			*		; ID of the first sound effect
 sfx_RingRight			ds.b 1		; $33
 sfx_RingLeft			ds.b 1		; $34
@@ -1608,12 +1578,12 @@ sfx_Perfect			ds.b 1		; $68
 sfx_PushBlock			ds.b 1		; $69
 sfx_Goal			ds.b 1		; $6A
 sfx_ActionBlock			ds.b 1		; $6B
-sfx_Splash2			ds.b 1		; $6C
+sfx_RotateStocks		ds.b 1		; $6C	; Liliam: Encore mode - stock rotate monitor
 sfx_UnknownShift		ds.b 1		; $6D
 sfx_BossHit			ds.b 1		; $6E
 sfx_Rumble2			ds.b 1		; $6F
 sfx_LavaBall			ds.b 1		; $70
-sfx_Shield2			ds.b 1		; $71
+sfx_CombineRing			ds.b 1		; $71	; Liliam: Encore mode - combine ring
 sfx_Hoverpad			ds.b 1		; $72
 sfx_Transporter			ds.b 1		; $73
 sfx_TunnelBooster		ds.b 1		; $74
@@ -1641,7 +1611,7 @@ sfx_WeatherMachine		ds.b 1		; $89
 sfx_Bouncy			ds.b 1		; $8A
 sfx_ChopTree			ds.b 1		; $8B
 sfx_ChopStuck			ds.b 1		; $8C
-sfx_UnknownFlutter		ds.b 1		; $8D
+sfx_PhotoPiece			ds.b 1		; $8D	; Liliam: gallery - photo piece object
 sfx_UnknownRevving		ds.b 1		; $8E
 sfx_DoorOpen			ds.b 1		; $8F
 sfx_DoorMove			ds.b 1		; $90
@@ -1688,41 +1658,76 @@ sfx_Signpost			ds.b 1		; $B8
 sfx_RingLoss			ds.b 1		; $B9
 sfx_Flying			ds.b 1		; $BA
 sfx_FlyTired			ds.b 1		; $BB
+sfx_HammerAttack		ds.b 1		; $BC	; Liliam: add extra characters
+sfx_HammerRush			ds.b 1		; $BD	; Liliam: add extra characters
+sfx_DropDash			ds.b 1		; $BE	; Liliam: hidden skills
+sfx_Peelout			ds.b 1		; $BF	; Liliam: hidden skills
+sfx_SpikeBounce			ds.b 1		; $C0	; Liliam: add extra characters
+sfx_HammerDrop			ds.b 1		; $C1	; Liliam: add extra characters
+sfx_MetalSonic			ds.b 1		; $C2	; Liliam: add extra characters
+sfx_MetalBarrier		ds.b 1		; $C3	; Liliam: add extra characters
+sfx_MetalCharge			ds.b 1		; $C4	; Liliam: add extra characters
+sfx_TimeStone			ds.b 1		; $C5	; Liliam: Metal Sonic hologram object
+sfx_AirCountdown		ds.b 1		; $C6	; Liliam: Encore mode - music
+sfx_PeeloutCharge		ds.b 1		; $C7	; Liliam: hidden skills
+sfx_MetalOverdrive		ds.b 1		; $C8	; Liliam: add extra characters
 sfx__FirstContinuous =		*		; ID of the first continuous sound effect
-sfx_SlideSkidLoud		ds.b 1		; $BC
-sfx_LargeShip			ds.b 1		; $BD
-sfx_RobotnikSiren		ds.b 1		; $BE
-sfx_BossRotate			ds.b 1		; $BF
-sfx_FanBig			ds.b 1		; $C0
-sfx_FanSmall			ds.b 1		; $C1
-sfx_FlamethrowerLoud		ds.b 1		; $C2
-sfx_GravityTunnel		ds.b 1		; $C3
-sfx_BossPanic			ds.b 1		; $C4
-sfx_UnknownSpin			ds.b 1		; $C5
-sfx_WaveHover			ds.b 1		; $C6
-sfx_CannonTurn			ds.b 1		; $C7
-sfx_SlideSkidQuiet		ds.b 1		; $C8
-sfx_SpikeBalls			ds.b 1		; $C9
-sfx_LightTunnel			ds.b 1		; $CA
-sfx_Rumble			ds.b 1		; $CB
-sfx_BigRumble			ds.b 1		; $CC
-sfx_DeathEggRiseLoud		ds.b 1		; $CD
-sfx_WindQuiet			ds.b 1		; $CE
-sfx_WindLoud			ds.b 1		; $CF
-sfx_Rising			ds.b 1		; $D0
-sfx_UnknownFlutter2		ds.b 1		; $D1
-sfx_GumballTab			ds.b 1		; $D2
-sfx_DeathEggRiseQuiet		ds.b 1		; $D3
-sfx_TurbineHum			ds.b 1		; $D4
-sfx_LavaFall			ds.b 1		; $D5
-sfx_UnknownZap			ds.b 1		; $D6
-sfx_ConveyorPlatform		ds.b 1		; $D7
-sfx_UnknownSaw			ds.b 1		; $D8
-sfx_MagneticSpike		ds.b 1		; $D9
-sfx_LeafBlower			ds.b 1		; $DA
-sfx_WaterSkid			ds.b 1		; $DB
-;mus_CreditsK					; Liliam: add extra music tracks
+sfx_LargeShip			ds.b 1		; $C9
+sfx_RobotnikSiren		ds.b 1		; $CA
+sfx_BossRotate			ds.b 1		; $CB
+sfx_FanBig			ds.b 1		; $CC
+sfx_FanSmall			ds.b 1		; $CD
+sfx_FlamethrowerLoud		ds.b 1		; $CE
+sfx_GravityTunnel		ds.b 1		; $CF
+sfx_BossPanic			ds.b 1		; $D0
+sfx_UnknownSpin			ds.b 1		; $D1
+sfx_WaveHover			ds.b 1		; $D2
+sfx_CannonTurn			ds.b 1		; $D3
+sfx_SlideSkidQuiet		ds.b 1		; $D4
+sfx_SpikeBalls			ds.b 1		; $D5
+sfx_LightTunnel			ds.b 1		; $D6
+sfx_Rumble			ds.b 1		; $D7
+sfx_BigRumble			ds.b 1		; $D8
+sfx_DeathEggRiseLoud		ds.b 1		; $D9
+sfx_WindQuiet			ds.b 1		; $DA
+sfx_Rising			ds.b 1		; $DB
+sfx_UnknownFlutter2		ds.b 1		; $DC
+sfx_GumballTab			ds.b 1		; $DD
+sfx_DeathEggRiseQuiet		ds.b 1		; $DE
+sfx_TurbineHum			ds.b 1		; $DF
+sfx_LavaFall			ds.b 1		; $E0
+sfx_UnknownZap			ds.b 1		; $E1
+sfx_ConveyorPlatform		ds.b 1		; $E2
+sfx_UnknownSaw			ds.b 1		; $E3
+sfx_MagneticSpike		ds.b 1		; $E4
+sfx_LeafBlower			ds.b 1		; $E5
+sfx_WaterSkid			ds.b 1		; $E6
 sfx__End =			*		; next ID after the last sound effect
+
+; ---------------------------------------------------------------------------
+; Liliam: add extra music tracks
+
+mus__Gap = mus__First-mus__End+mus__FirstExtra
+mus__FirstExtra =		*
+mus_Credits			ds.b 1		; $E7
+mus_CreditsK			ds.b 1		; $E8
+mus_KnucklesK			ds.b 1		; $E9
+mus_ExtraLifeK			ds.b 1		; $EA
+mus_InvincibilityK		ds.b 1		; $EB
+mus_HyperTheme			ds.b 1		; $EC
+mus_S1Boss			ds.b 1		; $ED
+mus_S2Boss			ds.b 1		; $EE
+mus_EncoreBonus			ds.b 1		; $EF
+mus_HighFive			ds.b 1		; $F0
+mus_ProtoMenu			ds.b 1		; $F1
+mus_ProtoKnuckles		ds.b 1		; $F2
+mus_ProtoCNZ1			ds.b 1		; $F3
+mus_ProtoCNZ2			ds.b 1		; $F4
+mus_ProtoICZ1			ds.b 1		; $F5
+mus_ProtoICZ2			ds.b 1		; $F6
+mus_ProtoLBZ1			ds.b 1		; $F7
+mus_ProtoLBZ2			ds.b 1		; $F8
+mus_ProtoCredits		ds.b 1		; $F9
 
 	dephase
 	!org 0				; make sure we reset the ROM position to 0

@@ -4850,7 +4850,9 @@ zMusIDPtr__End label *
 	endif
 	endm
 ; ---------------------------------------------------------------------------
+SEGA_PCM:	include "Sound/PCM/generated/Sega.inc"
 
+		even
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 ; DAC Banks
@@ -5149,11 +5151,19 @@ Sound_D8_Ptr:	offsetBankTableEntry.w Sound_D8
 Sound_D9_Ptr:	offsetBankTableEntry.w Sound_D9
 Sound_DA_Ptr:	offsetBankTableEntry.w Sound_DA
 Sound_DB_Ptr:	offsetBankTableEntry.w Sound_DB
+Sound_DC_Ptr:	offsetBankTableEntry.w Sound_DC
+Sound_DD_Ptr:	offsetBankTableEntry.w Sound_DD
+Sound_DE_Ptr:	offsetBankTableEntry.w Sound_DE
+Sound_DF_Ptr:	offsetBankTableEntry.w Sound_DF
+Sound_E0_Ptr:	offsetBankTableEntry.w Sound_E0
+Sound_E1_Ptr:	offsetBankTableEntry.w Sound_E1
+Sound_E2_Ptr:	offsetBankTableEntry.w Sound_E2
+Sound_E3_Ptr:	offsetBankTableEntry.w Sound_E3
+Sound_E4_Ptr:	offsetBankTableEntry.w Sound_E4
+Sound_E5_Ptr:	offsetBankTableEntry.w Sound_E5
+Sound_E6_Ptr:	offsetBankTableEntry.w Sound_E6
 Sound_End_Ptr
 ; ---------------------------------------------------------------------------
-SEGA_PCM:	include "Sound/PCM/generated/Sega.inc"
-
-		even
 Sound_33:	include "Sound/SFX/33 - Ring (Right).asm"
 Sound_34:	include "Sound/SFX/34 - Ring (Left).asm"
 Sound_35:	include "Sound/SFX/35 - Death.asm"
@@ -5211,12 +5221,12 @@ Sound_68:	include "Sound/SFX/68 - Perfect.asm"
 Sound_69:	include "Sound/SFX/69 - Push Block.asm"
 Sound_6A:	include "Sound/SFX/6A - Goal.asm"
 Sound_6B:	include "Sound/SFX/6B - Action Block.asm"
-Sound_6C:	include "Sound/SFX/6C - Splash 2.asm"
+Sound_6C:	include "Sound/SFX/6C - Rotate Stocks.asm"
 Sound_6D:	include "Sound/SFX/6D - Unknown Shift.asm"
 Sound_6E:	include "Sound/SFX/6E - Boss Hit.asm"
 Sound_6F:	include "Sound/SFX/6F - Rumble 2.asm"
 Sound_70:	include "Sound/SFX/70 - Lava Ball.asm"
-Sound_71:	include "Sound/SFX/71 - Shield 2.asm"
+Sound_71:	include "Sound/SFX/71 - Combine Ring.asm"
 Sound_72:	include "Sound/SFX/72 - Hoverpad.asm"
 Sound_73:	include "Sound/SFX/73 - Transporter.asm"
 Sound_74:	include "Sound/SFX/74 - Tunnel Booster.asm"
@@ -5244,7 +5254,7 @@ Sound_89:	include "Sound/SFX/89 - Weather Machine.asm"
 Sound_8A:	include "Sound/SFX/8A - Bouncy.asm"
 Sound_8B:	include "Sound/SFX/8B - Chop Tree.asm"
 Sound_8C:	include "Sound/SFX/8C - Chop Stuck.asm"
-Sound_8D:	include "Sound/SFX/8D - Unknown Flutter.asm"
+Sound_8D:	include "Sound/SFX/8D - Photo Piece.asm"
 Sound_8E:	include "Sound/SFX/8E - Unknown Revving.asm"
 Sound_8F:	include "Sound/SFX/8F - Door Open.asm"
 Sound_90:	include "Sound/SFX/90 - Door Move.asm"
@@ -5291,38 +5301,49 @@ Sound_B8:	include "Sound/SFX/B8 - Signpost.asm"
 Sound_B9:	include "Sound/SFX/B9 - Ring Loss.asm"
 Sound_BA:	include "Sound/SFX/BA - Flying.asm"
 Sound_BB:	include "Sound/SFX/BB - Flying (Tired).asm"
-Sound_BC:	include "Sound/SFX/BC - Slide Skid (Loud).asm"
-Sound_BD:	include "Sound/SFX/BD - Large Ship.asm"
-Sound_BE:	include "Sound/SFX/BE - Robotnik Siren.asm"
-Sound_BF:	include "Sound/SFX/BF - Boss Rotate.asm"
-Sound_C0:	include "Sound/SFX/C0 - Fan (Big).asm"
-Sound_C1:	include "Sound/SFX/C1 - Fan (Small).asm"
-Sound_C2:	include "Sound/SFX/C2 - Flamethrower (Loud).asm"
-Sound_C3:	include "Sound/SFX/C3 - Gravity Tunnel.asm"
-Sound_C4:	include "Sound/SFX/C4 - Boss Panic.asm"
-Sound_C5:	include "Sound/SFX/C5 - Unknown Spin.asm"
-Sound_C6:	include "Sound/SFX/C6 - Wave Hover.asm"
-Sound_C7:	include "Sound/SFX/C7 - Cannon Turn.asm"
-Sound_C8:	include "Sound/SFX/C8 - Slide Skid (Quiet).asm"
-Sound_C9:	include "Sound/SFX/C9 - Spike Balls.asm"
-Sound_CA:	include "Sound/SFX/CA - Light Tunnel.asm"
-Sound_CB:	include "Sound/SFX/CB - Rumble.asm"
-Sound_CC:	include "Sound/SFX/CC - Big Rumble.asm"
-Sound_CD:	include "Sound/SFX/CD - Death Egg Rise (Loud).asm"
-Sound_CE:	include "Sound/SFX/CE - Wind (Quiet).asm"
-Sound_CF:	include "Sound/SFX/CF - Wind (Loud).asm"
-Sound_D0:	include "Sound/SFX/D0 - Rising.asm"
-Sound_D1:	include "Sound/SFX/D1 - Unknown Flutter 2.asm"
-Sound_D2:	include "Sound/SFX/D2 - Gumball Tab.asm"
-Sound_D3:	include "Sound/SFX/D3 - Death Egg Rise (Quiet).asm"
-Sound_D4:	include "Sound/SFX/D4 - Turbine Hum.asm"
-Sound_D5:	include "Sound/SFX/D5 - Lava Fall.asm"
-Sound_D6:	include "Sound/SFX/D6 - Unknown Zap.asm"
-Sound_D7:	include "Sound/SFX/D7 - Conveyor Platform.asm"
-Sound_D8:	include "Sound/SFX/D8 - Unknown Saw.asm"
-Sound_D9:	include "Sound/SFX/D9 - Magnetic Spike.asm"
-Sound_DA:	include "Sound/SFX/DA - Leaf Blower.asm"
-Sound_DB:	include "Sound/SFX/DB - Water Skid.asm"
+Sound_BC:	include "Sound/SFX/BC - Hammer Attack.asm"
+Sound_BD:	include "Sound/SFX/BD - Hammer Rush.asm"
+Sound_BE:	include "Sound/SFX/BE - Drop Dash.asm"
+Sound_BF:	include "Sound/SFX/BF - Peelout.asm"
+Sound_C0:	include "Sound/SFX/C0 - Spike Bounce.asm"
+Sound_C1:	include "Sound/SFX/C1 - Hammer Drop.asm"
+Sound_C2:	include "Sound/SFX/C2 - Metal Sonic.asm"
+Sound_C3:	include "Sound/SFX/C3 - Metal Barrier.asm"
+Sound_C4:	include "Sound/SFX/C4 - Metal Charge.asm"
+Sound_C5:	include "Sound/SFX/C5 - Time Stone.asm"
+Sound_C6:	include "Sound/SFX/C6 - Air Countdown.asm"
+Sound_C7:	include "Sound/SFX/C7 - Peelout Charge.asm"
+Sound_C8:	include "Sound/SFX/C8 - Metal Overdrive.asm"
+Sound_C9:	include "Sound/SFX/C9 - Large Ship.asm"
+Sound_CA:	include "Sound/SFX/CA - Robotnik Siren.asm"
+Sound_CB:	include "Sound/SFX/CB - Boss Rotate.asm"
+Sound_CC:	include "Sound/SFX/CC - Fan (Big).asm"
+Sound_CD:	include "Sound/SFX/CD - Fan (Small).asm"
+Sound_CE:	include "Sound/SFX/CE - Flamethrower (Loud).asm"
+Sound_CF:	include "Sound/SFX/CF - Gravity Tunnel.asm"
+Sound_D0:	include "Sound/SFX/D0 - Boss Panic.asm"
+Sound_D1:	include "Sound/SFX/D1 - Unknown Spin.asm"
+Sound_D2:	include "Sound/SFX/D2 - Wave Hover.asm"
+Sound_D3:	include "Sound/SFX/D3 - Cannon Turn.asm"
+Sound_D4:	include "Sound/SFX/D4 - Slide Skid (Quiet).asm"
+Sound_D5:	include "Sound/SFX/D5 - Spike Balls.asm"
+Sound_D6:	include "Sound/SFX/D6 - Light Tunnel.asm"
+Sound_D7:	include "Sound/SFX/D7 - Rumble.asm"
+Sound_D8:	include "Sound/SFX/D8 - Big Rumble.asm"
+Sound_D9:	include "Sound/SFX/D9 - Death Egg Rise (Loud).asm"
+Sound_DA:	include "Sound/SFX/DA - Wind (Quiet).asm"
+Sound_DB:	include "Sound/SFX/DB - Rising.asm"
+Sound_DC:	include "Sound/SFX/DC - Unknown Flutter 2.asm"
+Sound_DD:	include "Sound/SFX/DD - Gumball Tab.asm"
+Sound_DE:	include "Sound/SFX/DE - Death Egg Rise (Quiet).asm"
+Sound_DF:	include "Sound/SFX/DF - Turbine Hum.asm"
+Sound_E0:	include "Sound/SFX/E0 - Lava Fall.asm"
+Sound_E1:	include "Sound/SFX/E1 - Unknown Zap.asm"
+Sound_E2:	include "Sound/SFX/E2 - Conveyor Platform.asm"
+Sound_E3:	include "Sound/SFX/E3 - Unknown Saw.asm"
+Sound_E4:	include "Sound/SFX/E4 - Magnetic Spike.asm"
+Sound_E5:	include "Sound/SFX/E5 - Leaf Blower.asm"
+Sound_E6:	include "Sound/SFX/E6 - Water Skid.asm"
 
 	finishBank
 
