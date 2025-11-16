@@ -4,7 +4,7 @@ SonicCD_DF_Header:
 	smpsHeaderTempoSFX  $01
 	smpsHeaderChanSFX   $01
 
-	smpsHeaderSFXChannel cFM5, SonicCD_DF_FM5, $04, $08
+	smpsHeaderSFXChannel cFM5, SonicCD_DF_FM5, $04, $12
 
 SonicCD_DF_FM5:
 	smpsSetvoice        $00
@@ -24,11 +24,6 @@ SonicCD_DF_Call1:
 	smpsLoop            $00, $0A, SonicCD_DF_Call1
 	smpsAlterPitch      $F6
 	smpsReturn
-
-	; Unused
-	smpsSetvoice        $00
-	dc.b	nRst, $0A
-	smpsStop
 
 SonicCD_DF_Voices:
 ;	Voice $00

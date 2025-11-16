@@ -1669,9 +1669,9 @@ sfx_MetalBarrier		ds.b 1		; $C3	; Liliam: add extra characters
 sfx_MetalCharge			ds.b 1		; $C4	; Liliam: add extra characters
 sfx_TimeStone			ds.b 1		; $C5	; Liliam: Metal Sonic hologram object
 sfx_AirCountdown		ds.b 1		; $C6	; Liliam: Encore mode - music
+sfx__FirstContinuous =		*		; ID of the first continuous sound effect
 sfx_PeeloutCharge		ds.b 1		; $C7	; Liliam: hidden skills
 sfx_MetalOverdrive		ds.b 1		; $C8	; Liliam: add extra characters
-sfx__FirstContinuous =		*		; ID of the first continuous sound effect
 sfx_LargeShip			ds.b 1		; $C9
 sfx_RobotnikSiren		ds.b 1		; $CA
 sfx_BossRotate			ds.b 1		; $CB

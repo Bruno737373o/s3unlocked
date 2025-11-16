@@ -8,7 +8,11 @@ SonicCD_CA_Header:
 
 SonicCD_CA_FM4:
 	smpsSetvoice        $00
-	dc.b	nAb6, $30
+
+SonicCD_CA_Loop1:
+	dc.b	nAb6, $16
+	smpsContinuousLoop  SonicCD_CA_Loop1
+	dc.b	$01
 	smpsStop
 
 SonicCD_CA_Voices:

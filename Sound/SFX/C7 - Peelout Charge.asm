@@ -10,10 +10,13 @@ SonicCD_AA_FM2:
 	smpsSetvoice        $00
 	dc.b	nRst, $01
 	smpsModSet          $03, $01, $09, $FF
+	dc.b	nCs6, $25, smpsNoAttack
+	smpsModOff
 
 SonicCD_AA_Loop1:
-	dc.b	nCs6, $06
-	smpsLoop            $00, $03, SonicCD_AA_Loop1
+	dc.b	nAb6, $16, smpsNoAttack
+	smpsContinuousLoop  SonicCD_AA_Loop1
+	dc.b	$01
 	smpsStop
 
 SonicCD_AA_Voices:

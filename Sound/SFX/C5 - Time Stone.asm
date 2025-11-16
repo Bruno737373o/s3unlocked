@@ -27,14 +27,12 @@ SonicCD_D9_FM6:
 	smpsFMAlterVol      $06
 	smpsAlterPitch      $F9
 	smpsJump            SonicCD_D9_Jump1
-	smpsStop	; Unused
 
 SonicCD_D9_FM4:
 	smpsSetvoice        $00
 	smpsPan             panLeft, $00
 	smpsAlterPitch      $F9
 	smpsJump            SonicCD_D9_Jump1
-	smpsStop	; Unused
 
 SonicCD_D9_Voices:
 ;	Voice $00
