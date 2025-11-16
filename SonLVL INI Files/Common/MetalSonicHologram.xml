@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Metal Sonic Hologram" Image="main" Depth="3">
+  <Images>
+    <ImageFromMappings id="main">
+      <ArtFile filename="../General/Sprites/Metal Sonic Hologram/Metal Sonic Hologram.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Metal Sonic Hologram/Map - Metal Sonic Hologram.asm" frame="1" />
+    </ImageFromMappings>
+    <ImageFromMappings id="dust">
+      <ArtFile filename="../General/Sprites/Metal Sonic Hologram/Metal Sonic Hologram.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Metal Sonic Hologram/Map - Metal Sonic Hologram.asm" frame="2" />
+    </ImageFromMappings>
+    <ImageFromMappings id="sprites">
+      <ArtFile filename="../General/Sprites/Metal Sonic Hologram/Metal Sonic Hologram.bin" compression="KosinskiM" />
+      <MapFile type="ASM" filename="../General/Sprites/Metal Sonic Hologram/Map - Metal Sonic Hologram.asm" frame="8" />
+    </ImageFromMappings>
+  </Images>
+  <Display>
+    <DisplayOption>
+      <ImageRef image="sprites">
+        <Offset X="-88" Y="-18" />
+      </ImageRef>
+      <ImageRef image="dust">
+        <Offset X="-21" Y="-7" />
+      </ImageRef>
+      <ImageRef image="main" />
+    </DisplayOption>
+  </Display>
+</ObjDef>
