@@ -110,7 +110,7 @@ namespace S3KObjectDefinitions.LBZ
 			sprite.Offset(-24, 0);
 			sprite = new Sprite(ObjectHelper.MapToBmp(art, map, 2, 2), sprite);
 
-			properties = new PropertySpec[4];
+			properties = new PropertySpec[5];
 			subtypes = new ReadOnlyCollection<byte>(new byte[0]);
 			sprites = new[] { sprite, new Sprite(sprite, true, false) };
 
@@ -125,15 +125,20 @@ namespace S3KObjectDefinitions.LBZ
 					{ "Up", 0x00 },
 					{ "Down", 0x10 }
 				},
-				(obj) => (obj.SubType & 0x30) == 0 ? 0x00 : 0x10,
+				(obj) => (obj.SubType & 0x10) == 0 ? 0x00 : 0x10,
 				(obj, value) => obj.SubType = (byte)((obj.SubType & 0xCF) | ((int)value & 0x30)));
 
-			properties[2] = new PropertySpec("Sonic only", typeof(bool), "Extended",
+			properties[2] = new PropertySpec("Knuckles only", typeof(bool), "Extended",
+				"If set, the object disappears when playing as Sonic.", null,
+				(obj) => (obj.SubType & 0x20) != 0,
+				(obj, value) => obj.SubType = (byte)((obj.SubType & 0xDF) | ((bool)value ? 0x20 : 0)));
+
+			properties[3] = new PropertySpec("Sonic only", typeof(bool), "Extended",
 				"If set, the object disappears when playing as Knuckles.", null,
 				(obj) => (obj.SubType & 0x40) != 0,
 				(obj, value) => obj.SubType = (byte)((obj.SubType & 0xBF) | ((bool)value ? 0x40 : 0)));
 
-			properties[3] = new PropertySpec("Launch", typeof(bool), "Extended",
+			properties[4] = new PropertySpec("Launch", typeof(bool), "Extended",
 				"If set, the object will fly off at the end of its movement.", null,
 				(obj) => obj.SubType >= 0x80,
 				(obj, value) => obj.SubType = (byte)((obj.SubType & 0x7F) | ((bool)value ? 0x80 : 0)));

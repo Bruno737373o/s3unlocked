@@ -197,7 +197,7 @@
 		dc.l Obj_LBZMinibossBox			; 196
 		dc.l Obj_LBZMinibossBoxKnux		; 197
 		dc.l Obj_LBZ2RobotnikShip		; 198
-		dc.l Obj_LBZ2EndRobotnik		; 199	; Liliam: restore unused LBZ2 Eggman
+		dc.l Obj_Ring				; 199
 		dc.l Obj_LBZKnuxPillar			; 200
 		dc.l Obj_LBZMiniboss			; 201
 		dc.l Obj_LBZFinalBoss1			; 202
