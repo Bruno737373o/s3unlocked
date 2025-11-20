@@ -26,7 +26,7 @@ namespace S3KObjectDefinitions.Common
 	{
 		public override string Name
 		{
-			get { return "Invisible Hurt Block (top)"; }
+			get { return "Invisible Spike Block"; }
 		}
 	}
 
@@ -34,7 +34,7 @@ namespace S3KObjectDefinitions.Common
 	{
 		public override string Name
 		{
-			get { return "Invisible Hurt Block (sides)"; }
+			get { return "Invisible Kill Block"; }
 		}
 	}
 

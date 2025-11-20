@@ -104,8 +104,8 @@
 		dc.l Obj_Ring				; 103
 		dc.l Obj_Ring				; 104
 		dc.l Obj_Ring				; 105
-		dc.l Obj_InvisibleHurtBlockHorizontal	; 106
-		dc.l Obj_InvisibleHurtBlockVertical	; 107
+		dc.l Obj_InvisibleSpikeBlock		; 106
+		dc.l Obj_InvisibleKillBlock		; 107
 		dc.l Obj_TensionBridge			; 108
 		dc.l Obj_InvisibleShockBlock		; 109
 		dc.l Obj_InvisibleLavaBlock		; 110
