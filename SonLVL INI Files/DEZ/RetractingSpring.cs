@@ -84,16 +84,13 @@ namespace S3KObjectDefinitions.DEZ
 
 			sprites[0][2].Offset(32, 0);
 			sprites[0][3].Offset(-32, 0);
-			sprites[1] = sprites[0];
 
-			//indexer.AddFile(springs, -512);
-			//var bitmap = sprites[0][0].GetBitmap();
-			//bitmap.DrawSprite(ObjectHelper.MapASMToBmp(indexer.ToArray(),
-			//	"../General/Sprites/Level Misc/Map - Spring.asm", "word_237BA", 0), 16, 0);
+			sprites[1] = BuildFlippedSprites(ObjectHelper.MapASMToBmp(indexer.ToArray(),
+				"../Levels/DEZ/Misc Object Data/Map - Retracting Spring 2.asm", 0, 1));
 
-			//sprites[1] = BuildFlippedSprites(new Sprite(bitmap, -16, -16));
-			//sprites[1][2].Offset(32, 0);
-			//sprites[1][3].Offset(-32, 0);
+			sprites[1][2].Offset(32, 0);
+			sprites[1][3].Offset(-32, 0);
+
 
 			unknownSprite = BuildFlippedSprites(ObjectHelper.UnknownObject);
 
