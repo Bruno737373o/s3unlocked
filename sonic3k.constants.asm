@@ -192,6 +192,36 @@ Status_LtngShield   = 5
 Status_BublShield   = 6
 
 ; ---------------------------------------------------------------------------
+; Liliam: hidden skills
+Skill_TailsAssist   = 0
+Skill_SonicDropDash = 1
+Skill_TailsBoost    = 2
+Skill_KnuxClimbDash = 3
+Skill_AmyDoubleJump = 4
+Skill_MightyWallGrb = 5
+Skill_RayWallGrab   = 6
+Skill_SonicPeelout  = 7
+
+; ---------------------------------------------------------------------------
+; Liliam: HUD - Encore mode HUD
+EncoreFlags_Enable  = 0
+EncoreFlags_Music   = 5
+EncoreFlags_Palette = 6
+EncoreFlags_SwapHUD = 7
+
+Encore_cursor_timer      = Reserved_object_3+$20
+Encore_stocks            = Reserved_object_3+$23
+Encore_HUD_player_frame  = Reserved_object_3+$2C
+Encore_HUD_stocks_frame  = Reserved_object_3+$2E
+Encore_HUD_stocks_timer  = Reserved_object_3+$30
+Encore_HUD_stocks_scroll = Reserved_object_3+$32
+
+sfx_EncoreSwap           = sfx_PulleyGrab
+sfx_EncoreSwapBlocked    = sfx_SmallBumpers
+sfx_EncoreRespawn        = sfx_Signpost
+sfx_Splash2              = sfx_Splash
+
+; ---------------------------------------------------------------------------
 ; Elemental Shield DPLC variables
 shield_prev_frame   = $34
 shield_art          = $38
@@ -956,7 +986,7 @@ Blue_spheres_stage_flag		ds.b 1			; set if a Blue Sphere special stage is being 
 			ds.b 1				; unused
 V_blank_cycles			ds.w 1			; the number of cycles between V-blanks
 Graphics_flags			ds.b 1			; bit 7 set = English system, bit 6 set = PAL system
-Hidden_skill_flags		ds.b 1		; Liliam: hidden skills
+Hidden_skills			ds.b 1		; Liliam: hidden skills
 Debug_mode_flag			ds.w 1
 Special_stage_override_flag = Debug_mode_flag+1	; Liliam: level select - access all special stages from act 1
 			ds.l 1				; unused
@@ -1033,36 +1063,6 @@ Special_stage_started		ds.b 1			; set when the player begins moving at the start
 			ds.b $2F			; unused
 SStage_extra_sprites		ds.b $70		; some extra sprite info for special stages
 	dephase
-; ---------------------------------------------------------------------------
-; Liliam: hidden skills
-HiddenSkill_TailsAssist		= 0
-HiddenSkill_SonicDropDash	= 1
-HiddenSkill_TailsFlyBoost	= 2
-HiddenSkill_KnuxClimbDash	= 3
-HiddenSkill_AmyHammerSpin 	= 4
-HiddenSkill_MightyWallKick	= 5
-HiddenSkill_RayWallKick		= 6
-HiddenSkill_SonicPeelout	= 7
-
-; ---------------------------------------------------------------------------
-; Liliam: HUD - Encore mode HUD
-EncoreFlags_Enable		= 0
-EncoreFlags_Music		= 5
-EncoreFlags_Palette		= 6
-EncoreFlags_SwapHUD		= 7
-
-Encore_cursor_timer =		Reserved_object_3+$20
-Encore_stocks =			Reserved_object_3+$23
-Encore_HUD_player_frame =	Reserved_object_3+$2C
-Encore_HUD_stocks_frame =	Reserved_object_3+$2E
-Encore_HUD_stocks_timer =	Reserved_object_3+$30
-Encore_HUD_stocks_scroll =	Reserved_object_3+$32
-
-sfx_EncoreSwap =		sfx_PulleyGrab
-sfx_EncoreSwapBlocked =		sfx_SmallBumpers
-sfx_EncoreRespawn =		sfx_Signpost
-sfx_Splash2 =			sfx_Splash
-
 ; ---------------------------------------------------------------------------
 ; Art tile stuff
 palette_line_0      =      (0<<13)
