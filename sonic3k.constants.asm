@@ -169,6 +169,8 @@ button_C_mask:			EQU	1<<button_C	; $20
 button_A_mask:			EQU	1<<button_A	; $40
 button_start_mask:		EQU	1<<button_start	; $80
 
+button_ABC_mask:		EQU	button_A_mask|button_B_mask|button_C_mask
+
 ; ---------------------------------------------------------------------------
 ; Player Status Variables
 Status_Facing       = 0
