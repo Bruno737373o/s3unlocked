@@ -29,11 +29,11 @@ DPLC_DashDust_:
 		dc.w word_18F7A-DPLC_DashDust_
 		dc.w word_18F7E-DPLC_DashDust_
 		dc.w word_18F82-DPLC_DashDust_
-		dc.w DPLC_InstaShield_P2_0-DPLC_DashDust_
-		dc.w DPLC_InstaShield_P2_1-DPLC_DashDust_
-		dc.w DPLC_InstaShield_P2_2-DPLC_DashDust_
-		dc.w DPLC_InstaShield_P2_3-DPLC_DashDust_
-		dc.w DPLC_InstaShield_P2_4-DPLC_DashDust_
+		dc.w DPLC_DashDust_InstaShield_0-DPLC_DashDust_
+		dc.w DPLC_DashDust_InstaShield_1-DPLC_DashDust_
+		dc.w DPLC_DashDust_InstaShield_2-DPLC_DashDust_
+		dc.w DPLC_DashDust_InstaShield_3-DPLC_DashDust_
+		dc.w DPLC_DashDust_InstaShield_4-DPLC_DashDust_
 		dc.w word_18F1E-DPLC_DashDust_
 word_18F1E:	dc.w 0
 word_18F20:	dc.w 1
@@ -87,18 +87,18 @@ word_18F7E:	dc.w 1
 		dc.w $F05C
 word_18F82:	dc.w 1
 		dc.w $F06C
-DPLC_InstaShield_P2_0:
+DPLC_DashDust_InstaShield_0:
 		dc.w 1
 		dc.w $5000
-DPLC_InstaShield_P2_1:
+DPLC_DashDust_InstaShield_1:
 		dc.w 1
 		dc.w $6006
-DPLC_InstaShield_P2_2:
+DPLC_DashDust_InstaShield_2:
 		dc.w 1
 		dc.w $900D
-DPLC_InstaShield_P2_3:
+DPLC_DashDust_InstaShield_3:
 		dc.w 1
 		dc.w $C017
-DPLC_InstaShield_P2_4:
+DPLC_DashDust_InstaShield_4:
 		dc.w 1
 		dc.w $F024
