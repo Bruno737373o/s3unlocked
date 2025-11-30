@@ -328,10 +328,9 @@ Object_RAM =			*			; $1FCC bytes ; $4A bytes per object, 110 objects
 Player_1			ds.b object_size	; main character in 1 player mode, player 1 in Competition mode
 Player_2			ds.b object_size	; Tails in a Sonic and Tails game, player 2 in Competition mode
 Reserved_object_3		ds.b object_size	; during a level, an object whose sole purpose is to clear the collision response list is stored here
-Dynamic_object_RAM		ds.b object_size*90	; $1A04 bytes ; 90 objects
+Dynamic_object_RAM		ds.b object_size*96	; $1BC0 bytes ; 96 objects
 Dynamic_object_RAM_end =	*
-Level_object_RAM =		Dynamic_object_RAM_end	; $4EA bytes ; various fixed in-level objects
-			ds.b object_size		; unknown
+Level_object_RAM =		Dynamic_object_RAM_end	; $378 bytes ; various fixed in-level objects
 Breathing_bubbles		ds.b object_size	; for the main character
 Breathing_bubbles_P2		ds.b object_size	; for Tails in a Sonic and Tails game
 Super_stars =			*			; for Super Sonic and Super Knuckles
@@ -340,10 +339,7 @@ Tails_tails			ds.b object_size	; Tails' tails
 Dust				ds.b object_size
 Dust_P2				ds.b object_size
 Shield				ds.b object_size
-Shield_P2			ds.b object_size	; left over from Sonic 2 I'm guessing
 Invincibility_stars		ds.b object_size*4
-Invincibility_stars_P2		ds.b object_size*3
-Wave_Splash			ds.b object_size	; Obj_HCZWaveSplash is loaded here
 Object_RAM_end =		*
 			ds.b $14			; unused
 Conveyor_belt_load_array	ds.b $E			; each subtype of hcz conveyor belt uses a different byte to check if it's already loaded. Since they're so wide, the object loader may try loading them multiple times
