@@ -9,7 +9,7 @@
 		dc.l Obj_Spikes				; 8
 		dc.l Obj_AIZ1Tree			; 9
 		dc.l Obj_AIZ1ZiplinePeg			; 10
-		dc.l Obj_Ring				; 11
+		dc.l Obj_HCZFBZSpikeBlock		; 11	; Liliam: spikes - allow Metal Sonic destruction
 		dc.l Obj_AIZGiantRideVine		; 12
 		dc.l Obj_BreakableWall			; 13
 		dc.l Obj_TwistedRamp			; 14

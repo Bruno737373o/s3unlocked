@@ -6,6 +6,39 @@ using SonicRetro.SonLVL.API;
 
 namespace S3KObjectDefinitions.Common
 {
+	class HCZFBZSpikeBlock : InvisibleBlock
+	{
+		public override string Name
+		{
+			get { return "Invisible Spike Block"; }
+		}
+
+		public override string SubtypeName(byte subtype)
+		{
+			return null;
+		}
+
+		public override Sprite GetDebugOverlay(ObjectEntry obj)
+		{
+			BitmapBits bmp = new BitmapBits(128, 32);
+			bmp.DrawRectangle(LevelData.ColorWhite, 0, 0, 127, 31);
+			return new Sprite(bmp, -64, -16);
+		}
+
+		public override Rectangle GetBounds(ObjectEntry obj)
+		{
+			return new Rectangle(obj.X - 64, obj.Y - 16, 128, 32);
+		}
+
+		public override PropertySpec[] CustomProperties
+		{
+			get
+			{
+				return Array.Empty<PropertySpec>();
+			}
+		}
+	}
+
 	class InvisibleShockBlock : InvisibleBlock
 	{
 		public override string Name
@@ -22,7 +55,7 @@ namespace S3KObjectDefinitions.Common
 		}
 	}
 
-	class InvisibleHurtBlockHorizontal : InvisibleBlock
+	class InvisibleSpikeBlock : InvisibleBlock
 	{
 		public override string Name
 		{
@@ -30,7 +63,7 @@ namespace S3KObjectDefinitions.Common
 		}
 	}
 
-	class InvisibleHurtBlockVertical : InvisibleBlock
+	class InvisibleKillBlock : InvisibleBlock
 	{
 		public override string Name
 		{

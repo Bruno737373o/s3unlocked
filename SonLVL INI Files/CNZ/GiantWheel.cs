@@ -48,14 +48,14 @@ namespace S3KObjectDefinitions.CNZ
 
 		public override Sprite GetDebugOverlay(ObjectEntry obj)
 		{
-			var bitmap = new BitmapBits(192, 192);
-			bitmap.DrawRectangle(LevelData.ColorWhite, 0, 0, 191, 191);
-			return new Sprite(bitmap, -96, -96);
+			var bitmap = new BitmapBits(168, 168);
+			bitmap.DrawRectangle(LevelData.ColorWhite, 0, 0, 167, 167);
+			return new Sprite(bitmap, -84, -84);
 		}
 
 		public override Rectangle GetBounds(ObjectEntry obj)
 		{
-			return new Rectangle(obj.X - 96, obj.Y - 96, 192, 192);
+			return new Rectangle(obj.X - 84, obj.Y - 84, 168, 168);
 		}
 
 		public override void Init(ObjectData data)
