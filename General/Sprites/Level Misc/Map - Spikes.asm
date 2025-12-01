@@ -13,6 +13,7 @@ Map_Spikes_:
 		dc.w Map_Spikes_0B-Map_Spikes_
 		dc.w Map_Spikes_0C-Map_Spikes_
 		dc.w Map_Spikes_0D-Map_Spikes_
+		dc.w Map_Spikes_0E-Map_Spikes_
 word_24466:	dc.w 2
 		dc.b  $F0,   7,   0,   0, $FF, $F0
 		dc.b  $F0,   7,   0,   0,   0,   0
@@ -85,3 +86,4 @@ Map_Spikes_0C:	dc.w 1
 		dc.b  $F0,   3,   0,   0, $FF, $F8
 Map_Spikes_0D:	dc.w 1
 		dc.b  $F0,   3,   0,   4,   0,   0
+Map_Spikes_0E:	dc.w 0
