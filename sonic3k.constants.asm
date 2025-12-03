@@ -328,6 +328,7 @@ Object_RAM =			*			; $1FCC bytes ; $4A bytes per object, 110 objects
 Player_1			ds.b object_size	; main character in 1 player mode, player 1 in Competition mode
 Player_2			ds.b object_size	; Tails in a Sonic and Tails game, player 2 in Competition mode
 Reserved_object_3		ds.b object_size	; during a level, an object whose sole purpose is to clear the collision response list is stored here
+Wave_Splash =			*		; Liliam: expand dynamic object RAM
 Dynamic_object_RAM		ds.b object_size*96	; $1BC0 bytes ; 96 objects
 Dynamic_object_RAM_end =	*
 Level_object_RAM =		Dynamic_object_RAM_end	; $378 bytes ; various fixed in-level objects
@@ -388,7 +389,7 @@ Pos_table_index_P2		ds.w 1
 Distance_from_top		ds.w 1			; the vertical scroll manager scrolls the screen until the player's distance from the top of the screen is equal to this (or between this and this + $40 when in the air). $60 by default
 Distance_from_top_P2		ds.w 1
 Deform_lock			ds.b 1
-			ds.b 1				; unused
+Scroll_lock_X			ds.b 1		; Liliam: HPZ - improve transition from LRZ2
 Camera_max_Y_pos_changing	ds.b 1			; set when the maximum camera Y pos is undergoing a change
 Dynamic_resize_routine		ds.b 1
 			ds.b 5				; unused
@@ -562,8 +563,8 @@ _unkF61A			ds.l 1			; unused
 V_scroll_value_P2 =		*
 V_scroll_value_FG_P2		ds.w 1
 V_scroll_value_BG_P2		ds.w 1
-Teleport_active_timer		ds.b 1			; left over from Sonic 2
-Teleport_active_flag		ds.b 1			; left over from Sonic 2
+H_int_prev_command		ds.b 1		; Liliam: bugfix - water transition lag (credit: Tiddles)
+H_int_prev_counter		ds.b 1		;
 H_int_counter_command		ds.w 1			; contains a command to write to VDP register $0A (line interrupt counter)
 H_int_counter =			H_int_counter_command+1	; just the counter part of the command
 Palette_fade_info =		*			; both index and count
