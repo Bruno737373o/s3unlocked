@@ -104,7 +104,7 @@
 		dc.l Obj_HCZSnakeBlocks			; 103
 		dc.l Obj_HCZSpinningColumn		; 104
 		dc.l Obj_HCZTwistingLoop		; 105
-		dc.l Obj_InvisibleSpikeBlock		; 106
+		dc.l Obj_InvisibleHurtBlock		; 106
 		dc.l Obj_InvisibleKillBlock		; 107
 		dc.l Obj_TensionBridge			; 108
 		dc.l Obj_HCZWaterSplash			; 109

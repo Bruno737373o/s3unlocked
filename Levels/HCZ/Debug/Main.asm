@@ -49,7 +49,7 @@
 	dbglistobj Obj_HCZWaterSplash,			Map_HCZWaterSplash,		   0,   0, make_art_tile(ArtTile_HCZWaterSplash,2,0)
 	dbglistobj Obj_StillSprite,			Map_StillSprites,		 $13, $13, make_art_tile(ArtTile_HCZ2BlockPlat+$10,2,0)
 	dbglistobj Obj_TensionBridge,			Map_TensionBridge,		 $90,   0, make_art_tile(ArtTile_HCZ2BlockPlat+$10,2,0)
-	dbglistobj Obj_InvisibleSpikeBlock,		Map_InvisibleBlock,		   0,   0, make_art_tile(ArtTile_Monitors,0,1)			; Liliam: use Eggman icon for hurt blocks
+	dbglistobj Obj_InvisibleHurtBlock,		Map_InvisibleBlock,		   0,   0, make_art_tile(ArtTile_Monitors,0,1)			; Liliam: use Eggman icon for hurt blocks
 	dbglistobj Obj_InvisibleKillBlock,		Map_InvisibleBlock,		   0,   0, make_art_tile(ArtTile_Monitors,0,1)			; Liliam: use Eggman icon for hurt blocks
 	dbglistobj Obj_BreakableWall,			Map_HCZBreakableWall,		   0,   0, make_art_tile($001,3,0)
 	dbglistobj Obj_BreakableWall,			Map_HCZBreakableWall,		   2,   2, make_art_tile(ArtTile_HCZ2KnuxWall,2,0)
