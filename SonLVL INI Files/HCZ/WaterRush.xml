@@ -14,7 +14,7 @@
     <DisplayOption>
       <ImageRef image="tunnel" />
       <ImageRef image="block">
-        <Offset X="-48" />
+        <Offset X="-80" />
       </ImageRef>
     </DisplayOption>
   </Display>
