@@ -240,7 +240,6 @@ zNumSFXTracks = (zTracksSFXEnd-zTracksSFXStart)/zTrack.len
 zNumSaveTracks = (zTracksSaveEnd-zTracksSaveStart)/zTrack.len
 ; ---------------------------------------------------------------------------
 		!org Z80_SoundDriverStart
-Z80_SoundDriver:
 		org		Z80_SoundDriver+Size_of_Snd_driver_guess	; This 'org' inserts some padding that we can paste the compressed sound driver over later (see the 's3p2bin' tool)
 
 		save
