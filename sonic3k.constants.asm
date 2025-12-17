@@ -1263,7 +1263,8 @@ ArtTile_ICZSnowdust                   = $0558
 ArtTile_ICZTeleport                   = $0570
 ArtTile_SnowboardDust                 = $06B8
 
-ArtTile_LBZ2Misc                      = $02EA
+ArtTile_LBZ2Misc                      = $0365	; Liliam: bugfix - improve LBZ act transition
+;ArtTile_LBZ2Misc                     = $02EA	;
 ArtTile_LBZFinalBoss1                 = $03AA
 ArtTile_LBZMisc                       = $03C3
 ArtTile_LBZFinalBoss2                 = $03D9
