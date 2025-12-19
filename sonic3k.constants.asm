@@ -602,8 +602,7 @@ Background_collision_flag	ds.b 1			 ; if set, background collision is enabled
 Disable_death_plane		ds.b 1			 ; if set, going below the screen wont kill the player
 Hyper_Sonic_flash_timer		ds.b 1			 ; used for Hyper Sonic's double jump move
 Super_Tails_flag		ds.b 1
-Palette_frame_Tails		ds.b 1			 ; Tails would use Palette_frame and Palette_timer, but they're reserved for his Super Flickies
-Palette_timer_Tails		ds.b 1
+Palette_frame_Tails		ds.w 1			 ; Tails would use Palette_frame, but it's reserved for his Super Flickies
 Ctrl_2_logical =		*			 ; both held and pressed
 Ctrl_2_held_logical		ds.b 1
 Ctrl_2_pressed_logical		ds.b 1
