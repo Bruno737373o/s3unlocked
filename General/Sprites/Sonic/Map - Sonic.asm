@@ -416,12 +416,12 @@ Map_SuperSonic_:
 		dc.w Map_Sonic_360RunA_SUPER-Map_SuperSonic_
 		dc.w Map_Sonic_360RunB_SUPER-Map_SuperSonic_
 		dc.w Map_Sonic_360RunC_SUPER-Map_SuperSonic_
-		dc.w Map_Sonic_PoleSwingRide-Map_SuperSonic_
-		dc.w Map_Sonic_PoleCurrent1-Map_SuperSonic_
-		dc.w Map_Sonic_PoleCurrent2-Map_SuperSonic_
+		dc.w Map_Sonic_PoleSwingRide_SUPER-Map_SuperSonic_
+		dc.w Map_Sonic_PoleCurrent1_SUPER-Map_SuperSonic_
+		dc.w Map_Sonic_PoleCurrent2_SUPER-Map_SuperSonic_
 		dc.w Map_Sonic_Pulley_SUPER-Map_SuperSonic_
-		dc.w Map_Sonic_BarCurrent1-Map_SuperSonic_
-		dc.w Map_Sonic_BarCurrent2-Map_SuperSonic_
+		dc.w Map_Sonic_BarCurrent1_SUPER-Map_SuperSonic_
+		dc.w Map_Sonic_BarCurrent2_SUPER-Map_SuperSonic_
 		dc.w Map_Sonic_DropDash1-Map_SuperSonic_
 		dc.w Map_Sonic_DropDash2-Map_SuperSonic_
 		dc.w Map_Sonic_DropDash3-Map_SuperSonic_
@@ -1246,21 +1246,29 @@ Map_Sonic_PoleSwingRide:
 		dc.b  $F0,  $A,   0,   0, $FF, $EC
 		dc.b  $F8,   6,   0,   9,   0,   4
 Map_Sonic_PoleCurrent1:
+		dc.w 3
+		dc.b  $F4,  $A,   0,   0, $FF, $E5
+		dc.b  $F4,   4,   0,   9, $FF, $FD
+		dc.b  $FC,  $D,   0,  $B, $FF, $FD
 Map_Sonic_PoleCurrent2:
 		dc.w 3
-		dc.b  $F4,  $E,   0,   0, $FF, $E6
-		dc.b  $F4,   0,   0,  $C,   0,   6
-		dc.b  $FC,   9,   0,  $D,   0,   6
+		dc.b  $F4,  $A,   0,   0, $FF, $E6
+		dc.b  $F4,   4,   0,   9, $FF, $FE
+		dc.b  $FC,  $D,   0,  $B, $FF, $FE
 Map_Sonic_Pulley:
 		dc.w 3
 		dc.b  $F1,  $E,   0,   0, $FF, $E9
 		dc.b  $F9,   1,   0,  $C,   0,   9
 		dc.b    9,   8,   0,  $E, $FF, $F9
 Map_Sonic_BarCurrent1:
+		dc.w 3
+		dc.b   $F,   9,   0,   0, $FF, $F5
+		dc.b  $F7,  $A,   0,   6, $FF, $F5
+		dc.b  $E7,   5,   0,  $F, $FF, $F5
 Map_Sonic_BarCurrent2:
 		dc.w 3
-		dc.b  $FE,  $B,   0,   0, $FF, $F5
-		dc.b  $F6,   8,   0,  $C, $FF, $F5
+		dc.b   $E,   9,   0,   0, $FF, $F5
+		dc.b  $F6,  $A,   0,   6, $FF, $F5
 		dc.b  $E6,   5,   0,  $F, $FF, $F5
 Map_Sonic_DropDash1:
 Map_Sonic_DropDash5:
@@ -1280,9 +1288,9 @@ Map_Sonic_DropDash4:
 		dc.b    0,  $D,   0,   8, $FF, $F0
 Map_Sonic_Stand1:
 		dc.w 3
-		dc.b  $ED,   8,   0,   0, $FF, $EE
-		dc.b  $F5,  $D,   0,   3, $FF, $EE
-		dc.b    5,   9,   0,  $B, $FF, $F6
+		dc.b  $EC,   8,   0,   0, $FF, $EF
+		dc.b  $F4,  $D,   0,   3, $FF, $EE
+		dc.b    4,   9,   0,  $B, $FF, $F6
 Map_Sonic_Stand2:
 Map_Sonic_Stand3:
 Map_Sonic_Stand4:
@@ -2002,12 +2010,36 @@ Map_Sonic_360RunB_SUPER:
 		dc.b  $FB,   8,   0,   8, $FF, $F6
 		dc.b    3,  $C,   0,  $B, $FF, $ED
 		dc.b   $B,   8,   0,  $F, $FF, $ED
+Map_Sonic_PoleSwingRide_SUPER:
+		dc.w 2
+		dc.b  $E8,  $B,   0,   0, $FF, $EC
+		dc.b  $F8,   6,   0,  $C,   0,   4
+Map_Sonic_PoleCurrent1_SUPER:
+		dc.w 3
+		dc.b  $F4,  $A,   0,   0, $FF, $E5
+		dc.b  $F4,   8,   0,   9, $FF, $FD
+		dc.b  $FC,  $D,   0,  $C, $FF, $FD
+Map_Sonic_PoleCurrent2_SUPER:
+		dc.w 3
+		dc.b  $F4,  $A,   0,   0, $FF, $E6
+		dc.b  $F4,   8,   0,   9, $FF, $FE
+		dc.b  $FC,  $D,   0,  $C, $FF, $FE
 Map_Sonic_Pulley_SUPER:
 		dc.w 4
 		dc.b  $E9,  $B,   0,   0, $FF, $E1
 		dc.b  $F1,   4,   0,  $C, $FF, $F9
 		dc.b  $F9,   9,   0,  $E, $FF, $F9
 		dc.b    9,   8,   0, $14, $FF, $F9
+Map_Sonic_BarCurrent1_SUPER:
+		dc.w 3
+		dc.b   $F,   9,   0,   0, $FF, $F5
+		dc.b  $EF,  $B,   0,   6, $FF, $F5
+		dc.b  $E7,   4,   0, $12, $FF, $F5
+Map_Sonic_BarCurrent2_SUPER:
+		dc.w 3
+		dc.b   $E,   9,   0,   0, $FF, $F5
+		dc.b  $EE,  $B,   0,   6, $FF, $F5
+		dc.b  $E6,   4,   0, $12, $FF, $F5
 Map_Sonic_Stand1_SUPER:
 Map_Sonic_Stand2_SUPER:
 		dc.w 4
