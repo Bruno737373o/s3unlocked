@@ -429,7 +429,7 @@ Competition_time_attack_new_top_record	ds.b 1		; signifies new time records in t
 Competition_lap_count		ds.b 1			; number of laps that player 1 has completed
 Competition_lap_count_2P	ds.b 1			; number of laps that player 2 has completed
 Act3_flag			ds.b 1			; set when entering LRZ 3 or DEZ 3 directly from previous act. Prevents title card from loading
-Alternate_start_flag		ds.b 1		; Liliam: Encore mode - player starts
+Encore_restart_flag		ds.b 1		; Liliam: Encore mode - restart level
 Camera_X_pos_P2			ds.l 1
 Camera_Y_pos_P2			ds.l 1
 Camera_X_pos_P2_copy		ds.w 1
@@ -530,7 +530,7 @@ HPZ_special_stage_completed	ds.w 1			; set if special stage was completed. This 
 Current_special_stage_2		ds.b 1			; seems to be just a copy of Current_special_stage
 			ds.b 1				; unused
 HPZ_current_special_stage	ds.b 1			; seems to be just a copy of Current_special_stage used specifically for HPZS
-			ds.b 1				; unused
+Alternate_start_flag		ds.b 1		; Liliam: Encore mode - player starts
 Ending_running_flag		ds.w 1			; the only thing this does is prevent the game from pausing
 Plane_buffer_2_addr		ds.l 1			; the address of the second plane buffer to process, if applicable
 Demo_hold_counter		ds.b 1			; the number of frames to hold the current buttons. This only applies to S&K demos
@@ -643,6 +643,7 @@ Nem_patterns_left		ds.w 1			; the number of patterns remaining to be decompresse
 Nem_frame_patterns_left		ds.w 1			; the number of patterns remaining to be decompressed in the current frame
 			ds.l 1				; unused?
 
+; The following all the way through Sprite_table is cleared on level load.
 Tails_CPU_interact		ds.w 1			; RAM address of the last object Tails stood on while controlled by AI
 Tails_CPU_idle_timer		ds.w 1			; counts down while controller 2 is idle, when it reaches 0 the AI takes over
 Tails_CPU_flight_timer		ds.w 1			; counts up while Tails is respawning, when it reaches 300 he drops into the level
@@ -915,8 +916,7 @@ Competition_current_lap		ds.b 1			; current lap number for player 1 in competiti
 Competition_current_lap_2P	ds.b 1			; current lap number for player 2 in competition mode
 Collected_holograms_array	ds.l 1		; Liliam: Metal Sonic hologram object
 Collected_photo_piece_array	ds.b $F		; Liliam: gallery - photo piece object
-			ds.b $11			; unused
-Results_screen_2P		ds.w 1			; left over from Sonic 2
+			ds.b $13			; unused
 Perfect_rings_left		ds.w 1			; left over from Sonic 2
 Perfect_rings_flag		ds.w 1			; unknown
 Player_mode			ds.w 1			; 0 = Sonic and Tails, 1 = Sonic alone, 2 = Tails alone, 3 = Knuckles alone
@@ -1006,7 +1006,7 @@ Competition_mode		ds.w 1
 P1_character			ds.b 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P2_character			ds.b 1
 Encore_stocks_packed		ds.w 1		; Liliam: Encore mode
-Encore_available_chars		ds.b 1		; Liliam: Encore mode
+Encore_rescued_chars		ds.b 1		; Liliam: Encore mode - stock rotate monitor
 			ds.b 1				; unused
 
 CrossResetRAM_End =		*
@@ -1446,7 +1446,7 @@ ArtTile_Player_1                      = $0680
 ArtTile_SignpostStub                  = $069E
 ArtTile_Player_2                      = $06A0
 ArtTile_TailsTail                     = $06B0
-ArtTile_TailsTail_Encore              = $06B7	; Liliam: Encore mode - respawn partner character
+ArtTile_EncoreTail                    = $06B7	; Liliam: Encore mode - respawn partner character
 ArtTile_Ring                          = $06C4	; Liliam: HUD - animate rings via DMA
 ;ArtTile_Ring                         = $06BC	;
 ArtTile_PhotoPiece                    = $06BC	; Liliam: HUD - animate rings via DMA
@@ -1544,7 +1544,7 @@ sfx_Roll			ds.b 1		; $3C
 sfx_Break			ds.b 1		; $3D
 sfx_FireShield			ds.b 1		; $3E
 sfx_BubbleShield		ds.b 1		; $3F
-sfx_UnknownShield		ds.b 1		; $40
+sfx_CombineRing			ds.b 1		; $40	; Liliam: Encore mode - combine ring
 sfx_LightningShield		ds.b 1		; $41
 sfx_InstaAttack			ds.b 1		; $42
 sfx_FireAttack			ds.b 1		; $43
@@ -1588,12 +1588,12 @@ sfx_Perfect			ds.b 1		; $68
 sfx_PushBlock			ds.b 1		; $69
 sfx_Goal			ds.b 1		; $6A
 sfx_ActionBlock			ds.b 1		; $6B
-sfx_RotateStocks		ds.b 1		; $6C	; Liliam: Encore mode - stock rotate monitor
+sfx_Teleport			ds.b 1		; $6C	; Liliam: Encore mode - restart level
 sfx_UnknownShift		ds.b 1		; $6D
 sfx_BossHit			ds.b 1		; $6E
 sfx_Rumble2			ds.b 1		; $6F
 sfx_LavaBall			ds.b 1		; $70
-sfx_CombineRing			ds.b 1		; $71	; Liliam: Encore mode - combine ring
+sfx_PhotoPiece			ds.b 1		; $71	; Liliam: gallery - photo piece object
 sfx_Hoverpad			ds.b 1		; $72
 sfx_Transporter			ds.b 1		; $73
 sfx_TunnelBooster		ds.b 1		; $74
@@ -1621,7 +1621,7 @@ sfx_WeatherMachine		ds.b 1		; $89
 sfx_Bouncy			ds.b 1		; $8A
 sfx_ChopTree			ds.b 1		; $8B
 sfx_ChopStuck			ds.b 1		; $8C
-sfx_PhotoPiece			ds.b 1		; $8D	; Liliam: gallery - photo piece object
+sfx_RotateStocks		ds.b 1		; $8D	; Liliam: Encore mode - stock rotate monitor
 sfx_UnknownRevving		ds.b 1		; $8E
 sfx_DoorOpen			ds.b 1		; $8F
 sfx_DoorMove			ds.b 1		; $90
