@@ -172,6 +172,16 @@ button_start_mask:		EQU	1<<button_start	; $80
 button_ABC_mask:		EQU	button_A_mask|button_B_mask|button_C_mask
 
 ; ---------------------------------------------------------------------------
+; Player routines
+State_Control       = 2
+State_Hurt          = 4
+State_NoControl     = 6
+
+State_Dead          = 6
+State_GameOver      = 8
+State_Drown         = $C
+
+; ---------------------------------------------------------------------------
 ; Player Status Variables
 Status_Facing       = 0
 Status_InAir        = 1
@@ -215,11 +225,6 @@ Encore_HUD_player_frame  = Reserved_object_3+$2C
 Encore_HUD_stocks_frame  = Reserved_object_3+$2E
 Encore_HUD_stocks_timer  = Reserved_object_3+$30
 Encore_HUD_stocks_scroll = Reserved_object_3+$32
-
-sfx_EncoreSwap           = sfx_PulleyGrab
-sfx_EncoreSwapBlocked    = sfx_SmallBumpers
-sfx_EncoreRespawn        = sfx_Signpost
-sfx_Splash2              = sfx_Splash
 
 ; ---------------------------------------------------------------------------
 ; Elemental Shield DPLC variables
@@ -1668,6 +1673,7 @@ sfx_MetalBarrier		ds.b 1		; $C3	; Liliam: add extra characters
 sfx_MetalCharge			ds.b 1		; $C4	; Liliam: add extra characters
 sfx_TimeStone			ds.b 1		; $C5	; Liliam: Metal Sonic hologram object
 sfx_AirCountdown		ds.b 1		; $C6	; Liliam: Encore mode - music
+
 sfx__FirstContinuous =		*		; ID of the first continuous sound effect
 sfx_PeeloutCharge		ds.b 1		; $C7	; Liliam: hidden skills
 sfx_MetalOverdrive		ds.b 1		; $C8	; Liliam: add extra characters
@@ -1702,6 +1708,11 @@ sfx_MagneticSpike		ds.b 1		; $E4
 sfx_LeafBlower			ds.b 1		; $E5
 sfx_WaterSkid			ds.b 1		; $E6
 sfx__End =			*		; next ID after the last sound effect
+
+sfx_EncoreRespawn =		sfx_Signpost
+sfx_EncoreSwap =		sfx_PulleyGrab
+sfx_EncoreSwapBlocked =		sfx_SmallBumpers
+sfx_Splash2 =			sfx_Splash
 
 ; ---------------------------------------------------------------------------
 ; Liliam: add extra music tracks
