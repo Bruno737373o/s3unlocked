@@ -177,9 +177,15 @@ State_Control       = 2
 State_Hurt          = 4
 State_NoControl     = 6
 
-State_Dead          = 6
-State_GameOver      = 8
-State_Drown         = $C
+State_Dead_2P       = 6				; Liliam: Encore mode - expand player routines
+State_GameOver_2P   = 8				;
+State_Drown         = $A			;
+State_Dead          = $C			;
+State_GameOver      = $E			;
+
+;State_Dead          = 6			;
+;State_GameOver      = 8			;
+;State_Drown         = $C			;
 
 ; ---------------------------------------------------------------------------
 ; Player Status Variables
