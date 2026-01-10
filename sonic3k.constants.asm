@@ -530,7 +530,7 @@ HPZ_special_stage_completed	ds.w 1			; set if special stage was completed. This 
 Current_special_stage_2		ds.b 1			; seems to be just a copy of Current_special_stage
 			ds.b 1				; unused
 HPZ_current_special_stage	ds.b 1			; seems to be just a copy of Current_special_stage used specifically for HPZS
-Alternate_start_flag		ds.b 1		; Liliam: Encore mode - player starts
+			ds.b 1				; unused
 Ending_running_flag		ds.w 1			; the only thing this does is prevent the game from pausing
 Plane_buffer_2_addr		ds.l 1			; the address of the second plane buffer to process, if applicable
 Demo_hold_counter		ds.b 1			; the number of frames to hold the current buttons. This only applies to S&K demos
@@ -917,8 +917,7 @@ Competition_current_lap_2P	ds.b 1			; current lap number for player 2 in competi
 Collected_holograms_array	ds.l 1		; Liliam: Metal Sonic hologram object
 Collected_photo_piece_array	ds.b $F		; Liliam: gallery - photo piece object
 			ds.b $13			; unused
-Perfect_rings_left		ds.w 1			; left over from Sonic 2
-Perfect_rings_flag		ds.w 1			; unknown
+Saved_encore_stocks		ds.l 1		; Liliam: Encore mode - save game
 Player_mode			ds.w 1			; 0 = Sonic and Tails, 1 = Sonic alone, 2 = Tails alone, 3 = Knuckles alone
 Player_option			ds.w 1			; option selected on level select, data select screen or Sonic & Knuckles title screen
 Encore_mode			ds.b 1		; Liliam: Encore mode
@@ -1005,9 +1004,9 @@ Cheat_input_counter2		ds.w 1			; progress entering cheat codes
 Competition_mode		ds.w 1
 P1_character			ds.b 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P2_character			ds.b 1
-Encore_stocks_packed		ds.w 1		; Liliam: Encore mode
-Encore_rescued_chars		ds.b 1		; Liliam: Encore mode - stock rotate monitor
-			ds.b 1				; unused
+Encore_stocks_packed		ds.w 1		; Liliam: Encore mode - save game
+Encore_rescued_chars		ds.b 1		; Liliam: Encore mode - character stock monitor
+Alternate_start_flag		ds.b 1		; Liliam: Encore mode - player starts
 
 CrossResetRAM_End =		*
 
