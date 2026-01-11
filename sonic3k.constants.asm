@@ -360,7 +360,7 @@ Conveyor_belt_load_array	ds.b $E			; each subtype of hcz conveyor belt uses a di
 Kos_decomp_buffer		ds.b $1000		; each module in a KosM archive is decompressed here and then DMAed to VRAM
 H_scroll_buffer			ds.b $380		; horizontal scroll table is built up here and then DMAed to VRAM
 Collision_response_list		ds.b $80		; only objects in this list are processed by the collision response routines
-Stat_table =			*			; used by Tails' AI in a Sonic and Tails game
+Stat_table =			*			; used by Tails' CPU controls in a Sonic and Tails game
 Pos_table_P2			ds.b $100		; used by Player 2 in competition mode
 Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
@@ -644,16 +644,16 @@ Nem_frame_patterns_left		ds.w 1			; the number of patterns remaining to be decom
 			ds.l 1				; unused?
 
 ; The following all the way through Sprite_table is cleared on level load.
-Tails_CPU_interact		ds.w 1			; RAM address of the last object Tails stood on while controlled by AI
-Tails_CPU_idle_timer		ds.w 1			; counts down while controller 2 is idle, when it reaches 0 the AI takes over
+Tails_CPU_interact		ds.w 1			; RAM address of the last object Tails stood on while controlled by the CPU
+Tails_CPU_idle_timer		ds.w 1			; counts down while controller 2 is idle, when it reaches 0 the CPU takes over
 Tails_CPU_flight_timer		ds.w 1			; counts up while Tails is respawning, when it reaches 300 he drops into the level
-Tails_CPU_facing_timer		ds.b 1		; Liliam: Tails AI - bias facing direction when respawning
-Tails_CPU_pos_table_offset	ds.b 1		; Liliam: Tails AI - track live position
-Tails_CPU_routine		ds.w 1			; Tails' current AI routine in a Sonic and Tails game
+Tails_CPU_facing_timer		ds.b 1		; Liliam: Tails CPU - bias facing direction when respawning
+Tails_CPU_pos_table_offset	ds.b 1		; Liliam: Tails CPU - track live position
+Tails_CPU_routine		ds.w 1			; Tails' current CPU routine in a Sonic and Tails game
 Tails_CPU_target_X		ds.w 1			; Tails' target x-position
 Tails_CPU_target_Y		ds.w 1			; Tails' target y-position
-Tails_CPU_auto_fly_timer	ds.b 1			; counts up until AI Tails automatically flies up to maintain altitude, while grabbing Sonic in Marble Garden Act 2's boss
-Tails_CPU_auto_jump_flag	ds.b 1			; set to #1 when AI Tails needs to jump of his own accord, regardless of whether Sonic jumped or not
+Tails_CPU_auto_fly_timer	ds.b 1			; counts up until CPU Tails automatically flies up to maintain altitude, while grabbing Sonic in Marble Garden Act 2's boss
+Tails_CPU_auto_jump_flag	ds.b 1			; set to #1 when CPU Tails needs to jump of his own accord, regardless of whether Sonic jumped or not
 Rings_manager_routine		ds.b 1
 Level_started_flag		ds.b 1
 _unkF712			ds.b $1C		; ??? ; unknown object respawn table
