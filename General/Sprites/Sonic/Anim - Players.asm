@@ -1,4 +1,8 @@
 AniSonic:
+AniAmy:
+AniMighty:
+AniRay:
+AniMetalSonic:
 		dc.w Ani_PlayerWalk-AniSonic		; 00
 		dc.w Ani_PlayerRun-AniSonic		; 01
 		dc.w Ani_PlayerSpin-AniSonic		; 02
