@@ -18,7 +18,7 @@
 	dbglistobj Obj_AIZCollapsingLogBridge,	Map_AIZCollapsingLogBridge,	   8,   0, make_art_tile(ArtTile_AIZMisc2,2,0)
 	dbglistobj Obj_AIZFallingLog,		Map_AIZFallingLog2,		   7,   0, make_art_tile(ArtTile_AIZMisc2,2,0)
 	dbglistobj Obj_AIZSpikedLog,		Map_AIZSpikedLog,		   0,   8, make_art_tile(ArtTile_AIZMisc2,2,0)
-	dbglistobj Obj_StillSprite,		Map_StillSprites,		   0,   0, make_art_tile(ArtTile_AIZMisc2,2,0)
+	dbglistobj Obj_StillSprite,		Map_StillSprites,		   0,   0, make_art_tile(ArtTile_AIZ2BridgePost,2,0)
 	dbglistobj Obj_StillSprite,		Map_StillSprites,		   1,   1, make_art_tile(ArtTile_AIZMisc2,2,0)
 	dbglistobj Obj_StillSprite,		Map_StillSprites,		   2,   2, make_art_tile(ArtTile_AIZMisc2,2,0)
 	dbglistobj Obj_StillSprite,		Map_StillSprites,		   3,   3, make_art_tile($001,2,0)

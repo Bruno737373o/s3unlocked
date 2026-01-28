@@ -347,6 +347,7 @@ Player_1			ds.b object_size	; main character in 1 player mode, player 1 in Compe
 Player_2			ds.b object_size	; Tails in a Sonic and Tails game, player 2 in Competition mode
 Reserved_object_3		ds.b object_size	; during a level, an object whose sole purpose is to clear the collision response list is stored here
 Wave_Splash =			*		; Liliam: expand dynamic object RAM
+Level_intro_object =		* + (object_size*2)
 Dynamic_object_RAM		ds.b object_size*96	; $1BC0 bytes ; 96 objects
 Dynamic_object_RAM_end =	*
 Level_object_RAM =		Dynamic_object_RAM_end	; $378 bytes ; various fixed in-level objects
@@ -1341,6 +1342,7 @@ ArtTile_Technosqueek                  = $052E
 ArtTile_SOZEndBoss                    = $03A4
 ArtTile_SOZ2Extra                     = $03AF
 ArtTile_SOZMiniboss                   = $03B5
+ArtTile_SOZMushroomParachute          = $03AE	; Liliam: Encore mode - FBZ level order
 ArtTile_SOZTile                       = $03C0
 ArtTile_SOZMisc                       = $03C9
 ArtTile_SOZSand                       = $04F3
