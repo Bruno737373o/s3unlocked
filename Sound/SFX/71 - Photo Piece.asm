@@ -4,8 +4,8 @@ Sfx5E_Header:
 	smpsHeaderTempoSFX  $01
 	smpsHeaderChanSFX   $02
 
-	smpsHeaderSFXChannel cFM5, Sfx5E_FM6,		$0C, $08
-	smpsHeaderSFXChannel cFM4, Sfx5E_FM5,		$0C, $08
+	smpsHeaderSFXChannel cFM5, Sfx5E_FM6,		$0C, $10
+	smpsHeaderSFXChannel cFM4, Sfx5E_FM5,		$0C, $10
 
 Sfx5E_FM5:
 	smpsModSet          $01, $01, $04, $04

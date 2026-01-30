@@ -899,9 +899,9 @@ Ring_spill_anim_counter		ds.b 1
 Ring_spill_anim_frame		ds.b 1
 Ring_spill_anim_accum		ds.w 1
 AIZ_vine_angle			ds.w 1			; controls the angle of AIZ giant vines
+Photo_piece_disable_flag	ds.b 1		; Liliam: museum - photo piece object
 Slot_machine_wall_frame_timer	ds.b 1		; Liliam: ported from S1 - restore full item set
 Slot_machine_wall_frame		ds.b 1		;
-_unkFEBE		ds.b 1				; unused
 Extra_life_flags_P2		ds.b 1
 Max_speed_P2			ds.w 1
 Acceleration_P2			ds.w 1
@@ -923,7 +923,7 @@ Competition_total_laps		ds.b 1			; total number of laps in competition mode (typ
 Competition_current_lap		ds.b 1			; current lap number for player 1 in competition mode
 Competition_current_lap_2P	ds.b 1			; current lap number for player 2 in competition mode
 Collected_holograms_array	ds.l 1		; Liliam: Metal Sonic hologram object
-Collected_photo_piece_array	ds.b $F		; Liliam: gallery - photo piece object
+Collected_photo_piece_array	ds.b $F		; Liliam: museum - photo piece object
 			ds.b $13			; unused
 Saved_encore_stocks		ds.l 1		; Liliam: Encore mode - save game
 Player_mode			ds.w 1			; 0 = Sonic and Tails, 1 = Sonic alone, 2 = Tails alone, 3 = Knuckles alone
@@ -1601,7 +1601,7 @@ sfx_UnknownShift		ds.b 1		; $6D
 sfx_BossHit			ds.b 1		; $6E
 sfx_Rumble2			ds.b 1		; $6F
 sfx_LavaBall			ds.b 1		; $70
-sfx_PhotoPiece			ds.b 1		; $71	; Liliam: gallery - photo piece object
+sfx_PhotoPiece			ds.b 1		; $71	; Liliam: museum - photo piece object
 sfx_Hoverpad			ds.b 1		; $72
 sfx_Transporter			ds.b 1		; $73
 sfx_TunnelBooster		ds.b 1		; $74
