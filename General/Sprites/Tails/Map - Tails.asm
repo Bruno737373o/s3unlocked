@@ -881,34 +881,34 @@ Map_Tails_Hang4:
 		dc.b  $E9,  $A,   0,   0, $FF, $F5
 Map_Tails_360Hang1:
 		dc.w 4
-		dc.b  $EC,   8,   0,   0, $FF, $F6
-		dc.b  $F4,  $D,   0,   3, $FF, $EE
-		dc.b    4,   8,   0,  $B, $FF, $F6
-		dc.b   $C,   4,   0,  $E, $FF, $FE
+		dc.b  $E9,   8,   0,   0, $FF, $F6
+		dc.b  $F1,  $D,   0,   3, $FF, $EE
+		dc.b    1,   8,   0,  $B, $FF, $F6
+		dc.b    9,   4,   0,  $E, $FF, $FE
 Map_Tails_360Hang2:
 		dc.w 3
-		dc.b  $EC,  $A,   0,   0, $FF, $F4
-		dc.b    4,  $C,   0,   9, $FF, $F4
-		dc.b   $C,   8,   0,  $D, $FF, $FC
+		dc.b  $E9,  $A,   0,   0, $FF, $F4
+		dc.b    1,  $C,   0,   9, $FF, $F4
+		dc.b    9,   8,   0,  $D, $FF, $FC
 Map_Tails_360Hang3:
 		dc.w 2
-		dc.b  $EC,  $A,   0,   0, $FF, $F4
-		dc.b    4,   5,   0,   9, $FF, $FC
+		dc.b  $E9,  $A,   0,   0, $FF, $F4
+		dc.b    1,   5,   0,   9, $FF, $FC
 Map_Tails_360Hang4:
 Map_Tails_360Hang7:
 		dc.w 3
-		dc.b  $EC,  $A,   0,   0, $FF, $F5
-		dc.b    4,   0,   0,   9, $FF, $FD
-		dc.b   $C,   4,   0,  $A, $FF, $FD
+		dc.b  $E9,  $A,   0,   0, $FF, $F5
+		dc.b    1,   0,   0,   9, $FF, $FD
+		dc.b    9,   4,   0,  $A, $FF, $FD
 Map_Tails_360Hang5:
 		dc.w 2
-		dc.b  $EC,  $B,   0,   0, $FF, $F4
-		dc.b   $C,   4,   0,  $C, $FF, $F4
+		dc.b  $E9,  $B,   0,   0, $FF, $F4
+		dc.b    9,   4,   0,  $C, $FF, $F4
 Map_Tails_360Hang6:
 		dc.w 3
-		dc.b  $EC,   9,   0,   0, $FF, $F2
-		dc.b  $FC,   5,   0,   6, $FF, $FA
-		dc.b   $C,   8,   0,  $A, $FF, $F2
+		dc.b  $E9,   9,   0,   0, $FF, $F2
+		dc.b  $F9,   5,   0,   6, $FF, $FA
+		dc.b    9,   8,   0,  $A, $FF, $F2
 Map_Tails_WallRide1:
 		dc.w 3
 		dc.b  $EC,   9,   0,   0, $FF, $F0
