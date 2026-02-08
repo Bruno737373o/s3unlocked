@@ -742,7 +742,7 @@ _unkFA82			ds.b 1
 _unkFA83			ds.b 1
 _unkFA84			ds.w 1
 _unkFA86			ds.w 1
-_unkFA88			ds.b 1
+Ending_completion_level		ds.b 1			; -2 = no emeralds, 0 = Chaos Emeralds, 2 = Super Emeralds
 _unkFA89			ds.b 1
 _unkFA8A			ds.w 1
 _unkFA8C			ds.w 1			; unused?
