@@ -12,6 +12,8 @@ Map_607E6:	dc.w word_607F0-Map_607E6
 		dc.w Map_EndingPoses_Ray2-Map_607E6
 		dc.w Map_EndingPoses_MetalSonic1-Map_607E6
 		dc.w Map_EndingPoses_MetalSonic2-Map_607E6
+		dc.w Map_EndingPoses_Amy1-Map_607E6
+		dc.w Map_EndingPoses_Amy2-Map_607E6
 		dc.w word_60866-Map_607E6
 		dc.w word_60A52-Map_607E6
 word_607F0:	dc.w 6			
