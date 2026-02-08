@@ -23,9 +23,9 @@ word_60316:	dc.w 4
 		dc.b    4,   8,   0, $32, $FF, $EC
 		dc.b   $C,   8,   0, $23, $FF, $F4
 word_60330:	dc.w 3
-		dc.b  $EC,  $B,   0, $35, $FF, $EC
-		dc.b  $F4,   5,   0, $41,   0,   4
-		dc.b   $C,   8,   0, $45, $FF, $F4
+		dc.b  $EC,  $B,   0, $35, $FF, $ED
+		dc.b  $F4,   5,   0, $41,   0,   5
+		dc.b   $C,   8,   0, $45, $FF, $F5
 word_60344:	dc.w 2
 		dc.b  $F4,   4,   8, $48, $FF, $F8
 		dc.b  $FC,  $E,   8, $4A, $FF, $F0
