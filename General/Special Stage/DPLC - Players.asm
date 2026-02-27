@@ -1,3 +1,4 @@
+PLC_SStageSonic:
 		dc.w PLC_SStageSonic0-PLC_SStageSonic
 		dc.w PLC_SStageSonic1-PLC_SStageSonic
 		dc.w PLC_SStageSonic2-PLC_SStageSonic

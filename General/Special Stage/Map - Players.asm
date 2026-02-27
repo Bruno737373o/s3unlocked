@@ -1,3 +1,4 @@
+Map_SStageSonic:
 		dc.w Map_SStageSonic0-Map_SStageSonic
 		dc.w Map_SStageSonic1-Map_SStageSonic
 		dc.w Map_SStageSonic1-Map_SStageSonic
