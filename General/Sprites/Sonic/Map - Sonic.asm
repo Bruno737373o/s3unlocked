@@ -966,16 +966,16 @@ Map_Sonic_BarSwing3:
 		dc.b   $B,   8,   0,  $C, $FF, $F3
 Map_Sonic_BarSwing4:
 		dc.w 3
-		dc.b  $E8,   8,   0,   0, $FF, $F2
-		dc.b  $F0,   4,   0,   3, $FF, $F6
-		dc.b  $F8,  $B,   0,   5, $FF, $F2
+		dc.b  $E8,   8,   0,   0, $FF, $F3
+		dc.b  $F0,   4,   0,   3, $FF, $F7
+		dc.b  $F8,  $B,   0,   5, $FF, $F3
 Map_Sonic_BarSwing5:
 		dc.w 1
-		dc.b  $F0,  $B,   0,   0, $FF, $F2
+		dc.b  $F0,  $B,   0,   0, $FF, $F3
 Map_Sonic_BarSwing6:
 		dc.w 2
-		dc.b  $E8,   0,   0,   0, $FF, $FA
-		dc.b  $F0,  $B,   0,   1, $FF, $F2
+		dc.b  $E8,   0,   0,   0, $FF, $FB
+		dc.b  $F0,  $B,   0,   1, $FF, $F3
 Map_Sonic_CorkscrewWallRide1:
 		dc.w 2
 		dc.b  $EC,  $B,   0,   0, $FF, $F0
@@ -1848,10 +1848,10 @@ Map_Sonic_PoleSwing4_SUPER:
 		dc.b  $F0,   7,   0,  $C,   0,   5
 Map_Sonic_BarSwing4_SUPER:
 		dc.w 4
-		dc.b  $E8,   8,   0,   0, $FF, $F2
-		dc.b  $F0,   4,   0,   3, $FF, $F6
-		dc.b  $F8,   9,   0,   5, $FF, $F2
-		dc.b    8,  $D,   0,  $B, $FF, $EE
+		dc.b  $E8,   8,   0,   0, $FF, $F3
+		dc.b  $F0,   4,   0,   3, $FF, $F7
+		dc.b  $F8,   9,   0,   5, $FF, $F3
+		dc.b    8,  $D,   0,  $B, $FF, $EF
 Map_Sonic_HangSwing2_SUPER:
 		dc.w 4
 		dc.b  $E6,   4,   0,   0, $FF, $E9
