@@ -237,7 +237,9 @@ Ani_SonicStand:		dc.b    5, $48, $48, $48, $48, $48, $48, $48, $48, $48, $48, $4
 			dc.b  $B1, $B1, $B0, $B0, $B1, $B1, $B0, $B0, $B1, $B1, $B0, $B0, $B1, $B1, $B0, $B0, $B1, $B1, $B0, $B0
 			dc.b  $B1, $B1, $B0, $B0, $B1, $B1, $B2, $B2, $B2, $B2, $B2, $B2, $B3, $B3, $B3, $B3, $B3, $B3, $B4, $B5
 			dc.b  $B5, $B5, $B5, $B5, $B5, $B4, $B4, $FE, $35
-Ani_SuperSonicStand:	dc.b    7, $AE, $AF, $B0, $AF, $FF
+Ani_SuperSonicStand:	dc.b    7, $AE, $AF, $B0, $AF, $AE, $AF, $B0, $AF, $AE, $AF, $B0, $AF, $AE, $AF, $B0, $AF, $AE, $AF, $B0
+			dc.b  $AF, $AE, $AF, $B0, $AF, $AE, $AF, $B0, $AF, $AE, $AF, $B0, $AF, $AE, $AF, $B0, $AF, $AE, $B1, $B6
+			dc.b  $B7, $B8, $B9, $FE,   4
 Ani_TailsStand:		dc.b    7, $D8, $D8, $D8, $D8, $D8, $D8, $D8, $D8, $D8, $D8, $AE, $AF, $D8, $D8, $D8, $D8, $D8, $D8, $D8
 			dc.b  $D8, $AE, $AF, $D8, $D8, $D8, $D8, $D8, $D8, $D8, $D8, $D8, $B0, $B0, $B0, $B0, $B0, $B0, $B0, $B0
 			dc.b  $B0, $B0, $B0, $B0, $B0, $B0, $B0, $B0, $B1, $B2, $B3, $B2, $B3, $B2, $B3, $B2, $B3, $B2, $B3, $B1
