@@ -973,51 +973,51 @@ Map_Amy_WallRide5:
 Map_Amy_360Run1:
 Map_Amy_360Run3:
 		dc.w 3
-		dc.b  $E5,   3,   0,   0,   0,   3
-		dc.b  $ED,   7,   0,   4, $FF, $F3
-		dc.b    5,   0,   0,  $C,   0,   3
+		dc.b  $E9,   3,   0,   0,   0,   3
+		dc.b  $F1,   7,   0,   4, $FF, $F3
+		dc.b    9,   0,   0,  $C,   0,   3
 Map_Amy_360Run2:
 		dc.w 3
-		dc.b  $E5,   3,   0,   0,   0,   4
-		dc.b  $ED,   7,   0,   4, $FF, $F4
-		dc.b    5,   0,   0,  $C,   0,   4
+		dc.b  $E9,   3,   0,   0,   0,   4
+		dc.b  $F1,   7,   0,   4, $FF, $F4
+		dc.b    9,   0,   0,  $C,   0,   4
 Map_Amy_360Run4:
 		dc.w 3
-		dc.b  $E5,   3,   0,   0, $FF, $F9
-		dc.b  $ED,   3,   0,   4,   0,   1
-		dc.b    5,   0,   0,   8, $FF, $F9
+		dc.b  $E9,   3,   0,   0, $FF, $F9
+		dc.b  $F1,   3,   0,   4,   0,   1
+		dc.b    9,   0,   0,   8, $FF, $F9
 Map_Amy_360Run5:
 Map_Amy_360Run7:
 		dc.w 3
-		dc.b  $E5,   3,   8,   0, $FF, $F6
-		dc.b  $ED,   7,   8,   4, $FF, $FE
-		dc.b    5,   0,   8,  $C, $FF, $F6
+		dc.b  $E9,   3,   8,   0, $FF, $F6
+		dc.b  $F1,   7,   8,   4, $FF, $FE
+		dc.b    9,   0,   8,  $C, $FF, $F6
 Map_Amy_360Run6:
 		dc.w 3
-		dc.b  $E5,   3,   8,   0, $FF, $F5
-		dc.b  $ED,   7,   8,   4, $FF, $FD
-		dc.b    5,   0,   8,  $C, $FF, $F5
+		dc.b  $E9,   3,   8,   0, $FF, $F5
+		dc.b  $F1,   7,   8,   4, $FF, $FD
+		dc.b    9,   0,   8,  $C, $FF, $F5
 Map_Amy_360Run8:
 		dc.w 3
-		dc.b  $E5,   3,   0,   0, $FF, $F6
-		dc.b  $ED,   7,   0,   4, $FF, $FE
-		dc.b    5,   0,   0,  $C, $FF, $F6
+		dc.b  $E9,   3,   0,   0, $FF, $F6
+		dc.b  $F1,   7,   0,   4, $FF, $FE
+		dc.b    9,   0,   0,  $C, $FF, $F6
 Map_Amy_360Run9:
 		dc.w 3
-		dc.b  $E5,   3,   0,   0, $FF, $F4
-		dc.b  $ED,   7,   0,   4, $FF, $FC
-		dc.b    5,   0,   0,  $C, $FF, $F4
+		dc.b  $E9,   3,   0,   0, $FF, $F4
+		dc.b  $F1,   7,   0,   4, $FF, $FC
+		dc.b    9,   0,   0,  $C, $FF, $F4
 Map_Amy_360RunA:
 		dc.w 3
-		dc.b  $E5,   3,   0,   0,   0,   1
-		dc.b  $ED,   3,   0,   4, $FF, $F9
-		dc.b    5,   0,   0,   8,   0,   1
+		dc.b  $E9,   3,   0,   0,   0,   1
+		dc.b  $F1,   3,   0,   4, $FF, $F9
+		dc.b    9,   0,   0,   8,   0,   1
 Map_Amy_360RunB:
 Map_Amy_360RunC:
 		dc.w 3
-		dc.b  $E5,   3,   8,   0,   0,   4
-		dc.b  $ED,   7,   8,   4, $FF, $F4
-		dc.b    5,   0,   8,  $C,   0,   4
+		dc.b  $E9,   3,   8,   0,   0,   4
+		dc.b  $F1,   7,   8,   4, $FF, $F4
+		dc.b    9,   0,   8,  $C,   0,   4
 Map_Amy_PoleSwingRide:
 		dc.w 2
 		dc.b  $EC,  $F,   0,   0, $FF, $EB
