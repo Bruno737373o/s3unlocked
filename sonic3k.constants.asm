@@ -128,28 +128,24 @@ objoff_30 =		$30
  enum 	objoff_46=$46,objoff_47=$47,objoff_48=$48,objoff_49=$49
 
  ; ---------------------------------------------------------------------------
-; Bits 3-6 of an object's status after a SolidObject call is a
-; bitfield with the following meaning:
+; Bits 3-6 of an object's status after a SolidObject call are a bitfield with the following meaning:
 p1_standing_bit   = 3
 p2_standing_bit   = p1_standing_bit + 1
-
 p1_standing       = 1<<p1_standing_bit
 p2_standing       = 1<<p2_standing_bit
 
 pushing_bit_delta = 2
 p1_pushing_bit    = p1_standing_bit + pushing_bit_delta
 p2_pushing_bit    = p1_pushing_bit + 1
-
 p1_pushing        = 1<<p1_pushing_bit
 p2_pushing        = 1<<p2_pushing_bit
-
 
 standing_mask     = p1_standing|p2_standing
 pushing_mask      = p1_pushing|p2_pushing
 
 ; ---------------------------------------------------------------------------
 ; Controller Buttons
-;
+; ---------------------------------------------------------------------------
 ; Buttons bit numbers
 button_up:			EQU	0
 button_down:			EQU	1
@@ -159,6 +155,7 @@ button_B:			EQU	4
 button_C:			EQU	5
 button_A:			EQU	6
 button_start:			EQU	7
+
 ; Buttons masks (1 << x == pow(2, x))
 button_up_mask:			EQU	1<<button_up	; $01
 button_down_mask:		EQU	1<<button_down	; $02
@@ -168,24 +165,9 @@ button_B_mask:			EQU	1<<button_B	; $10
 button_C_mask:			EQU	1<<button_C	; $20
 button_A_mask:			EQU	1<<button_A	; $40
 button_start_mask:		EQU	1<<button_start	; $80
-
 button_ABC_mask:		EQU	button_A_mask|button_B_mask|button_C_mask
-
-; ---------------------------------------------------------------------------
-; Player routines
-State_Control       = 2
-State_Hurt          = 4
-State_NoControl     = 6
-
-State_Dead_2P       = 6				; Liliam: Encore mode - expand player routines
-State_GameOver_2P   = 8				;
-State_Drown         = $A			;
-State_Dead          = $C			;
-State_GameOver      = $E			;
-
-;State_Dead          = 6			;
-;State_GameOver      = 8			;
-;State_Drown         = $C			;
+button_confirm_mask:		EQU	button_C_mask|button_start_mask			; Liliam: hidden skills
+;button_confirm_mask:		EQU	button_A_mask|button_C_mask|button_start_mask	;
 
 ; ---------------------------------------------------------------------------
 ; Player Status Variables
@@ -206,6 +188,28 @@ Status_CombineRing  = 3				; Liliam: Encore mode - combine ring
 Status_FireShield   = 4
 Status_LtngShield   = 5
 Status_BublShield   = 6
+
+; ---------------------------------------------------------------------------
+; Player routines
+State_Control       = 2
+State_Hurt          = 4
+State_NoControl     = 6
+
+State_Dead_2P       = 6				; Liliam: Encore mode - expand player routines
+State_GameOver_2P   = 8				;
+State_Drown         = $A			;
+State_Dead          = $C			;
+State_GameOver      = $E			;
+
+;State_Dead         = 6				;
+;State_GameOver     = 8				;
+;State_Drown        = $C			;
+
+; ---------------------------------------------------------------------------
+; Elemental Shield DPLC variables
+shield_prev_frame   = $34
+shield_art          = $38
+shield_plc          = $3C
 
 ; ---------------------------------------------------------------------------
 ; Liliam: hidden skills
@@ -233,15 +237,8 @@ Encore_HUD_stocks_timer  = Reserved_object_3+$30
 Encore_HUD_stocks_scroll = Reserved_object_3+$32
 
 ; ---------------------------------------------------------------------------
-; Elemental Shield DPLC variables
-shield_prev_frame   = $34
-shield_art          = $38
-shield_plc          = $3C
-
-; ---------------------------------------------------------------------------
 ; Clock equates
 ; ---------------------------------------------------------------------------
-
 Master_Clock    = 53693175
 M68000_Clock    = Master_Clock/7
 Z80_Clock       = Master_Clock/15
@@ -251,7 +248,6 @@ PSG_Sample_Rate = Z80_Clock/16
 ; ---------------------------------------------------------------------------
 ; Address equates
 ; ---------------------------------------------------------------------------
-
 ; Z80 addresses
 Z80_RAM =			$A00000 ; start of Z80 RAM
 Z80_RAM_end =			$A02000 ; end of non-reserved Z80 RAM
@@ -260,8 +256,8 @@ Z80_reset =			$A11200
 
 SRAM_access_flag =		$A130F1
 Security_addr =			$A14000
-; ---------------------------------------------------------------------------
 
+; ---------------------------------------------------------------------------
 ; I/O Area
 HW_Version =			$A10001
 HW_Port_1_Data =		$A10003
@@ -279,14 +275,14 @@ HW_Port_2_SCtrl =		$A10019
 HW_Expansion_TxData =		$A1001B
 HW_Expansion_RxData =		$A1001D
 HW_Expansion_SCtrl =		$A1001F
-; ---------------------------------------------------------------------------
 
+; ---------------------------------------------------------------------------
 ; VDP addresses
 VDP_data_port =			$C00000
 VDP_control_port =		$C00004
 PSG_input =			$C00011
-; ---------------------------------------------------------------------------
 
+; ---------------------------------------------------------------------------
 ; RAM addresses
 
 ; SRAM addresses
@@ -351,6 +347,7 @@ Wave_Splash =			*		; Liliam: expand dynamic object RAM
 Level_intro_object =		* + (object_size*2)
 Dynamic_object_RAM		ds.b object_size*96	; $1BC0 bytes ; 96 objects
 Dynamic_object_RAM_end =	*
+
 Level_object_RAM =		Dynamic_object_RAM_end	; $378 bytes ; various fixed in-level objects
 Breathing_bubbles		ds.b object_size	; for the main character
 Breathing_bubbles_P2		ds.b object_size	; for Tails in a Sonic and Tails game
@@ -363,6 +360,7 @@ Shield				ds.b object_size
 Invincibility_stars		ds.b object_size*4
 Object_RAM_end =		*
 			ds.b $14			; unused
+
 Conveyor_belt_load_array	ds.b $E			; each subtype of hcz conveyor belt uses a different byte to check if it's already loaded. Since they're so wide, the object loader may try loading them multiple times
 			ds.b $12			; unused
 
@@ -374,10 +372,13 @@ Pos_table_P2			ds.b $100		; used by Player 2 in competition mode
 Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
 			ds.b $C				; unused
+
 Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
 			ds.w 1				; unused
+
 Emerald_flicker_flag		ds.w 1			; controls the emerald flicker in save screen and special stage results.
 			ds.b $44			; unused
+
 Saved_data			ds.b $54		; saved data from 1 player mode
 Ring_status_table		ds.b $400		; 1 word per ring
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry
@@ -571,7 +572,7 @@ Ctrl_1_pressed			ds.b 1			; buttons being pressed newly this frame
 Ctrl_2 =			*			; both held and pressed
 Ctrl_2_held			ds.b 1
 Ctrl_2_pressed			ds.b 1
-_tempF608		ds.b 6				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles
+			ds.b 6				; unused
 
 VDP_reg_1_command		ds.w 1			; AND the lower byte by $BF and write to VDP control port to disable display, OR by $40 to enable
 			ds.l 1				; unused
@@ -754,6 +755,7 @@ Camera_stored_min_X_pos		ds.w 1			; the target camera minimum x-position
 Camera_stored_min_Y_pos		ds.w 1			; the target camera minimum y-position
 Camera_stored_max_Y_pos		ds.w 1			; the target camera maximum y-position
 Slotted_object_bits		ds.b 8			; bits to determine which slots are used for slotted objects
+
 _unkFAA2			ds.b 1
 _unkFAA3			ds.b 1
 _unkFAA4			ds.w 1
@@ -820,8 +822,7 @@ Level_frame_counter		ds.w 1			; the number of frames which have elapsed since th
 Debug_object			ds.b 1			; the current position in the debug mode object list
 Debug_monitor_subtype		ds.b 1		; Liliam: allow selection of debug monitor contents
 Debug_placement_mode =		*			; both routine and type
-Debug_placement_routine		ds.b 1
-			ds.b 1			; Liliam: move debug frame cycling mode to negative
+Debug_placement_routine		ds.w 1		; Liliam: debug - move frame cycling mode to negative
 Debug_camera_delay		ds.b 1
 Debug_camera_speed		ds.b 1
 V_int_run_count			ds.l 1			; the number of times V-int has run
@@ -953,19 +954,17 @@ Level_select_repeat		ds.w 1			; delay counter for repeating the button press. Al
 Level_select_option		ds.w 1			; the current selected option in the level select
 Sound_test_sound		ds.w 1
 Title_screen_option		ds.b 1
-			ds.b 1				; unused
-_tempFF88		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles
+			ds.b 3				; unused
 Competition_settings =		*			; both items and game type
 Competition_items		ds.b 1			; 0 = Enabled, FF = Disabled.
 Competition_type		ds.b 1			; 0 = grand prix, 3 = match race, -1 = time attack
-_tempFF8C		ds.b 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles
-			ds.b 1				; unused
+			ds.w 1				; unused
 Total_bonus_countup		ds.w 1			; the total points to be added due to various bonuses this frame in the end of level results screen
 Current_music			ds.w 1
 Collected_special_ring_array	ds.l 1			; each bit indicates a special stage entry ring in the current zone
 Saved2_status_secondary		ds.b 1
 Respawn_table_keep		ds.b 1			; if set, respawn table is not reset during level load
-_tempFF98		ds.w 1				; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles
+			ds.w 1				; unused
 Saved_apparent_zone_and_act	ds.w 1
 Saved2_apparent_zone_and_act	ds.w 1
 
@@ -976,7 +975,7 @@ Blue_spheres_option		ds.b 1			; 0 = level, 1 = start, 2 = code
 Blue_spheres_menu_flag		ds.b 1			; 0 = single stage, 1 = normal, bit 7 set = entering a code
 Blue_spheres_difficulty		ds.b 1			; value currently displayed
 Blue_spheres_target_difficulty	ds.b 1			; value read from the layout
-			ds.w 1			; Liliam: removed S&K alone mode
+			ds.w 1				; unused
 Emerald_counts =		*			; both Chaos and Super emeralds
 Chaos_emerald_count		ds.b 1
 Super_emerald_count		ds.b 1
@@ -1079,6 +1078,7 @@ SStage_extra_sprites		ds.b $70		; some extra sprite info for special stages
 	dephase
 ; ---------------------------------------------------------------------------
 ; Art tile stuff
+
 palette_line_0      =      (0<<13)
 palette_line_1      =      (1<<13)
 palette_line_2      =      (2<<13)
@@ -1141,6 +1141,7 @@ Window_Enable                 = (1<<7)
 
 ; ---------------------------------------------------------------------------
 ; VRAM and tile art base addresses.
+
 ; VRAM Reserved regions.
 VRAM_Window_Name_Table                = $8000
 VRAM_Plane_A_Name_Table_Competition   = $8000
@@ -1489,9 +1490,6 @@ ArtTile_SSZ2EggRoboStand              = $1BE	; Liliam: Metal Sonic - final boss
 ArtTile_SSZ2EggRoboRun                = $1FC	; Liliam: Metal Sonic - final boss
 ArtTile_SSZ2Extra                     = $241	; Liliam: Metal Sonic - final boss
 ArtTile_SSZ2DeathEggRobot             = $254	; Liliam: Metal Sonic - final boss
-
-; ---------------------------------------------------------------------------
-; Universal locations.
 
 ; Universal (used on all standard levels).
 ArtTile_DiagonalSpring                = $043A
