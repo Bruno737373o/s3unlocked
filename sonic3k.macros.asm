@@ -90,6 +90,25 @@ clearRAM macro addr,length
     endif
     endm
 
+; tells the VDP to stop outputting to the display
+disableDisplay macro
+	move	#$2700,sr
+	disableDisplay_HInt
+    endm
+
+disableDisplay_HInt macro
+	move.w	(VDP_reg_1_command).w,d0
+	andi.b	#$BF,d0
+	move.w	d0,(VDP_control_port).l
+    endm
+
+; tells the VDP to enable the display again
+enableDisplay macro
+	move.w	(VDP_reg_1_command).w,d0
+	ori.b	#$40,d0
+	move.w	d0,(VDP_control_port).l
+    endm
+
 ; tells the Z80 to stop, and waits for it to finish stopping (acquire bus)
 stopZ80 macro
 	move.w	#$100,(Z80_bus_request).l ; stop the Z80
