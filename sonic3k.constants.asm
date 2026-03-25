@@ -1086,12 +1086,69 @@ palette_line_3      =      (3<<13)
 high_priority       =      (1<<15)
 tile_mask           =      $07FF
 drawing_mask        =      $7FFF
+; ---------------------------------------------------------------------------
+; VDP register commands.
+
+VDP_Option0         = $8000
+VDP_Option1         = $8100
+VDP_Plane_A         = $8200
+VDP_Window_         = $8300
+VDP_Plane_B         = $8400
+VDP_Sprites         = $8500
+VDP_BGColor         = $8700
+VDP_HIntPos         = $8A00
+VDP_Option2         = $8B00
+VDP_Option3         = $8C00
+VDP_HScroll         = $8D00
+VDP_AutoInc         = $8F00
+VDP_PlnSize         = $9000
+VDP_WinXPos         = $9100
+VDP_WinYPos         = $9200
+VDP_DMALen1         = $9300
+VDP_DMALen2         = $9400
+VDP_DMASrc1         = $9500
+VDP_DMASrc2         = $9600
+VDP_DMASrc3         = $9700
+
+enable_display_bit  = (1<<6)
+
+; Option 0
+VDPReg0_DisableHInt           = (1<<2)
+VDPReg0_EnableHInt            = (1<<4)|VDPReg0_DisableHInt
+
+; Option 1
+VDPReg1_DisableVIntAndDisplay = (1<<4)|(1<<2)
+VDPReg1_DisableDisplay        = (1<<5)|VDPReg1_DisableVIntAndDisplay
+VDPReg1_EnableDisplay         = enable_display_bit|VDPReg1_DisableDisplay
+
+; Option 2
+VDPReg2_FullScroll            = (0<<0)
+VDPReg2_LineScroll            = (3<<0)
+VDPReg2_VScroll               = (1<<2)|VDPReg2_LineScroll
+
+; Option 3
+VDPReg3_DisableSH             = (1<<7)|(1<<0)
+VDPReg3_EnableSH              = (1<<3)|VDPReg3_DisableSH
+
+; Plane sizes
+PlaneSize_512x256             = (1<<0)
+PlaneSize_1024x256            = (3<<0)
+PlaneSize_512x512             = (1<<4)|PlaneSize_512x256
+
+; Window options
+Window_Disable                = (0<<7)
+Window_Enable                 = (1<<7)
 
 ; ---------------------------------------------------------------------------
 ; VRAM and tile art base addresses.
 ; VRAM Reserved regions.
+VRAM_Window_Name_Table                = $8000
+VRAM_Plane_A_Name_Table_Competition   = $8000
+VRAM_Plane_B_Name_Table_Competition   = $A000
 VRAM_Plane_A_Name_Table               = $C000	; Extends until $CFFF
 VRAM_Plane_B_Name_Table               = $E000	; Extends until $EFFF
+VRAM_HScroll_Table                    = $F000
+VRAM_Sprite_Table                     = $F800
 
 ; Menu background.
 ArtTile_S3MenuBG                      = $0001

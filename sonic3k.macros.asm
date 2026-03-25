@@ -98,14 +98,14 @@ disableDisplay macro
 
 disableDisplay_HInt macro
 	move.w	(VDP_reg_1_command).w,d0
-	andi.b	#$BF,d0
+	andi.b	#~enable_display_bit,d0
 	move.w	d0,(VDP_control_port).l
     endm
 
 ; tells the VDP to enable the display again
 enableDisplay macro
 	move.w	(VDP_reg_1_command).w,d0
-	ori.b	#$40,d0
+	ori.b	#enable_display_bit,d0
 	move.w	d0,(VDP_control_port).l
     endm
 
