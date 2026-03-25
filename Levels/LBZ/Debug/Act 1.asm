@@ -29,7 +29,7 @@
 	dbglistobj Obj_Ribot,			Map_Ribot,		   4,   0, make_art_tile(ArtTile_Ribot,1,0)
 	dbglistobj Obj_Corkey,			Map_Corkey,		 $20,   0, make_art_tile(ArtTile_Corkey,1,0)
 	dbglistobj Obj_Flybot767,		Map_Flybot767,		   0,   0, make_art_tile(ArtTile_Rhinobot,1,0)
-	dbglistobj Obj_StarPost,		Map_StarPost,		   1,   0, make_art_tile(ArtTile_StarPost+8,0,0)
+	dbglistobj Obj_StarPost,		Map_StarPost,		   1,   0, make_art_tile(ArtTile_StarPost,0,0)
 	dbglistobj Obj_LBZMovingPlatform,	Map_LBZMovingPlatform,	  $D,   0, make_art_tile(ArtTile_LBZMisc,2,0)
 	dbglistobj Obj_LBZTubeElevator,		Map_LBZTubeElevator,	   0,   2, make_art_tile(ArtTile_LBZTubeTrans,1,0)
 	dbglistobj Obj_StillSprite,		Map_StillSprites,	 $14, $14, make_art_tile(ArtTile_LBZMisc+$4A,2,0)

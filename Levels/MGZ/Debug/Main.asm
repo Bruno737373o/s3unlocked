@@ -34,4 +34,4 @@
 	dbglistobj Obj_MGZPulley,		Map_MGZPulley,			 $20,   0, make_art_tile(ArtTile_MGZMisc1,1,0)
 	dbglistobj Obj_MGZTopPlatform,		Map_MGZTopPlatform,		   0,   0, make_art_tile(ArtTile_MGZMisc1,1,0)
 	dbglistobj Obj_MGZTopLauncher,		Map_MGZTopPlatform,		   0,   2, make_art_tile(ArtTile_MGZMisc2,2,0)
-	dbglistobj Obj_StarPost,		Map_StarPost,			   1,   0, make_art_tile(ArtTile_StarPost+8,0,0)
+	dbglistobj Obj_StarPost,		Map_StarPost,			   1,   0, make_art_tile(ArtTile_StarPost,0,0)

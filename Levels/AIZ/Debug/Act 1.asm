@@ -17,7 +17,7 @@
 	dbglistobj Obj_Rhinobot,		Map_Rhinobot,			   0,   0, make_art_tile(ArtTile_Rhinobot,1,0)
 	dbglistobj Obj_Bloominator,		Map_Bloominator,		   0,   0, make_art_tile(ArtTile_Bloominator,1,0)
 	dbglistobj Obj_MonkeyDude,		Map_MonkeyDude,			 $10,   0, make_art_tile(ArtTile_MonkeyDude,1,0)
-	dbglistobj Obj_StarPost,		Map_StarPost,			   1,   0, make_art_tile(ArtTile_StarPost+8,0,0)
+	dbglistobj Obj_StarPost,		Map_StarPost,			   1,   0, make_art_tile(ArtTile_StarPost,0,0)
 	dbglistobj Obj_Bubbler,			Map_Bubbler,			 $81, $13, make_art_tile(ArtTile_Bubbles,0,1)
 	dbglistobj Obj_CorkFloor,		Map_AIZCorkFloor,		   0,   0, make_art_tile($001,2,0)
 	dbglistobj Obj_AIZForegroundPlant,	Map_AIZForegroundPlant,		   0,   0, make_art_tile(ArtTile_AIZMisc1,2,1)

@@ -33,5 +33,5 @@
 	dbglistobj Obj_Bloominator,		Map_Bloominator,		   0,   0, make_art_tile(ArtTile_Bloominator,1,0)
 	dbglistobj Obj_MonkeyDude,		Map_MonkeyDude,			   0,   0, make_art_tile(ArtTile_MonkeyDude,1,0)
 	dbglistobj Obj_CaterKillerJr,		Map_CaterKillerJr,		   0,   0, make_art_tile(ArtTile_CaterkillerJr,1,0)
-	dbglistobj Obj_StarPost,		Map_StarPost,			   1,   0, make_art_tile(ArtTile_StarPost+8,0,0)
+	dbglistobj Obj_StarPost,		Map_StarPost,			   1,   0, make_art_tile(ArtTile_StarPost,0,0)
 	dbglistobj Obj_FloatingPlatform,	Map_AIZFloatingPlatform,	 $20,   0, make_art_tile(ArtTile_AIZ2FloatingPlatform,2,0)
