@@ -1165,13 +1165,9 @@ ArtTile_Competition_CharSel           = $05C9
 ; Save screen.
 ArtTile_Save_Misc                     = $029F
 ArtTile_Save_Extra                    = $0454
-ArtTile_Save_Text                     = $0562
-
-; Sonic 2 Menus.
-ArtTile_S2MenuBox                     = $0070
-ArtTile_S2Sega                        = $0080
-ArtTile_S2LevelSelectPics             = $0090
-ArtTile_S2Signpost                    = $0500
+ArtTile_Save_Text                     = $0541	; Liliam: museum - add kana character set
+;ArtTile_Save_Text                    = $0562	;
+ArtTile_Save_ZoneIcon                 = $05BA	; Liliam: data select - add extra characters
 
 ; Blue Sphere.
 ArtTile_BlueSphere_Difficulty         = $0180

@@ -27,10 +27,10 @@
 		dc.l Pal_Amy				; Liliam: add extra characters
 		dc.w Normal_palette&$FFFF		;
 		dc.w bytesToLcnt($20)			;
-		dc.l Pal_SaveScreen+$20			;
+		dc.l Pal_LevelSelect+$20		;
 		dc.w Normal_palette&$FFFF		;
 		dc.w bytesToLcnt($20)			;
-		dc.l Pal_SaveScreen+$20			;
+		dc.l Pal_LevelSelect+$20		;
 		dc.w Normal_palette&$FFFF		;
 		dc.w bytesToLcnt($20)			;
 		dc.l Pal_MetalSonic			;

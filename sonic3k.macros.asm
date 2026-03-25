@@ -157,12 +157,8 @@ levselstr macro str
 ; codepage for level select (and save screen)
 	save
 	codepage LEVELSELECT
-	charset '0','9', 16    ; Add character set for numbers
-	charset 'A','Z', 30    ; Add character set for uppercase letters
-	charset '<', 26        ; Add character for left arrow
-	charset '>', 27        ; Add character for right arrow
-	charset '#',$FF        ; Add character that marks the end of text
-	charset ' ',  0        ; Add character for space
+	charset '0', 'Z', $10
+	charset ' ',   0
 	restore
 
 ; macros for defining animated PLC script lists
