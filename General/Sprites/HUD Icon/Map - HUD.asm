@@ -5,8 +5,6 @@ Map_HUD_:
 		dc.w word_DC6A-Map_HUD_
 		dc.w word_DC96-Map_HUD_
 		dc.w word_DCB6-Map_HUD_
-		dc.w Map_HUD_EncoreBonus1-Map_HUD_
-		dc.w Map_HUD_EncoreBonus2-Map_HUD_
 Map_HUD_Barrier:
 		dc.w Map_HUD_Blank-Map_HUD_Barrier
 		dc.w Map_HUD_FlameBarrier-Map_HUD_Barrier
@@ -53,23 +51,11 @@ word_DC6A:	dc.w 5
 		dc.b  $80,  $D, $20, $26,   0, $40
 		dc.b  $90,  $D, $20, $2E,   0, $28
 		dc.b  $A0,   9, $20, $36,   0, $30
-word_DC96:	dc.w 5
+word_DC96:	dc.w 3
 		dc.b  $80,  $D, $20,  $E,   0,   0
 		dc.b  $80,   1, $20,   8,   0, $20
 		dc.b  $80,   9, $20, $36,   0, $30
-		dc.b  $40,   5,   1, $10,   0,   0
-		dc.b  $40,  $D, $21, $14,   0, $11
-word_DCB6:	dc.w 3
-		dc.b  $80,   9, $20, $36,   0, $30
-		dc.b  $40,   5,   1, $10,   0,   0
-		dc.b  $40,  $D, $21, $14,   0, $11
-Map_HUD_EncoreBonus1:
-		dc.w 3
-		dc.b  $80,  $D, $20,  $E,   0,   0
-		dc.b  $80,   1, $20,   8,   0, $20
-		dc.b  $80,   9, $20, $36,   0, $30
-Map_HUD_EncoreBonus2:
-		dc.w 1
+word_DCB6:	dc.w 1
 		dc.b  $80,   9, $20, $36,   0, $30
 Map_HUD_FlameBarrier:
 		dc.w 1

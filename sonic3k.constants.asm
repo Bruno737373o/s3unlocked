@@ -439,7 +439,7 @@ Competition_time_attack_new_top_record	ds.b 1		; signifies new time records in t
 Competition_lap_count		ds.b 1			; number of laps that player 1 has completed
 Competition_lap_count_2P	ds.b 1			; number of laps that player 2 has completed
 Act3_flag			ds.b 1			; set when entering LRZ 3 or DEZ 3 directly from previous act. Prevents title card from loading
-Encore_restart_flag		ds.b 1		; Liliam: Encore mode - restart level
+Alternate_start_flag		ds.b 1		; Liliam: Encore mode - player starts
 Camera_X_pos_P2			ds.l 1
 Camera_Y_pos_P2			ds.l 1
 Camera_X_pos_P2_copy		ds.w 1
@@ -668,7 +668,7 @@ Rings_manager_routine		ds.b 1
 Level_started_flag		ds.b 1
 _unkF712			ds.b $1C		; ??? ; unknown object respawn table
 AIZ1_palette_cycle_flag		ds.b 1			; selects which palette cycles are used in AIZ1
-			ds.b 1				; unused
+Bonus_stage_flag		ds.b 1		; Liliam: Encore mode - bonus stage
 Water_flag			ds.b 1
 			ds.b $D				; unused
 Flying_carrying_Sonic_flag	ds.b 1			; set when Tails carries Sonic in a Sonic and Tails game
@@ -816,7 +816,8 @@ System_stack =			*			; this is the top of the stack, it grows downwards
 
 CrossResetRAM:	; RAM in this region will not be cleared after a soft reset.
 
-			ds.w 1				; unused
+			ds.b 1				; unused
+Encore_restart_flag		ds.b 1		; Liliam: Encore mode - restart level
 Restart_level_flag		ds.w 1
 Level_frame_counter		ds.w 1			; the number of frames which have elapsed since the level started
 Debug_object			ds.b 1			; the current position in the debug mode object list
@@ -1014,7 +1015,7 @@ P1_character			ds.b 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P2_character			ds.b 1
 Encore_stocks_packed		ds.w 1		; Liliam: Encore mode - save game
 Encore_rescued_chars		ds.b 1		; Liliam: Encore mode - character stock monitor
-Alternate_start_flag		ds.b 1		; Liliam: Encore mode - player starts
+Encore_available_chars		ds.b 1		; Liliam: Encore mode - save game
 
 CrossResetRAM_End =		*
 
@@ -1686,7 +1687,7 @@ sfx_WeatherMachine		ds.b 1		; $89
 sfx_Bouncy			ds.b 1		; $8A
 sfx_ChopTree			ds.b 1		; $8B
 sfx_ChopStuck			ds.b 1		; $8C
-sfx_RotateStocks		ds.b 1		; $8D	; Liliam: Encore mode - stock rotate monitor
+sfx_RotateStocks		ds.b 1		; $8D	; Liliam: Encore mode - stock rotate item
 sfx_UnknownRevving		ds.b 1		; $8E
 sfx_DoorOpen			ds.b 1		; $8F
 sfx_DoorMove			ds.b 1		; $90
