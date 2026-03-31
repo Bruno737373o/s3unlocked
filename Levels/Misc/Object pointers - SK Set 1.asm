@@ -230,10 +230,10 @@
 		dc.l Obj_FBZSpiderCrane			; 229
 		dc.l Obj_PachinkoTriangleBumper		; 230
 		dc.l Obj_PachinkoFlipper		; 231
-		dc.l Obj_PachinkoEnergyTrap		; 232
-		dc.l Obj_PachinkoInvisibleUnknown	; 233
-		dc.l Obj_Pachinko_Platform		; 234
-		dc.l Obj_GumballItem			; 235
+		dc.l Obj_Ring				; 232	; Liliam: rolling jump bonus - remove F ball
+		dc.l Obj_Ring				; 233	;
+		dc.l Obj_Ring				; 234	;
+		dc.l Obj_Ring				; 235	;
 		dc.l Obj_PachinkoMagnetOrb		; 236
 		dc.l Obj_PachinkoItemOrb		; 237
 		dc.l Obj_Ring				; 238
