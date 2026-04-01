@@ -1687,7 +1687,7 @@ sfx_WeatherMachine		ds.b 1		; $89
 sfx_Bouncy			ds.b 1		; $8A
 sfx_ChopTree			ds.b 1		; $8B
 sfx_ChopStuck			ds.b 1		; $8C
-sfx_RotateStocks		ds.b 1		; $8D	; Liliam: Encore mode - stock rotate item
+sfx_ChangeCharacter		ds.b 1		; $8D	; Liliam: Encore mode - change character item
 sfx_UnknownRevving		ds.b 1		; $8E
 sfx_DoorOpen			ds.b 1		; $8F
 sfx_DoorMove			ds.b 1		; $90
