@@ -513,9 +513,9 @@ Current_sprite_table_page	ds.w 1
 Sprite_table_page_flip_pending	ds.w 1
 
 Event_LBZ2_DeathEgg =		*			; if set, Launch Base 2 Death Egg is currently rising
-_unkEF40_1			ds.l 1			; used as a part of calculating decimal scores
-_unkEF44_1 =			*			; used as a jump pointer in vint 1E, unknown why this is used
-_unkEF44_2			ds.l 1			; used as a part of calculating decimal scores
+_unkEF40			ds.l 1			; used as a part of calculating decimal scores
+_unkEF44 =			*			; used as a part of calculating decimal scores
+V_int_1E_addr			ds.l 1			; used as a jump pointer in vint 1E
 Competition_menu_selection	ds.b 1			; 0 = Grandprix, 1 = Matchrace, 2 = Timeattack. 3 = Exit
 Not_ghost_flag			ds.b 1			; set if Player 2 in competition mode isn't a ghost of player 1
 Competition_menu_zone		ds.b 1			; competition mode zone id. This is different from the zone order in game
