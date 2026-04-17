@@ -282,17 +282,48 @@ VDP_control_port =		$C00004
 PSG_input =			$C00011
 
 ; ---------------------------------------------------------------------------
-; RAM addresses
-
 ; SRAM addresses
 ; Notes: SRAM in Sonic 3 Alone and Sonic 3 & Knuckles is 1KB in size.
 ; Both games use odd 8-bit addresses for saving.
 ; This means that even addresses cannot be used unless SRAM is set to use them.
 ; Therefore, this is phased in word to skip the even bytes.
 
-SRAM_competition_size =	$15*4	; $54 bytes
-SRAM_S3game_size = $D*4	; $34 bytes
-SRAM_SKgame_size = $15*4	; $54 bytes
+SRAM_2P_record1 =		  0 ; longword
+SRAM_2P_record2 =		  4 ; longword
+SRAM_2P_record3 =		  8 ; longword
+SRAM_2P_player1 =		 $C ; byte
+SRAM_2P_player2 =		 $D ; byte
+SRAM_2P_player3 =		 $E ; byte
+SRAM_2P_next_slot =		$10
+
+SRAM_S3_clear_type =		  0 ; byte
+SRAM_S3_collected_rings1 =	  1 ; byte
+SRAM_S3_player_mode =		  2 ; byte
+SRAM_S3_current_zone =		  3 ; byte
+SRAM_S3_current_special_stage =	  4 ; byte
+SRAM_S3_collected_emeralds =	  6 ; byte
+SRAM_S3_collected_rings2 =	  7 ; byte
+SRAM_S3_next_slot =		  8
+
+SRAM_clear_type =		  0 ; byte
+SRAM_unknown =			  1 ; byte
+SRAM_current_special_stage =	  2 ; byte
+SRAM_current_zone =		  3 ; byte
+SRAM_collected_special_rings =	  4 ; word
+SRAM_collected_emeralds =	  6 ; word
+SRAM_life_count =		  8 ; byte
+SRAM_continue_count =		  9 ; byte
+SRAM_next_slot =		 $A
+
+SRAM_2P_num_slots =	  5
+SRAM_S3_num_slots =	  6
+SRAM_num_slots =	  8
+SRAM_integrity =	'BD'
+SRAM_integrity2 =	'LD'
+
+SRAM_competition_size =	SRAM_2P_num_slots*SRAM_2P_next_slot+4	; $54 bytes
+SRAM_S3game_size =	SRAM_S3_num_slots*SRAM_S3_next_slot+4	; $34 bytes
+SRAM_SKgame_size =	SRAM_num_slots*SRAM_next_slot+4		; $54 bytes
 
 	phase $200001
 SRAM_start	=		*
@@ -301,18 +332,19 @@ SRAM_competition	ds.w SRAM_competition_size	; $54 bytes
 	ds.w 2	; unused
 SRAM_competition_backup	ds.w SRAM_competition_size	; $54 bytes
 	ds.w 2	; unused
-SRAM_S3game	ds.w SRAM_S3game_size	; $34 bytes
+SRAM_S3game		ds.w SRAM_S3game_size		; $34 bytes
 	ds.w $12	; unused
-SRAM_S3game_backup	ds.w SRAM_S3game_size	; $34 bytes
+SRAM_S3game_backup	ds.w SRAM_S3game_size		; $34 bytes
 	ds.w $12	; unused
-SRAM_SKgame	ds.w SRAM_SKgame_size	; $54 bytes
+SRAM_SKgame		ds.w SRAM_SKgame_size		; $54 bytes
 	ds.w 2	; unused
-SRAM_SKgame_backup	ds.w SRAM_SKgame_size	; $54 bytes
+SRAM_SKgame_backup	ds.w SRAM_SKgame_size		; $54 bytes
 	ds.w $15	; unused
 SRAM_end	=		*
 	dephase
 
-; M68K RAM addresses
+; ---------------------------------------------------------------------------
+; RAM addresses
 
 Sprite_table_alternate =	ramaddr(   $FF7880 ) ; $280 bytes ; alternate sprite table for player 1 in competition mode
 Sprite_table_P2 =		ramaddr(   $FF7B00 ) ; $280 bytes ; sprite table for player 2 in competition mode
