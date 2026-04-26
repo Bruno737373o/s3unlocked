@@ -1047,8 +1047,8 @@ Competition_mode		ds.w 1
 P1_character			ds.b 1			; 0 = Sonic, 1 = Tails, 2 = Knuckles
 P2_character			ds.b 1
 Encore_stocks_packed		ds.w 1		; Liliam: Encore mode - save game
-Encore_rescued_chars		ds.b 1		; Liliam: Encore mode - character stock monitor
-Encore_available_chars		ds.b 1		; Liliam: Encore mode - save game
+Encore_available_chars		ds.b 1		; Liliam: Encore mode - character stock monitor
+Encore_unlocked_chars		ds.b 1		; Liliam: Encore mode - save game
 
 CrossResetRAM_End =		*
 
