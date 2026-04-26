@@ -3,9 +3,9 @@ Map_SaveScreen_:
 		dc.w word_CE58-Map_SaveScreen_
 		dc.w word_CEC6-Map_SaveScreen_
 		dc.w word_CF1C-Map_SaveScreen_
+		dc.w Map_SaveScreen_OptionsButton1-Map_SaveScreen_
+		dc.w Map_SaveScreen_OptionsButton2-Map_SaveScreen_
 		dc.w word_CF36-Map_SaveScreen_
-		dc.w word_CF5C-Map_SaveScreen_
-		dc.w word_CF6A-Map_SaveScreen_
 		dc.w word_CF84-Map_SaveScreen_
 		dc.w word_CF98-Map_SaveScreen_
 		dc.w word_CFA6-Map_SaveScreen_
@@ -34,12 +34,62 @@ Map_SaveScreen_:
 		dc.w word_D100-Map_SaveScreen_
 		dc.w word_D108-Map_SaveScreen_
 		dc.w word_D110-Map_SaveScreen_
-		dc.w Map_SaveScreen_KnucklesEncore-Map_SaveScreen_
-		dc.w Map_SaveScreen_AmyEncore-Map_SaveScreen_
+		dc.w Map_SaveScreen_EncoreEmerald-Map_SaveScreen_
+		dc.w word_CF5C-Map_SaveScreen_
+		dc.w Map_SaveScreen_SonicTails-Map_SaveScreen_
+		dc.w Map_SaveScreen_SonicKnuckles-Map_SaveScreen_
+		dc.w Map_SaveScreen_SonicAmy-Map_SaveScreen_
+		dc.w Map_SaveScreen_SonicMighty-Map_SaveScreen_
+		dc.w Map_SaveScreen_SonicRay-Map_SaveScreen_
+		dc.w Map_SaveScreen_SonicMetalSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_TailsSonic-Map_SaveScreen_
+		dc.w word_CF6A-Map_SaveScreen_
+		dc.w Map_SaveScreen_TailsKnuckles-Map_SaveScreen_
+		dc.w Map_SaveScreen_TailsAmy-Map_SaveScreen_
+		dc.w Map_SaveScreen_TailsMighty-Map_SaveScreen_
+		dc.w Map_SaveScreen_TailsRay-Map_SaveScreen_
+		dc.w Map_SaveScreen_TailsMetalSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_KnucklesSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_KnucklesTails-Map_SaveScreen_
+		dc.w Map_SaveScreen_Knuckles-Map_SaveScreen_
+		dc.w Map_SaveScreen_KnucklesAmy-Map_SaveScreen_
+		dc.w Map_SaveScreen_KnucklesMighty-Map_SaveScreen_
+		dc.w Map_SaveScreen_KnucklesRay-Map_SaveScreen_
+		dc.w Map_SaveScreen_KnucklesMetalSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_AmySonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_AmyTails-Map_SaveScreen_
+		dc.w Map_SaveScreen_AmyKnuckles-Map_SaveScreen_
 		dc.w Map_SaveScreen_Amy-Map_SaveScreen_
+		dc.w Map_SaveScreen_AmyMighty-Map_SaveScreen_
+		dc.w Map_SaveScreen_AmyRay-Map_SaveScreen_
+		dc.w Map_SaveScreen_AmyMetalSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_MightySonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_MightyTails-Map_SaveScreen_
+		dc.w Map_SaveScreen_MightyKnuckles-Map_SaveScreen_
+		dc.w Map_SaveScreen_MightyAmy-Map_SaveScreen_
 		dc.w Map_SaveScreen_Mighty-Map_SaveScreen_
+		dc.w Map_SaveScreen_MightyRay-Map_SaveScreen_
+		dc.w Map_SaveScreen_MightyMetalSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_RaySonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_RayTails-Map_SaveScreen_
+		dc.w Map_SaveScreen_RayKnuckles-Map_SaveScreen_
+		dc.w Map_SaveScreen_RayAmy-Map_SaveScreen_
+		dc.w Map_SaveScreen_RayMighty-Map_SaveScreen_
 		dc.w Map_SaveScreen_Ray-Map_SaveScreen_
+		dc.w Map_SaveScreen_RayMetalSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_MetalSonicSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_MetalSonicTails-Map_SaveScreen_
+		dc.w Map_SaveScreen_MetalSonicKnuckles-Map_SaveScreen_
+		dc.w Map_SaveScreen_MetalSonicAmy-Map_SaveScreen_
+		dc.w Map_SaveScreen_MetalSonicMighty-Map_SaveScreen_
+		dc.w Map_SaveScreen_MetalSonicRay-Map_SaveScreen_
 		dc.w Map_SaveScreen_MetalSonic-Map_SaveScreen_
+		dc.w Map_SaveScreen_Amy2-Map_SaveScreen_
+		dc.w Map_SaveScreen_EncoreStocks1-Map_SaveScreen_
+		dc.w Map_SaveScreen_EncoreStocks2-Map_SaveScreen_
+		dc.w Map_SaveScreen_EncoreStocks3-Map_SaveScreen_
+		dc.w Map_SaveScreen_EncoreStocks4-Map_SaveScreen_
+		dc.w Map_SaveScreen_EncoreStocks5-Map_SaveScreen_
 word_CE56:	dc.w 0
 word_CE58:	dc.w $10
 		dc.b  $A6,   3,   0, $42, $FF, $D8
@@ -70,65 +120,66 @@ word_CEC6:	dc.w $A
 		dc.b  $F5,  $C, $18, $47,   0,   0
 		dc.b  $E5,   2, $18, $42,   0, $20
 word_CF1C:	dc.w 4
-		dc.b  $F4,  $E, $20, $4B, $FF, $C8
-		dc.b  $F4,  $E, $20, $57, $FF, $E8
-		dc.b  $F4,  $E, $20, $63,   0,   8
-		dc.b  $F4,   6, $20, $6F,   0, $28
-word_CF36:	dc.w 5
-		dc.b  $D8,  $E, $28, $75, $FF, $E8
-		dc.b  $F0,   9, $28, $81, $FF, $F0
-		dc.b  $D6,   0, $28, $87,   0,   0
-		dc.b  $DE,  $F, $28, $88, $FF, $F8
-		dc.b  $EE,   1, $28, $98,   0, $18
-word_CF5C:	dc.w 2
-		dc.b  $D8,  $E, $28, $75, $FF, $EE
-		dc.b  $F0,   9, $28, $81, $FF, $F6
+		dc.b  $F4,  $E, $40, $4B, $FF, $C8
+		dc.b  $F4,  $E, $40, $57, $FF, $E8
+		dc.b  $F4,  $E, $40, $63,   0,   8
+		dc.b  $F4,   6, $40, $6F,   0, $28
+word_CF36:	dc.w 6
+		dc.b  $D8,   8, $20, $75, $FF, $F0
+		dc.b  $E0,  $D, $20, $78, $FF, $E8
+		dc.b  $F0,   9, $20, $80, $FF, $F0
+		dc.b  $D6,   0, $28, $86,   0,   0
+		dc.b  $DE,  $F, $28, $87, $FF, $F8
+		dc.b  $EE,   1, $28, $97,   0, $18
+word_CF5C:	dc.w 3
+		dc.b  $D8,   8, $20, $75, $FF, $F6
+		dc.b  $E0,  $D, $20, $78, $FF, $EE
+		dc.b  $F0,   9, $20, $80, $FF, $F6
 word_CF6A:	dc.w 3
-		dc.b  $D8,   0, $20, $87, $FF, $FF
-		dc.b  $E0,  $F, $20, $88, $FF, $EF
-		dc.b  $F0,   1, $20, $98, $FF, $E7
-word_CF84:	dc.w 4
-		dc.b  $D8,   8, $40, $9A, $FF, $F3
-		dc.b  $E0,  $D, $40, $9D, $FF, $F3
-		dc.b  $F0,   8, $40, $A5, $FF, $F3
-		dc.b  $F8,  $C, $40, $A8, $FF, $F3
+		dc.b  $D8,   0, $20, $86, $FF, $FF
+		dc.b  $E0,  $F, $20, $87, $FF, $EF
+		dc.b  $F0,   1, $20, $97, $FF, $E7
+word_CF84:	dc.w 3
+		dc.b  $D8,   8, $48, $99, $FF, $F3
+		dc.b  $E0,  $D, $48, $9C, $FF, $F3
+		dc.b  $F0,   9, $48, $A4, $FF, $F5
 word_CF98:	dc.w 2
-		dc.b  $B8,  $E, $20, $AC, $FF, $E4
-		dc.b  $B8,   2, $20, $B8,   0,   4
+		dc.b  $B8,  $E, $20, $AA, $FF, $E4
+		dc.b  $B8,   2, $20, $B6,   0,   4
 word_CFA6:	dc.w 1
-		dc.b  $B8,  $A, $20, $BB, $FF, $EC
+		dc.b  $B8,  $A, $20, $B9, $FF, $EC
 word_CFAE:	dc.w 1
-		dc.b  $B8,   2, $20, $C4, $FF, $F4
+		dc.b  $B8,   2, $20, $C2, $FF, $F4
 word_CFB6:	dc.w 1
-		dc.b  $B8,  $A, $20, $BB, $FF, $EC
+		dc.b  $B8,  $A, $20, $B9, $FF, $EC
 word_CFBE:	dc.w 2
-		dc.b  $B8,  $E, $20, $C7, $FF, $E4
-		dc.b  $B8,   2, $20, $D3,   0,   4
+		dc.b  $B8,  $E, $20, $C5, $FF, $E4
+		dc.b  $B8,   2, $20, $D1,   0,   4
 word_CFCC:	dc.w 3
-		dc.b  $D0,  $F, $20, $D6, $FF, $EC
-		dc.b  $D8,   2, $20, $E6,   0,  $C
-		dc.b  $F0,   9, $20, $E9, $FF, $F4
+		dc.b  $D0,  $F, $20, $D4, $FF, $EC
+		dc.b  $D8,   2, $20, $E4,   0,  $C
+		dc.b  $F0,   9, $20, $E7, $FF, $F4
 word_CFE0:	dc.w 3
-		dc.b  $D0,  $F, $20, $EF, $FF, $EC
-		dc.b  $D8,   2, $20, $FF,   0,  $C
-		dc.b  $F0,   9, $20, $E9, $FF, $F4
+		dc.b  $D0,  $F, $20, $ED, $FF, $EC
+		dc.b  $D8,   2, $20, $FD,   0,  $C
+		dc.b  $F0,   9, $20, $E7, $FF, $F4
 word_CFF4:	dc.w 2
-		dc.b  $C6,   5,   1,   2, $FF, $F8
-		dc.b    2,   5, $11,   2, $FF, $F8
+		dc.b  $C6,   5,   1,   0, $FF, $F8
+		dc.b    2,   5, $11,   0, $FF, $F8
 word_D002:	dc.w 1
-		dc.b  $CE,   0, $E1,   6, $FF, $FC
+		dc.b  $E8,   0, $61,   4, $FF, $FC
 word_D00A:	dc.w 1
-		dc.b  $D8,   0, $61,   7, $FF, $E8
+		dc.b  $E8,   0, $61,   5, $FF, $FC
 word_D012:	dc.w 1
-		dc.b  $D8,   0, $61,   8,   0, $10
+		dc.b  $E8,   0, $61,   6, $FF, $FC
 word_D01A:	dc.w 1
-		dc.b  $EE,   0, $61,   9, $FF, $E3
+		dc.b  $E8,   0, $61,   7, $FF, $FC
 word_D022:	dc.w 1
-		dc.b  $EE,   0, $61,  $A,   0, $15
+		dc.b  $E8,   0, $61,   8, $FF, $FC
 word_D02A:	dc.w 1
-		dc.b  $FF,   0, $61,  $B, $FF, $F1
+		dc.b  $E8,   0, $61,   9, $FF, $FC
 word_D032:	dc.w 1
-		dc.b  $FF,   0, $61,  $C,   0,   7
+		dc.b  $E8,   0, $61,  $A, $FF, $FC
 word_D03A:	dc.w 6
 		dc.b  $88,  $F, $63, $1B, $FF, $D8
 		dc.b  $88,  $F, $63, $2B, $FF, $F8
@@ -137,66 +188,388 @@ word_D03A:	dc.w 6
 		dc.b  $A8,  $E, $63, $4F, $FF, $F8
 		dc.b  $A8,   6, $63, $5B,   0, $18
 word_D060:	dc.w 6
-		dc.b  $88,  $F, $61,  $D, $FF, $D8
-		dc.b  $88,  $F, $61, $1D, $FF, $F8
-		dc.b  $88,   7, $61, $2D,   0, $18
-		dc.b  $A8,  $E, $61, $35, $FF, $D8
-		dc.b  $A8,  $E, $61, $41, $FF, $F8
-		dc.b  $A8,   6, $61, $4D,   0, $18
+		dc.b  $88,  $F, $61,  $B, $FF, $D8
+		dc.b  $88,  $F, $61, $1B, $FF, $F8
+		dc.b  $88,   7, $61, $2B,   0, $18
+		dc.b  $A8,  $E, $61, $33, $FF, $D8
+		dc.b  $A8,  $E, $61, $3F, $FF, $F8
+		dc.b  $A8,   6, $61, $4B,   0, $18
 word_D086:	dc.w 6
-		dc.b  $88,  $F, $61, $53, $FF, $D8
-		dc.b  $88,  $F, $61, $63, $FF, $F8
-		dc.b  $88,   7, $61, $73,   0, $18
-		dc.b  $A8,  $E, $61, $7B, $FF, $D8
-		dc.b  $A8,  $E, $61, $87, $FF, $F8
-		dc.b  $A8,   6, $61, $93,   0, $18
+		dc.b  $88,  $F, $61, $51, $FF, $D8
+		dc.b  $88,  $F, $61, $61, $FF, $F8
+		dc.b  $88,   7, $61, $71,   0, $18
+		dc.b  $A8,  $E, $61, $79, $FF, $D8
+		dc.b  $A8,  $E, $61, $85, $FF, $F8
+		dc.b  $A8,   6, $61, $91,   0, $18
 word_D0AC:	dc.w 2
-		dc.b  $88,   5,   1,   2, $FF, $F8
-		dc.b  $C0,   5, $11,   2, $FF, $F8
+		dc.b  $80,   5,   1,   0, $FF, $F8
+		dc.b  $B8,   5, $11,   0, $FF, $F8
 word_D0BA:	dc.w 6
-		dc.b  $88,  $F, $61, $99, $FF, $D8
-		dc.b  $88,  $F, $61, $A9, $FF, $F8
-		dc.b  $88,   7, $61, $B9,   0, $18
-		dc.b  $A8,  $E, $61, $C1, $FF, $D8
-		dc.b  $A8,  $E, $61, $CD, $FF, $F8
-		dc.b  $A8,   6, $61, $D9,   0, $18
+		dc.b  $88,  $F, $61, $97, $FF, $D8
+		dc.b  $88,  $F, $61, $A7, $FF, $F8
+		dc.b  $88,   7, $61, $B7,   0, $18
+		dc.b  $A8,  $E, $61, $BF, $FF, $D8
+		dc.b  $A8,  $E, $61, $CB, $FF, $F8
+		dc.b  $A8,   6, $61, $D7,   0, $18
 word_D0E0:	dc.w 1
-		dc.b  $CE,   5, $E1, $DF, $FF, $F8
+		dc.b  $E8,   5, $61, $DD, $FF, $F8
 word_D0E8:	dc.w 1
-		dc.b  $D8,   5, $61, $E3, $FF, $E4
+		dc.b  $E8,   5, $61, $E1, $FF, $F8
 word_D0F0:	dc.w 1
-		dc.b  $D8,   5, $61, $E7,   0,  $C
+		dc.b  $E8,   5, $61, $E5, $FF, $F8
 word_D0F8:	dc.w 1
-		dc.b  $EE,   5, $61, $EB, $FF, $DF
+		dc.b  $E8,   5, $61, $E9, $FF, $F8
 word_D100:	dc.w 1
-		dc.b  $EE,   5, $61, $EF,   0, $11
+		dc.b  $E8,   5, $61, $ED, $FF, $F8
 word_D108:	dc.w 1
-		dc.b  $FF,   5, $61, $F3, $FF, $ED
+		dc.b  $E8,   5, $61, $F1, $FF, $F8
 word_D110:	dc.w 1
-		dc.b  $FF,   5, $61, $F7,   0,   3
-Map_SaveScreen_KnucklesEncore:
-		dc.w 4
-		dc.b  $D8,   8, $28, $9A, $FF, $F5
-		dc.b  $E0,  $D, $28, $9D, $FF, $ED
-		dc.b  $F0,   8, $28, $A5, $FF, $F5
-		dc.b  $F8,  $C, $28, $A8, $FF, $ED
-Map_SaveScreen_AmyEncore:
+		dc.b  $E8,   5, $61, $F5, $FF, $F8
+Map_SaveScreen_EncoreStocks1:
+		dc.w 1
+		dc.b  $18,   0, $20,   0, $FF, $FC
+Map_SaveScreen_EncoreStocks2:
 		dc.w 2
-		dc.b  $D8,   8, $22, $2D, $FF, $F4
-		dc.b  $E0,  $B, $22, $30, $FF, $F4
+		dc.b  $18,   0, $20,   0, $FF, $F7
+		dc.b  $18,   0, $20,   1,   0,   1
+Map_SaveScreen_EncoreStocks3:
+		dc.w 3
+		dc.b  $18,   0, $20,   0, $FF, $F2
+		dc.b  $18,   0, $20,   1, $FF, $FC
+		dc.b  $18,   0, $20,   2,   0,   6
+Map_SaveScreen_EncoreStocks4:
+		dc.w 4
+		dc.b  $18,   0, $20,   0, $FF, $ED
+		dc.b  $18,   0, $20,   1, $FF, $F7
+		dc.b  $18,   0, $20,   2,   0,   1
+		dc.b  $18,   0, $20,   3,   0,  $B
+Map_SaveScreen_EncoreStocks5:
+		dc.w 5
+		dc.b  $18,   0, $20,   0, $FF, $E8
+		dc.b  $18,   0, $20,   1, $FF, $F2
+		dc.b  $18,   0, $20,   2, $FF, $FC
+		dc.b  $18,   0, $20,   3,   0,   6
+		dc.b  $18,   0, $20,   4,   0, $10
+Map_SaveScreen_EncoreEmerald:
+		dc.w 1
+		dc.b  $E8,   5, $22, $2B, $FF, $F8
+Map_SaveScreen_SonicTails:
+		dc.w 6
+		dc.b  $D8,   8, $20, $75, $FF, $EE
+		dc.b  $E0,  $D, $20, $78, $FF, $E6
+		dc.b  $F0,   9, $20, $80, $FF, $EE
+		dc.b  $D8,   0, $28, $86,   0,   0
+		dc.b  $E0,  $F, $28, $87, $FF, $F8
+		dc.b  $F0,   1, $28, $97,   0, $18
+Map_SaveScreen_SonicKnuckles:
+		dc.w 6
+		dc.b  $D8,   8, $20, $75, $FF, $EE
+		dc.b  $E0,  $D, $20, $78, $FF, $E6
+		dc.b  $F0,   9, $20, $80, $FF, $EE
+		dc.b  $D8,   8, $28, $99, $FF, $FA
+		dc.b  $E0,  $D, $28, $9C, $FF, $FA
+		dc.b  $F0,   9, $28, $A4, $FF, $FC
+Map_SaveScreen_SonicAmy:
+		dc.w 5
+		dc.b  $D8,   8, $20, $75, $FF, $EE
+		dc.b  $E0,  $D, $20, $78, $FF, $E6
+		dc.b  $F0,   9, $20, $80, $FF, $EE
+		dc.b  $D8,   8, $2A, $2F, $FF, $FB
+		dc.b  $E0,  $B, $2A, $32, $FF, $FB
+Map_SaveScreen_SonicMighty:
+		dc.w 5
+		dc.b  $D8,   8, $20, $75, $FF, $EE
+		dc.b  $E0,  $D, $20, $78, $FF, $E6
+		dc.b  $F0,   9, $20, $80, $FF, $EE
+		dc.b  $D8,  $C, $2A, $3E, $FF, $F7
+		dc.b  $E0,  $F, $2A, $42, $FF, $F7
+Map_SaveScreen_SonicRay:
+		dc.w 5
+		dc.b  $D8,   8, $20, $75, $FF, $EE
+		dc.b  $E0,  $D, $20, $78, $FF, $E6
+		dc.b  $F0,   9, $20, $80, $FF, $EE
+		dc.b  $D8,   9, $2A, $52, $FF, $FF
+		dc.b  $E8,  $E, $2A, $58, $FF, $F7
+Map_SaveScreen_SonicMetalSonic:
+		dc.w 5
+		dc.b  $D8,   8, $20, $75, $FF, $EE
+		dc.b  $E0,  $D, $20, $78, $FF, $E6
+		dc.b  $F0,   9, $20, $80, $FF, $EE
+		dc.b  $D8,  $C, $2A, $67, $FF, $F7
+		dc.b  $E0,  $F, $2A, $6B, $FF, $F7
+Map_SaveScreen_TailsSonic:
+		dc.w 6
+		dc.b  $D8,   0, $20, $86, $FF, $F7
+		dc.b  $E0,  $F, $20, $87, $FF, $E7
+		dc.b  $F0,   1, $20, $97, $FF, $DF
+		dc.b  $D8,   8, $28, $75, $FF, $F9
+		dc.b  $E0,  $D, $28, $78, $FF, $F9
+		dc.b  $F0,   9, $28, $80, $FF, $F9
+Map_SaveScreen_TailsKnuckles:
+		dc.w 6
+		dc.b  $D8,   0, $20, $86, $FF, $F7
+		dc.b  $E0,  $F, $20, $87, $FF, $E7
+		dc.b  $F0,   1, $20, $97, $FF, $DF
+		dc.b  $D8,   8, $28, $99, $FF, $FA
+		dc.b  $E0,  $D, $28, $9C, $FF, $FA
+		dc.b  $F0,   9, $28, $A4, $FF, $FC
+Map_SaveScreen_TailsAmy:
+		dc.w 5
+		dc.b  $D8,   0, $20, $86, $FF, $F7
+		dc.b  $E0,  $F, $20, $87, $FF, $E7
+		dc.b  $F0,   1, $20, $97, $FF, $DF
+		dc.b  $D8,   8, $2A, $2F, $FF, $FB
+		dc.b  $E0,  $B, $2A, $32, $FF, $FB
+Map_SaveScreen_TailsMighty:
+		dc.w 5
+		dc.b  $D8,   0, $20, $86, $FF, $F7
+		dc.b  $E0,  $F, $20, $87, $FF, $E7
+		dc.b  $F0,   1, $20, $97, $FF, $DF
+		dc.b  $D8,  $C, $2A, $3E, $FF, $F7
+		dc.b  $E0,  $F, $2A, $42, $FF, $F7
+Map_SaveScreen_TailsRay:
+		dc.w 5
+		dc.b  $D8,   0, $20, $86, $FF, $F7
+		dc.b  $E0,  $F, $20, $87, $FF, $E7
+		dc.b  $F0,   1, $20, $97, $FF, $DF
+		dc.b  $D8,   9, $2A, $52, $FF, $FF
+		dc.b  $E8,  $E, $2A, $58, $FF, $F7
+Map_SaveScreen_TailsMetalSonic:
+		dc.w 5
+		dc.b  $D8,   0, $20, $86, $FF, $F7
+		dc.b  $E0,  $F, $20, $87, $FF, $E7
+		dc.b  $F0,   1, $20, $97, $FF, $DF
+		dc.b  $D8,  $C, $2A, $67, $FF, $F7
+		dc.b  $E0,  $F, $2A, $6B, $FF, $F7
+Map_SaveScreen_KnucklesSonic:
+		dc.w 6
+		dc.b  $D8,   8, $20, $99, $FF, $ED
+		dc.b  $E0,  $D, $20, $9C, $FF, $E5
+		dc.b  $F0,   9, $20, $A4, $FF, $EB
+		dc.b  $D8,   8, $28, $75, $FF, $F9
+		dc.b  $E0,  $D, $28, $78, $FF, $F9
+		dc.b  $F0,   9, $28, $80, $FF, $F9
+Map_SaveScreen_KnucklesTails:
+		dc.w 6
+		dc.b  $D8,   8, $20, $99, $FF, $ED
+		dc.b  $E0,  $D, $20, $9C, $FF, $E5
+		dc.b  $F0,   9, $20, $A4, $FF, $EB
+		dc.b  $D8,   0, $28, $86,   0,   0
+		dc.b  $E0,  $F, $28, $87, $FF, $F8
+		dc.b  $F0,   1, $28, $97,   0, $18
+Map_SaveScreen_Knuckles:
+		dc.w 3
+		dc.b  $D8,   8, $20, $99, $FF, $F5
+		dc.b  $E0,  $D, $20, $9C, $FF, $ED
+		dc.b  $F0,   9, $20, $A4, $FF, $F3
+Map_SaveScreen_KnucklesAmy:
+		dc.w 5
+		dc.b  $D8,   8, $20, $99, $FF, $ED
+		dc.b  $E0,  $D, $20, $9C, $FF, $E5
+		dc.b  $F0,   9, $20, $A4, $FF, $EB
+		dc.b  $D8,   8, $2A, $2F, $FF, $FB
+		dc.b  $E0,  $B, $2A, $32, $FF, $FB
+Map_SaveScreen_KnucklesMighty:
+		dc.w 5
+		dc.b  $D8,   8, $20, $99, $FF, $ED
+		dc.b  $E0,  $D, $20, $9C, $FF, $E5
+		dc.b  $F0,   9, $20, $A4, $FF, $EB
+		dc.b  $D8,  $C, $2A, $3E, $FF, $F7
+		dc.b  $E0,  $F, $2A, $42, $FF, $F7
+Map_SaveScreen_KnucklesRay:
+		dc.w 5
+		dc.b  $D8,   8, $20, $99, $FF, $ED
+		dc.b  $E0,  $D, $20, $9C, $FF, $E5
+		dc.b  $F0,   9, $20, $A4, $FF, $EB
+		dc.b  $D8,   9, $2A, $52, $FF, $FF
+		dc.b  $E8,  $E, $2A, $58, $FF, $F7
+Map_SaveScreen_KnucklesMetalSonic:
+		dc.w 5
+		dc.b  $D8,   8, $20, $99, $FF, $ED
+		dc.b  $E0,  $D, $20, $9C, $FF, $E5
+		dc.b  $F0,   9, $20, $A4, $FF, $EB
+		dc.b  $D8,  $C, $2A, $67, $FF, $F7
+		dc.b  $E0,  $F, $2A, $6B, $FF, $F7
+Map_SaveScreen_AmySonic:
+		dc.w 5
+		dc.b  $D8,   8, $22, $2F, $FF, $EC
+		dc.b  $E0,  $B, $22, $32, $FF, $EC
+		dc.b  $D8,   8, $28, $75, $FF, $F9
+		dc.b  $E0,  $D, $28, $78, $FF, $F9
+		dc.b  $F0,   9, $28, $80, $FF, $F9
+Map_SaveScreen_AmyTails:
+		dc.w 5
+		dc.b  $D8,   8, $22, $2F, $FF, $EC
+		dc.b  $E0,  $B, $22, $32, $FF, $EC
+		dc.b  $D8,   0, $28, $86,   0,   0
+		dc.b  $E0,  $F, $28, $87, $FF, $F8
+		dc.b  $F0,   1, $28, $97,   0, $18
+Map_SaveScreen_AmyKnuckles:
+		dc.w 5
+		dc.b  $D8,   8, $22, $2F, $FF, $EC
+		dc.b  $E0,  $B, $22, $32, $FF, $EC
+		dc.b  $D8,   8, $28, $99, $FF, $FA
+		dc.b  $E0,  $D, $28, $9C, $FF, $FA
+		dc.b  $F0,   9, $28, $A4, $FF, $FC
 Map_SaveScreen_Amy:
 		dc.w 2
-		dc.b  $D8,   8, $42, $3C, $FF, $F4
-		dc.b  $E0,  $B, $42, $3F, $FF, $F4
+		dc.b  $D8,   8, $22, $2F, $FF, $F4
+		dc.b  $E0,  $B, $22, $32, $FF, $F4
+Map_SaveScreen_AmyMighty:
+		dc.w 4
+		dc.b  $D8,   8, $22, $2F, $FF, $EC
+		dc.b  $E0,  $B, $22, $32, $FF, $EC
+		dc.b  $D8,  $C, $2A, $3E, $FF, $F7
+		dc.b  $E0,  $F, $2A, $42, $FF, $F7
+Map_SaveScreen_AmyRay:
+		dc.w 4
+		dc.b  $D8,   8, $22, $2F, $FF, $EC
+		dc.b  $E0,  $B, $22, $32, $FF, $EC
+		dc.b  $D8,   9, $2A, $52, $FF, $FF
+		dc.b  $E8,  $E, $2A, $58, $FF, $F7
+Map_SaveScreen_AmyMetalSonic:
+		dc.w 4
+		dc.b  $D8,   8, $22, $2F, $FF, $EC
+		dc.b  $E0,  $B, $22, $32, $FF, $EC
+		dc.b  $D8,  $C, $2A, $67, $FF, $F7
+		dc.b  $E0,  $F, $2A, $6B, $FF, $F7
+Map_SaveScreen_MightySonic:
+		dc.w 5
+		dc.b  $D8,  $C, $22, $3E, $FF, $E8
+		dc.b  $E0,  $F, $22, $42, $FF, $E8
+		dc.b  $D8,   8, $28, $75, $FF, $F9
+		dc.b  $E0,  $D, $28, $78, $FF, $F9
+		dc.b  $F0,   9, $28, $80, $FF, $F9
+Map_SaveScreen_MightyTails:
+		dc.w 5
+		dc.b  $D8,  $C, $22, $3E, $FF, $E8
+		dc.b  $E0,  $F, $22, $42, $FF, $E8
+		dc.b  $D8,   0, $28, $86,   0,   0
+		dc.b  $E0,  $F, $28, $87, $FF, $F8
+		dc.b  $F0,   1, $28, $97,   0, $18
+Map_SaveScreen_MightyKnuckles:
+		dc.w 5
+		dc.b  $D8,  $C, $22, $3E, $FF, $E8
+		dc.b  $E0,  $F, $22, $42, $FF, $E8
+		dc.b  $D8,   8, $28, $99, $FF, $FA
+		dc.b  $E0,  $D, $28, $9C, $FF, $FA
+		dc.b  $F0,   9, $28, $A4, $FF, $FC
+Map_SaveScreen_MightyAmy:
+		dc.w 4
+		dc.b  $D8,  $C, $22, $3E, $FF, $E8
+		dc.b  $E0,  $F, $22, $42, $FF, $E8
+		dc.b  $D8,   8, $2A, $2F, $FF, $FB
+		dc.b  $E0,  $B, $2A, $32, $FF, $FB
 Map_SaveScreen_Mighty:
 		dc.w 2
-		dc.b  $D8,  $C, $22, $4B, $FF, $F0
-		dc.b  $E0,  $F, $22, $4F, $FF, $F0
+		dc.b  $D8,  $C, $22, $3E, $FF, $F0
+		dc.b  $E0,  $F, $22, $42, $FF, $F0
+Map_SaveScreen_MightyRay:
+		dc.w 4
+		dc.b  $D8,  $C, $22, $3E, $FF, $E8
+		dc.b  $E0,  $F, $22, $42, $FF, $E8
+		dc.b  $D8,   9, $2A, $52, $FF, $FF
+		dc.b  $E8,  $E, $2A, $58, $FF, $F7
+Map_SaveScreen_MightyMetalSonic:
+		dc.w 4
+		dc.b  $D8,  $C, $22, $3E, $FF, $E8
+		dc.b  $E0,  $F, $22, $42, $FF, $E8
+		dc.b  $D8,  $C, $2A, $67, $FF, $F7
+		dc.b  $E0,  $F, $2A, $6B, $FF, $F7
+Map_SaveScreen_RaySonic:
+		dc.w 5
+		dc.b  $D8,   9, $22, $52, $FF, $E8
+		dc.b  $E8,  $E, $22, $58, $FF, $E8
+		dc.b  $D8,   8, $28, $75, $FF, $F9
+		dc.b  $E0,  $D, $28, $78, $FF, $F9
+		dc.b  $F0,   9, $28, $80, $FF, $F9
+Map_SaveScreen_RayTails:
+		dc.w 5
+		dc.b  $D8,   9, $22, $52, $FF, $E8
+		dc.b  $E8,  $E, $22, $58, $FF, $E8
+		dc.b  $D8,   0, $28, $86,   0,   0
+		dc.b  $E0,  $F, $28, $87, $FF, $F8
+		dc.b  $F0,   1, $28, $97,   0, $18
+Map_SaveScreen_RayKnuckles:
+		dc.w 5
+		dc.b  $D8,   9, $22, $52, $FF, $E8
+		dc.b  $E8,  $E, $22, $58, $FF, $E8
+		dc.b  $D8,   8, $28, $99, $FF, $FA
+		dc.b  $E0,  $D, $28, $9C, $FF, $FA
+		dc.b  $F0,   9, $28, $A4, $FF, $FC
+Map_SaveScreen_RayAmy:
+		dc.w 4
+		dc.b  $D8,   9, $22, $52, $FF, $E8
+		dc.b  $E8,  $E, $22, $58, $FF, $E8
+		dc.b  $D8,   8, $2A, $2F, $FF, $FB
+		dc.b  $E0,  $B, $2A, $32, $FF, $FB
+Map_SaveScreen_RayMighty:
+		dc.w 4
+		dc.b  $D8,   9, $22, $52, $FF, $E8
+		dc.b  $E8,  $E, $22, $58, $FF, $E8
+		dc.b  $D8,  $C, $2A, $3E, $FF, $F7
+		dc.b  $E0,  $F, $2A, $42, $FF, $F7
 Map_SaveScreen_Ray:
-		dc.w 2
-		dc.b  $D8,   8, $22, $5F, $FF, $F0
-		dc.b  $E0,  $F, $22, $62, $FF, $F0
+		dc.w 3
+		dc.b  $D8,   9, $22, $52, $FF, $F0
+		dc.b  $E8,  $E, $22, $58, $FF, $F0
+		dc.b  $E0,   2, $22, $64,   0,   8
+Map_SaveScreen_RayMetalSonic:
+		dc.w 4
+		dc.b  $D8,   9, $22, $52, $FF, $E8
+		dc.b  $E8,  $E, $22, $58, $FF, $E8
+		dc.b  $D8,  $C, $2A, $67, $FF, $F7
+		dc.b  $E0,  $F, $2A, $6B, $FF, $F7
+Map_SaveScreen_MetalSonicSonic:
+		dc.w 5
+		dc.b  $D8,  $C, $22, $67, $FF, $E8
+		dc.b  $E0,  $F, $22, $6B, $FF, $E8
+		dc.b  $D8,   8, $28, $75, $FF, $F9
+		dc.b  $E0,  $D, $28, $78, $FF, $F9
+		dc.b  $F0,   9, $28, $80, $FF, $F9
+Map_SaveScreen_MetalSonicTails:
+		dc.w 5
+		dc.b  $D8,  $C, $22, $67, $FF, $E8
+		dc.b  $E0,  $F, $22, $6B, $FF, $E8
+		dc.b  $D8,   0, $28, $86,   0,   0
+		dc.b  $E0,  $F, $28, $87, $FF, $F8
+		dc.b  $F0,   1, $28, $97,   0, $18
+Map_SaveScreen_MetalSonicKnuckles:
+		dc.w 5
+		dc.b  $D8,  $C, $22, $67, $FF, $E8
+		dc.b  $E0,  $F, $22, $6B, $FF, $E8
+		dc.b  $D8,   8, $28, $99, $FF, $FA
+		dc.b  $E0,  $D, $28, $9C, $FF, $FA
+		dc.b  $F0,   9, $28, $A4, $FF, $FC
+Map_SaveScreen_MetalSonicAmy:
+		dc.w 4
+		dc.b  $D8,  $C, $22, $67, $FF, $E8
+		dc.b  $E0,  $F, $22, $6B, $FF, $E8
+		dc.b  $D8,   8, $2A, $2F, $FF, $FB
+		dc.b  $E0,  $B, $2A, $32, $FF, $FB
+Map_SaveScreen_MetalSonicMighty:
+		dc.w 4
+		dc.b  $D8,  $C, $22, $67, $FF, $E8
+		dc.b  $E0,  $F, $22, $6B, $FF, $E8
+		dc.b  $D8,  $C, $2A, $3E, $FF, $F7
+		dc.b  $E0,  $F, $2A, $42, $FF, $F7
+Map_SaveScreen_MetalSonicRay:
+		dc.w 4
+		dc.b  $D8,  $C, $22, $67, $FF, $E8
+		dc.b  $E0,  $F, $22, $6B, $FF, $E8
+		dc.b  $D8,   9, $2A, $52, $FF, $FF
+		dc.b  $E8,  $E, $2A, $58, $FF, $F7
 Map_SaveScreen_MetalSonic:
 		dc.w 2
-		dc.b  $D8,  $C, $22, $72, $FF, $F0
-		dc.b  $E0,  $F, $22, $76, $FF, $F0
+		dc.b  $D8,  $C, $22, $67, $FF, $F0
+		dc.b  $E0,  $F, $22, $6B, $FF, $F0
+Map_SaveScreen_Amy2:
+		dc.w 2
+		dc.b  $D8,   8, $42, $7B, $FF, $F4
+		dc.b  $E0,  $B, $42, $7E, $FF, $F4
+Map_SaveScreen_OptionsButton1:
+		dc.w 1
+		dc.b  $DA,  $F, $22, $8A, $FF, $F0
+Map_SaveScreen_OptionsButton2:
+		dc.w 1
+		dc.b  $E2,  $E, $22, $9A, $FF, $F0

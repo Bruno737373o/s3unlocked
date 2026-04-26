@@ -223,17 +223,18 @@ Skill_SonicPeelout  = 7
 
 ; ---------------------------------------------------------------------------
 ; Liliam: HUD - Encore mode HUD
-EncoreFlags_Enable  = 0
-EncoreFlags_Music   = 5
-EncoreFlags_Palette = 6
-EncoreFlags_SwapHUD = 7
+EncoreFlags_Enable        = 0
+EncoreFlags_Music         = 1
+EncoreFlags_Palette       = 2
+EncoreFlags_SwapHUD       = 7
+EncoreFlags_All           = (1<<EncoreFlags_Enable)|(1<<EncoreFlags_Music)|(1<<EncoreFlags_Palette)
 
-Encore_cursor_timer      = Reserved_object_3+$20
-Encore_stocks            = Reserved_object_3+$23
-Encore_HUD_player_frame  = Reserved_object_3+$2C
-Encore_HUD_stocks_frame  = Reserved_object_3+$2E
-Encore_HUD_stocks_timer  = Reserved_object_3+$30
-Encore_HUD_stocks_scroll = Reserved_object_3+$32
+Encore_cursor_timer       = Reserved_object_3+$20
+Encore_stocks             = Reserved_object_3+$23
+Encore_HUD_player_frame   = Reserved_object_3+$2C
+Encore_HUD_stocks_frame   = Reserved_object_3+$2E
+Encore_HUD_stocks_timer   = Reserved_object_3+$30
+Encore_HUD_stocks_scroll  = Reserved_object_3+$32
 
 ; ---------------------------------------------------------------------------
 ; Clock equates
@@ -318,6 +319,7 @@ SRAM_next_slot =		 $A
 SRAM_2P_num_slots =	  5
 SRAM_S3_num_slots =	  6
 SRAM_num_slots =	  8
+SRAM_encore_num_slots =	  3			; Liliam: Encore mode - save data
 SRAM_integrity =	'BD'
 SRAM_integrity2 =	'LD'
 
@@ -1197,7 +1199,7 @@ ArtTile_Competition_CharSel           = $05C9
 ; Save screen.
 ArtTile_Save_Misc                     = $029F
 ArtTile_Save_Extra                    = $0454
-ArtTile_Save_Text                     = $0541	; Liliam: museum - add kana character set
+ArtTile_Save_Text                     = $0547	; Liliam: museum - add kana character set
 ;ArtTile_Save_Text                    = $0562	;
 ArtTile_Save_ZoneIcon                 = $05BA	; Liliam: data select - add extra characters
 
@@ -1244,7 +1246,8 @@ ArtTile_SKTitle_Mountain              = $07A0
 
 ; Sonic 3 fonts (continue, credits).
 ArtTile_S3Fonts_SmallText             = $0001
-ArtTile_S3Fonts_BigText               = $0029
+ArtTile_S3Fonts_BigText               = $002A	; Liliam: use S3 staff roll for hack credits
+;ArtTile_S3Fonts_BigText              = $0029	;
 
 ; Continue screen.
 ArtTile_Continue_Digits               = $0001

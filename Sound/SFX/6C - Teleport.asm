@@ -7,7 +7,7 @@ Sound6C_Teleport_Header:
 	smpsHeaderSFXChannel cFM5, Sound6C_Teleport_FM5,	$00, $10
 	smpsHeaderSFXChannel cFM4, Sound6C_Teleport_FM4,	$00, $10
 	smpsHeaderSFXChannel cPSG3, Sound_6C_PSG3,	$00, $00
-	smpsHeaderSFXChannel cPSG2, Sound_B8_PSG2,	$00, $00
+	smpsHeaderSFXChannel cPSG2, Sound_6C_PSG2,	$00, $00
 
 ; FM4 Data
 Sound6C_Teleport_FM4:
@@ -27,7 +27,7 @@ Sound6C_Teleport_Loop00:
 	smpsAlterVol        $02
 	smpsAlterPitch      $01
 	smpsLoop            $00, $20, Sound6C_Teleport_Loop00
-	smpsStop
+	smpsStopFM
 
 ; PSG3 Data
 Sound_6C_PSG3:
@@ -36,10 +36,28 @@ Sound_6C_PSG3:
 	smpsPSGform         $E7
 	dc.b	nBb4, $1D
 
-Sound6C_Teleport_Loop01:
+Sound6C_Teleport_Loop03:
 	dc.b	smpsNoAttack, $07
 	smpsPSGAlterVol     $01
-	smpsLoop            $00, $10, Sound6C_Teleport_Loop01
+	smpsLoop            $00, $10, Sound6C_Teleport_Loop03
+	smpsStop
+
+; PSG2 Data
+Sound_6C_PSG2:
+	dc.b	nRst, $16
+	smpsPSGvoice        fTone_03
+
+Sound6C_Teleport_Loop01:
+	dc.b	nD5, $04, nE5, nFs5
+	smpsPSGAlterVol     $01
+	smpsAlterPitch      $FF
+	smpsLoop            $00, $05, Sound6C_Teleport_Loop01
+
+Sound6C_Teleport_Loop02:
+	dc.b	nD5, $04, nE5, nFs5
+	smpsPSGAlterVol     $01
+	smpsAlterPitch      $01
+	smpsLoop            $00, $07, Sound6C_Teleport_Loop02
 	smpsStop
 
 Sound6C_Teleport_Voices:
