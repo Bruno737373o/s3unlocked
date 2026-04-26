@@ -211,15 +211,15 @@ shield_art          = $38
 shield_plc          = $3C
 
 ; ---------------------------------------------------------------------------
-; Liliam: hidden skills
-Skill_TailsAssist   = 0
-Skill_SonicDropDash = 1
-Skill_TailsBoost    = 2
-Skill_KnuxClimbDash = 3
-Skill_AmyDoubleJump = 4
-Skill_MightyWallGrb = 5
-Skill_RayWallGrab   = 6
-Skill_SonicPeelout  = 7
+; Liliam: options menu
+Option_AccurateRollHeight = 0
+Option_SonicDropDash      = 1
+Option_TailsAscend        = 2
+Option_KnuxClimbDash      = 3
+Option_AmyDoubleJump      = 4
+Option_MightyWallJump     = 5
+Option_RayWallJump        = 6
+Option_SonicPeelOut       = 7
 
 ; ---------------------------------------------------------------------------
 ; Liliam: HUD - Encore mode HUD
@@ -298,9 +298,11 @@ SRAM_2P_player3 =		 $E ; byte
 SRAM_2P_next_slot =		$10
 
 SRAM_clear_type =		  0 ; byte
-SRAM_unknown =			  1 ; byte
-SRAM_current_special_stage =	  2 ; byte
-SRAM_current_zone =		  3 ; byte
+SRAM_current_zone =		  1 ; byte	; Liliam: data select - restructure save file
+SRAM_player_mode =		  2 ; byte	;
+SRAM_current_special_stage =	  3 ; byte	;
+;SRAM_current_special_stage =	  2 ; byte	;
+;SRAM_current_zone =		  3 ; byte	;
 SRAM_collected_special_rings =	  4 ; word
 SRAM_collected_emeralds =	  6 ; word
 SRAM_life_count =		  8 ; byte
@@ -314,7 +316,9 @@ SRAM_integrity =	'BD'
 SRAM_integrity2 =	'LD'
 
 SRAM_competition_size =	SRAM_2P_num_slots*SRAM_2P_next_slot+4	; $54 bytes
-SRAM_SKgame_size =	SRAM_num_slots*SRAM_next_slot+4		; $54 bytes
+SRAM_main_size =	SRAM_num_slots*SRAM_next_slot+4		; $54 bytes
+SRAM_encore_size =	SRAM_encore_num_slots*SRAM_next_slot+4	; $22 bytes
+SRAM_extra_size =	$22+4					; $26 bytes
 
 	phase $200001
 SRAM_start	=		*
@@ -323,14 +327,18 @@ SRAM_competition	ds.w SRAM_competition_size	; $54 bytes
 	ds.w 2	; unused
 SRAM_competition_backup	ds.w SRAM_competition_size	; $54 bytes
 	ds.w 2	; unused
-SRAM_S3game		ds.w $34			; $34 bytes
-	ds.w $12	; unused
-SRAM_S3game_backup	ds.w $34			; $34 bytes
-	ds.w $12	; unused
-SRAM_SKgame		ds.w SRAM_SKgame_size		; $54 bytes
+SRAM_main		ds.w SRAM_main_size		; $54 bytes
 	ds.w 2	; unused
-SRAM_SKgame_backup	ds.w SRAM_SKgame_size		; $54 bytes
-	ds.w $15	; unused
+SRAM_main_backup	ds.w SRAM_main_size		; $54 bytes
+	ds.w 2	; unused
+SRAM_encore		ds.w SRAM_encore_size		; $22 bytes
+	ds.w 2	; unused
+SRAM_encore_backup	ds.w SRAM_encore_size		; $22 bytes
+	ds.w 2	; unused
+SRAM_extra		ds.w SRAM_extra_size		; $26 bytes
+	ds.w 2	; unused
+SRAM_extra_backup	ds.w SRAM_extra_size		; $26 bytes
+	ds.w 9	; unused
 SRAM_end	=		*
 	dephase
 
@@ -393,14 +401,19 @@ Stat_table =			*			; used by Tails' CPU controls in a Sonic and Tails game
 Pos_table_P2			ds.b $100		; used by Player 2 in competition mode
 Pos_table 			ds.b $100		;
 Competition_saved_data		ds.b $54		; saved data from Competition Mode
-			ds.b $C				; unused
-
-Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
-			ds.w 1				; unused
-
+			ds.b $A				; unused
 Emerald_flicker_flag		ds.w 1			; controls the emerald flicker in save screen and special stage results.
-			ds.b $44			; unused
-
+Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
+Extra_saved_data =		*		; Liliam: options menu
+Collected_holograms_array	ds.l 1		; Liliam: Metal Sonic hologram object
+Collected_photo_piece_array	ds.b $F		; Liliam: museum - photo piece object
+			ds.b 1				; unused
+Unlock_flags			ds.w 1		; Liliam: options menu
+Options				ds.w 1		; Liliam: options menu
+Blue_spheres_saved_level	ds.l 1		; Liliam: blue sphere - load saved level on startup
+			ds.b 6				; unused
+				ds.w 2		; Liliam: options menu
+Encore_saved_data		ds.b $22	; Liliam: Encore mode - save game
 Saved_data			ds.b $54		; saved data from 1 player mode
 Ring_status_table		ds.b $400		; 1 word per ring
 Object_respawn_table		ds.b $300		; 1 byte per object, every object in the level gets an entry
@@ -947,10 +960,8 @@ Competition_total_laps		ds.b 1			; total number of laps in competition mode (typ
 			ds.b 1				; unused
 Competition_current_lap		ds.b 1			; current lap number for player 1 in competition mode
 Competition_current_lap_2P	ds.b 1			; current lap number for player 2 in competition mode
-Collected_holograms_array	ds.l 1		; Liliam: Metal Sonic hologram object
-Collected_photo_piece_array	ds.b $F		; Liliam: museum - photo piece object
-			ds.b $13			; unused
-Saved_encore_stocks		ds.l 1		; Liliam: Encore mode - save game
+			ds.b $2A			; unused
+
 Player_mode			ds.w 1			; 0 = Sonic and Tails, 1 = Sonic alone, 2 = Tails alone, 3 = Knuckles alone
 Player_option			ds.w 1			; option selected on level select, data select screen or Sonic & Knuckles title screen
 Encore_mode			ds.b 1		; Liliam: Encore mode
@@ -990,8 +1001,7 @@ Respawn_table_keep		ds.b 1			; if set, respawn table is not reset during level l
 			ds.w 1				; unused
 Saved_apparent_zone_and_act	ds.w 1
 Saved2_apparent_zone_and_act	ds.w 1
-
-Blue_spheres_saved_level	ds.l 1		; Liliam: blue sphere - load saved level on startup
+Saved_encore_stocks		ds.l 1		; Liliam: Encore mode - save game
 Blue_spheres_current_stage	ds.b 4			; the layout parts that make up the current stage
 Blue_spheres_current_level	ds.l 1			; number shown at the top of the full game menu
 Blue_spheres_option		ds.b 1			; 0 = level, 1 = start, 2 = code
@@ -1022,7 +1032,7 @@ Blue_spheres_stage_flag		ds.b 1			; set if a Blue Sphere special stage is being 
 			ds.b 1				; unused
 V_blank_cycles			ds.w 1			; the number of cycles between V-blanks
 Graphics_flags			ds.b 1			; bit 7 set = English system, bit 6 set = PAL system
-Hidden_skills			ds.b 1		; Liliam: hidden skills
+			ds.b 1				; unused
 Debug_mode_flag			ds.w 1
 Special_stage_override_flag = Debug_mode_flag+1	; Liliam: level select - access all special stages from act 1
 			ds.l 1				; unused
@@ -1759,8 +1769,8 @@ sfx_Flying			ds.b 1		; $BA
 sfx_FlyTired			ds.b 1		; $BB
 sfx_HammerAttack		ds.b 1		; $BC	; Liliam: add extra characters
 sfx_HammerRush			ds.b 1		; $BD	; Liliam: add extra characters
-sfx_DropDash			ds.b 1		; $BE	; Liliam: hidden skills
-sfx_Peelout			ds.b 1		; $BF	; Liliam: hidden skills
+sfx_DropDash			ds.b 1		; $BE	; Liliam: hidden ability - drop dash
+sfx_PeelOut			ds.b 1		; $BF	; Liliam: hidden ability - peel out
 sfx_SpikeBounce			ds.b 1		; $C0	; Liliam: add extra characters
 sfx_HammerDrop			ds.b 1		; $C1	; Liliam: add extra characters
 sfx_MetalSonic			ds.b 1		; $C2	; Liliam: add extra characters
@@ -1770,7 +1780,7 @@ sfx_TimeStone			ds.b 1		; $C5	; Liliam: Metal Sonic hologram object
 sfx_AirCountdown		ds.b 1		; $C6	; Liliam: Encore mode - music
 
 sfx__FirstContinuous =		*		; ID of the first continuous sound effect
-sfx_PeeloutCharge		ds.b 1		; $C7	; Liliam: hidden skills
+sfx_PeelOutCharge		ds.b 1		; $C7	; Liliam: hidden ability - peel out
 sfx_MetalOverdrive		ds.b 1		; $C8	; Liliam: add extra characters
 sfx_LargeShip			ds.b 1		; $C9
 sfx_RobotnikSiren		ds.b 1		; $CA
