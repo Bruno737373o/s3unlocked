@@ -297,15 +297,6 @@ SRAM_2P_player2 =		 $D ; byte
 SRAM_2P_player3 =		 $E ; byte
 SRAM_2P_next_slot =		$10
 
-SRAM_S3_clear_type =		  0 ; byte
-SRAM_S3_collected_rings1 =	  1 ; byte
-SRAM_S3_player_mode =		  2 ; byte
-SRAM_S3_current_zone =		  3 ; byte
-SRAM_S3_current_special_stage =	  4 ; byte
-SRAM_S3_collected_emeralds =	  6 ; byte
-SRAM_S3_collected_rings2 =	  7 ; byte
-SRAM_S3_next_slot =		  8
-
 SRAM_clear_type =		  0 ; byte
 SRAM_unknown =			  1 ; byte
 SRAM_current_special_stage =	  2 ; byte
@@ -317,14 +308,12 @@ SRAM_continue_count =		  9 ; byte
 SRAM_next_slot =		 $A
 
 SRAM_2P_num_slots =	  5
-SRAM_S3_num_slots =	  6
 SRAM_num_slots =	  8
 SRAM_encore_num_slots =	  3			; Liliam: Encore mode - save data
 SRAM_integrity =	'BD'
 SRAM_integrity2 =	'LD'
 
 SRAM_competition_size =	SRAM_2P_num_slots*SRAM_2P_next_slot+4	; $54 bytes
-SRAM_S3game_size =	SRAM_S3_num_slots*SRAM_S3_next_slot+4	; $34 bytes
 SRAM_SKgame_size =	SRAM_num_slots*SRAM_next_slot+4		; $54 bytes
 
 	phase $200001
@@ -334,9 +323,9 @@ SRAM_competition	ds.w SRAM_competition_size	; $54 bytes
 	ds.w 2	; unused
 SRAM_competition_backup	ds.w SRAM_competition_size	; $54 bytes
 	ds.w 2	; unused
-SRAM_S3game		ds.w SRAM_S3game_size		; $34 bytes
+SRAM_S3game		ds.w $34			; $34 bytes
 	ds.w $12	; unused
-SRAM_S3game_backup	ds.w SRAM_S3game_size		; $34 bytes
+SRAM_S3game_backup	ds.w $34			; $34 bytes
 	ds.w $12	; unused
 SRAM_SKgame		ds.w SRAM_SKgame_size		; $54 bytes
 	ds.w 2	; unused
