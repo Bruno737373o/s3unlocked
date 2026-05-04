@@ -116,7 +116,8 @@ loc_220C30:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.w	#1,anim(a1)
-		move.w	#$800,ground_vel(a1)
+;		move.w	#$800,ground_vel(a1)			; Liliam: ported from S3 - restore surfboard intro
+		move.w	#$700,ground_vel(a1)			;
 		move.w	#$800,x_vel(a1)
 		move.w	#0,y_vel(a1)
 		move.l	#Obj_AIZSurfboardIntro_Run,(a0)
@@ -144,8 +145,10 @@ Obj_AIZSurfboardIntro_Run:
 
 loc_220CB6:
 		jsr	(MoveSprite2).l
-		cmpi.w	#$13C0,x_pos(a0)
+;		cmpi.w	#$13C0,x_pos(a0)			;
+		cmpi.w	#$1380,x_pos(a0)			;
 		blo.s	loc_220CE2
+		move.w	#$800,ground_vel(a0)			;
 		move.b	#0,$2E(a0)
 		move.l	#Obj_AIZSurfboardIntro_Stop,(a3)
 		move.b	#1,(Ctrl_1_locked).w
