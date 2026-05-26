@@ -225,7 +225,7 @@
 		dc.l Pal_DEZBoss
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w bytesToLcnt($60)
-		dc.l Pal_CutsceneKnux			; Liliam: bugfix - HPZ SS results palette screwery
+		dc.l Pal_HPZ				; Liliam: bugfix - HPZ SS results palette screwery
 ;		dc.l Pal_DEZBoss			;
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w bytesToLcnt($60)
