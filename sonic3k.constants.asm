@@ -1464,12 +1464,12 @@ ArtTile_HPZSmallEmeralds              = $04B6	;
 ;ArtTile_HPZGrayEmerald               = $0477	;
 ;ArtTile_HPZEntryTeleporter           = $0488	;
 ;ArtTile_HPZSmallEmeralds             = $04AC	;
-ArtTile_HPZKnuxDizzy                  = $0485	; Liliam: HPZ - allow loading capsule art
+ArtTile_HPZKnuxDizzy                  = $0485	; Liliam: cutscene knux - convert palette
 ;ArtTile_HPZKnuxDizzy                 = $0500	;
-ArtTile_HPZBossDebris                 = $0488	; Liliam: Encore mode - LRZ2 boss
-ArtTile_HPZBossCrane                  = $04FB	; Liliam: HPZ - allow loading capsule art
 ArtTile_HPZKnuxBossDust               = $0500
 ArtTile_HPZTeleporter                 = $052E
+ArtTile_HPZBossDebris                 = $0488	; Liliam: Encore mode - LRZ2 boss
+ArtTile_HPZBossCrane                  = $04FB	; Liliam: HPZ - add Knuckles cutscene
 
 ArtTile_SSZMisc                       = $02D4
 ArtTile_SSZSpiralRamp                 = $0348
