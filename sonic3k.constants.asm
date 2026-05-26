@@ -573,9 +573,7 @@ _unkEF68			ds.w 1			; stores a tile used in special stage results screen, unknow
 Special_stage_zone_and_act	ds.w 1			; stored zone and act during special stage results screen?
 HPZ_special_stage_completed	ds.w 1			; set if special stage was completed. This determines which cutscene to play when entering HPZS
 Current_special_stage_2		ds.b 1			; seems to be just a copy of Current_special_stage
-			ds.b 1				; unused
-HPZ_current_special_stage	ds.b 1			; seems to be just a copy of Current_special_stage used specifically for HPZS
-			ds.b 1				; unused
+			ds.b 3				; unused
 Ending_running_flag		ds.w 1			; the only thing this does is prevent the game from pausing
 Plane_buffer_2_addr		ds.l 1			; the address of the second plane buffer to process, if applicable
 Demo_hold_counter		ds.b 1			; the number of frames to hold the current buttons. This only applies to S&K demos
