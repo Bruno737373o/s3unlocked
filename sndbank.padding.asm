@@ -1876,6 +1876,592 @@ Map_HPZKnucklesCutsceneDebris:
 		include "Levels/HPZ/Misc Object Data/Map - Knuckles Cutscene Debris.asm"
 ; ---------------------------------------------------------------------------
 
+Obj_HPZEncoreCutscene:
+		tst.b	(End_of_level_flag).w
+		beq.w	HPZEncoreCutscene_Return
+		move.l	#Obj_HPZEncoreCutscene_WaitForPlayer,(a0)
+		jsr	(Restore_PlayerControl).l
+		lea	(Player_2).w,a1
+		jsr	(Restore_PlayerControl2).l
+		jsr	(AllocateObject).l
+		bne.s	.done
+		move.l	#Obj_HPZEncoreRobotnik,(a1)
+		move.w	a1,parent3(a0)
+		jsr	(CreateNewSprite4).l
+		bne.s	.done
+		move.l	#Obj_IncLevEndXGradual,(a1)
+		move.w	#$1600,(Camera_stored_max_X_pos).w
+		jsr	(CreateNewSprite4).l
+		bne.s	.done
+		move.l	#Obj_DecLevStartYGradual,(a1)
+		move.w	#$300,(Camera_stored_min_Y_pos).w
+
+	.done:
+		lea	(Pal_HPZ_Encore).l,a1
+		lea	(Normal_palette_line_2).w,a2
+		moveq	#bytesToLcnt($20),d0
+		btst	#EncoreFlags_Palette,(Encore_mode).w
+		bne.s	.loop
+		lea	(Pal_HPZ).l,a1
+
+	.loop:
+		move.l	(a1),Water_palette-Normal_palette(a2)
+		move.l	(a1)+,(a2)+
+		dbf	d0,.loop
+		lea	(ArtKosM_HPZEncoreRobotnik).l,a1
+		move.w	#tiles_to_bytes(ArtTile_HPZEncoreRobotnik),d2
+		jsr	(Queue_Kos_Module).l
+		lea	(ArtKosM_HPZTeleporter).l,a1
+		move.w	#tiles_to_bytes(ArtTile_HPZEncoreTeleporter),d2
+		jsr	(Queue_Kos_Module).l
+		moveq	#$47,d0
+		jmp	(Load_PLC).l
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreCutscene_WaitForPlayer:
+		move.w	#$14B0,d0
+		cmp.w	(Camera_X_pos).w,d0
+		bhi.w	HPZEncoreCutscene_Return
+		move.l	#Obj_HPZEncoreCutscene_SetPlayerPriority,(a0)
+		move.w	d0,(Camera_min_X_pos).w
+		move.w	#$300,(Camera_target_max_Y_pos).w
+		lea	(Debug_saved_art_tile).w,a1
+		tst.w	(Debug_placement_mode).w
+		bgt.s	.setPriority
+		lea	(Player_1+art_tile).w,a1
+
+	.setPriority:
+		andi.w	#drawing_mask,(a1)
+		lea	(ArtKosM_LBZFinalBoss2).l,a1
+		move.w	#tiles_to_bytes(ArtTile_SpikesSprings),d2
+		jsr	(Queue_Kos_Module).l
+		jsr	(AllocateObject).l
+		bne.s	Obj_HPZEncoreCutscene_SetPlayerPriority
+		move.l	#Obj_HPZEncoreTeleporter,(a1)
+		move.w	a0,parent3(a1)
+
+Obj_HPZEncoreCutscene_SetPlayerPriority:
+		move.w	(Camera_max_X_pos).w,d0
+		cmp.w	(Camera_X_pos).w,d0
+		bhi.w	HPZEncoreCutscene_Return
+		move.w	d0,(Camera_min_X_pos).w
+		move.l	#Obj_HPZEncoreCutscene_SetEmeraldPriority,(a0)
+		move.w	#$380,d1
+		move.w	d1,(Player_1+priority).w
+		move.w	d1,(Player_2+priority).w
+		move.b	#1,(Boss_flag).w
+		jmp	(Make_CutsceneSkipObj).l
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreCutscene_SetEmeraldPriority:
+		move.l	#Obj_HPZEncoreCutscene_WaitForQuake,(a0)
+		lea	(Dynamic_object_RAM-next_object).w,a1
+		move.w	#$380,d1
+		moveq	#7-1,d0
+
+	.loop:
+		lea	next_object(a1),a1
+		cmp.l	#Obj_HPZSuperEmerald_Encore,(a1)
+		beq.s	.setPriority
+		cmp.l	#Obj_HPZSuperEmerald_EncoreShattered,(a1)
+		bne.s	.loop
+
+	.setPriority:
+		addi.w	#$280,priority(a1)
+		cmp.w	priority(a1),d1
+		bhi.s	.done
+		move.w	d1,priority(a1)
+
+	.done:
+		dbf	d0,.loop
+		movea.w	(_unkFABA).w,a1
+		move.w	d1,priority(a1)
+		rts
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreCutscene_WaitForQuake:
+		tst.w	(Screen_shake_flag).w
+		bne.w	HPZEncoreCutscene_Return
+		move.l	#Obj_HPZEncoreCutscene_ResetPlayerPriority,(a0)
+		moveq	#signextendB(mus_MinibossK),d0
+		jmp	(Play_Music).l
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreCutscene_ResetPlayerPriority:
+		movea.w	parent3(a0),a1
+		btst	#0,status(a1)
+		beq.w	HPZEncoreCutscene_Return
+		move.l	#Obj_HPZEncoreCutscene_ResetEmeraldPriority,(a0)
+		move.w	#$100,d1
+		move.w	d1,(Player_1+priority).w
+		move.w	d1,(Player_2+priority).w
+		rts
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreCutscene_ResetEmeraldPriority:
+		move.l	#Obj_HPZEncoreCutscene_WaitForRobotnik,(a0)
+		lea	(Dynamic_object_RAM-next_object).w,a1
+		move.w	#$100,d1
+		moveq	#7-1,d0
+
+	.loop:
+		lea	next_object(a1),a1
+		cmp.l	#Obj_HPZSuperEmerald_Encore,(a1)
+		beq.s	.setPriority
+		cmp.l	#Obj_HPZSuperEmerald_EncoreShattered,(a1)
+		bne.s	.loop
+
+	.setPriority:
+		subi.w	#$280,priority(a1)
+		cmp.w	priority(a1),d1
+		bhi.s	.done
+		move.w	#$200,priority(a1)
+
+	.done:
+		dbf	d0,.loop
+		movea.w	(_unkFABA).w,a1
+		move.w	#$180,priority(a1)
+		rts
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreCutscene_WaitForRobotnik:
+		movea.w	parent3(a0),a1
+		btst	#1,status(a1)
+		beq.w	HPZEncoreCutscene_Return
+		move.l	#Obj_HPZEncoreCutscene_MoveCamera,(a0)
+		move.l	#CopyPal_HPZEncoreCutscene,(Water_palette_data_addr).w
+		move.w	#$4EF9,(H_int_jump).w
+		move.l	#HInt3,(H_int_addr).w
+		move.b	#$68,(H_int_counter).w
+		move.w	#VDP_Option0|VDPReg0_EnableHInt,(VDP_control_port).l
+		cmpi.w	#$1000,(V_blank_cycles).w
+		blo.s	Obj_HPZEncoreCutscene_MoveCamera
+		move.l	#HInt4,(H_int_addr).w
+
+Obj_HPZEncoreCutscene_MoveCamera:
+		move.w	(Camera_X_pos).w,d0
+		cmpi.w	#$15A2,d0
+		bhs.s	.moveX
+		move.l	#Obj_HPZEncoreCutscene_WaitForFlyAway,(a0)
+		st	(Deform_lock).w
+
+	.moveX:
+		subq.w	#1,d0
+		move.w	d0,(Camera_X_pos).w
+		move.w	d0,(Camera_min_X_pos).w
+		move.w	d0,(Camera_max_X_pos).w
+		addi.w	#$130,d0
+		cmp.w	(Player_1+x_pos).w,d0
+		bhs.s	.moveY
+		move.w	d0,(Player_1+x_pos).w
+
+	.moveY:
+		subq.w	#1,$2E(a0)
+		bpl.s	HPZEncoreCutscene_Return
+		move.w	#6-1,$2E(a0)
+		move.w	(Camera_Y_pos).w,d0
+		subq.w	#1,d0
+
+HPZEncoreCutscene_ApplyCamera:
+		move.w	d0,(Camera_Y_pos).w
+		move.w	d0,(Camera_min_Y_pos).w
+		move.w	d0,(Camera_max_Y_pos).w
+		move.w	d0,(Camera_target_max_Y_pos).w
+
+HPZEncoreCutscene_Return:
+		rts
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreCutscene_WaitForFlyAway:
+		movea.w	parent3(a0),a1
+		btst	#4,status(a1)
+		beq.s	HPZEncoreCutscene_Return
+		move.w	#$15A0,x_pos(a0)
+		move.w	#$3E0,y_pos(a0)
+		move.b	#$80,subtype(a0)
+		jsr	(Obj_SpriteMask).l
+		move.l	#Obj_HPZEncoreCutscene_WaitForCamera,(a0)
+		move.w	#$60-1,$2E(a0)
+		bset	#7,status(a0)
+
+Obj_HPZEncoreCutscene_WaitForCamera:
+		btst	#0,$2F(a0)
+		bne.s	.skip
+		move.w	(Camera_Y_pos).w,d0
+		addq.w	#1,d0
+		bsr.s	HPZEncoreCutscene_ApplyCamera
+
+	.skip:
+		subq.w	#1,$2E(a0)
+		bpl.s	Obj_HPZEncoreCutscene_DisableSpriteCollision
+		move.l	#Obj_HPZEncoreCutscene_DisableSpriteCollision,(a0)
+
+Obj_HPZEncoreCutscene_DisableSpriteCollision:
+		lea	y_vel(a0),a1
+		move.w	(Player_1+y_vel).w,(a1)+
+		move.w	(Player_2+y_vel).w,(a1)+
+		st	(Player_1+y_vel).w
+		st	(Player_2+y_vel).w
+		st	(Spritemask_flag).w
+		jmp	(Draw_Sprite).l
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreCutscene_StartNewLevel:
+		subq.w	#1,$2E(a0)
+		bpl.s	HPZEncoreCutscene_Return
+		jmp	(loc_45D98).l
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnik:
+		move.l	#Obj_HPZEncoreRobotnik_WaitForCamera,(a0)
+		lea	ObjDat_HPZEncoreRobotnik(pc),a1
+		jsr	(SetUp_ObjAttributes).l
+		lea	ChildObjDat_HPZEncoreRobotnik(pc),a2
+		jmp	(CreateChild1_Normal).l
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnik_WaitForCamera:
+		tst.b	(Boss_flag).w
+		beq.w	HPZEncoreCutscene_Return
+		move.l	#Obj_HPZEncoreRobotnik_Quake,(a0)
+		move.w	(Camera_X_pos).w,d0
+		addi.w	#$A0,d0
+		move.w	d0,x_pos(a0)
+		move.w	(Camera_Y_pos).w,d0
+		addi.w	#$120,d0
+		move.w	d0,y_pos(a0)
+		lea	(Pal_LBZFinalBoss2).l,a1
+		jsr	(PalLoad_Line1).l
+		st	(Screen_shake_flag).w
+		move.w	#75-1,$2E(a0)
+
+Obj_HPZEncoreRobotnik_Quake:
+		subq.w	#1,$2E(a0)
+		bmi.s	.done
+		move.w	$2E(a0),d0
+		andi.b	#$F,d0
+		bne.w	HPZEncoreCutscene_Return
+		moveq	#signextendB(sfx_Rumble2),d0
+		jmp	(Play_SFX).l
+; ---------------------------------------------------------------------------
+
+	.done:
+		move.l	#Obj_HPZEncoreRobotnik_Jump,(a0)
+		moveq	#signextendB(sfx_Collapse),d0
+		jsr	(Play_SFX).l
+		clr.w	(Screen_shake_flag).w
+		move.w	#-$B00,y_vel(a0)
+
+Obj_HPZEncoreRobotnik_Jump:
+		jsr	(MoveSprite).l
+		tst.w	y_vel(a0)
+		bmi.w	HPZEncoreRobotnik_Draw
+		bset	#0,status(a0)
+		move.w	#$31E,d0
+		cmp.w	y_pos(a0),d0
+		bhs.w	HPZEncoreRobotnik_Draw
+		move.w	d0,y_pos(a0)
+		move.l	#Obj_HPZEncoreRobotnik_WaitToMove,(a0)
+		move.w	#45-1,$2E(a0)
+		bset	#1,status(a0)
+
+Obj_HPZEncoreRobotnik_WaitToMove:
+		subq.w	#1,$2E(a0)
+		bpl.w	HPZEncoreRobotnik_Draw
+		move.l	#Obj_HPZEncoreRobotnik_Move,(a0)
+		move.w	#$80-1,$2E(a0)
+		move.w	#-$60,x_vel(a0)
+		clr.w	y_vel(a0)
+
+Obj_HPZEncoreRobotnik_Move:
+		jsr	(MoveSprite2).l
+		subq.w	#1,$2E(a0)
+		bne.w	HPZEncoreRobotnik_Draw
+		move.l	#Obj_HPZEncoreRobotnik_WaitToGrab,(a0)
+		move.w	#$20-1,$2E(a0)
+		bset	#2,status(a0)
+
+Obj_HPZEncoreRobotnik_WaitToGrab:
+		subq.w	#1,$2E(a0)
+		bpl.w	HPZEncoreRobotnik_Draw
+		move.l	#Obj_HPZEncoreRobotnik_WaitToFly,(a0)
+		move.w	#$14,(Screen_shake_flag).w
+		moveq	#signextendB(sfx_BigRumble),d0
+		jsr	(Play_SFX).l
+		move.l	a0,-(sp)
+		movea.w	(_unkFABA).w,a0
+		subi.w	#$18,y_pos(a0)
+		lea	(ChildObjDat_6661E).l,a2
+		jsr	(CreateChild6_Simple).l
+		lea	(ChildObjDat_HPZEncoreEmeraldDebris).l,a2
+		jsr	(CreateChild6_Simple).l
+		addi.w	#$18,y_pos(a0)
+		movea.l	(sp)+,a0
+		move.w	#$20-1,$2E(a0)
+		bset	#3,status(a0)
+		clr.w	x_vel(a0)
+		clr.w	y_vel(a0)
+
+Obj_HPZEncoreRobotnik_WaitToFly:
+		subq.w	#1,$2E(a0)
+		bpl.s	HPZEncoreRobotnik_Draw
+		move.l	#Obj_HPZEncoreRobotnik_FlyAway,(a0)
+
+Obj_HPZEncoreRobotnik_FlyAway:
+		moveq	#-$20,d1
+		jsr	(MoveSprite_CustomGravity).l
+		movea.w	(_unkFABA).w,a1
+		add.l	d0,y_pos(a1)
+		move.w	(Camera_Y_pos).w,d0
+		subi.w	#$50,d0
+		cmp.w	y_pos(a0),d0
+		blo.s	HPZEncoreRobotnik_Draw
+		move.l	#Draw_Sprite,(a0)
+		move.l	#Draw_Sprite,(a1)
+		bset	#4,status(a0)
+
+HPZEncoreRobotnik_Draw:
+		jmp	(Draw_Sprite).l
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnikHead:
+		move.l	#HPZEncoreRobotnik_AnimateChild,(a0)
+		lea	ObjDat_HPZEncoreRobotnikHead(pc),a1
+		jsr	(SetUp_ObjAttributes).l
+		move.l	#AniRaw_RobotnikHead,$30(a0)
+		bra.w	HPZEncoreRobotnik_AnimateChild
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnikShip:
+		move.l	#HPZEncoreRobotnik_DrawChild,(a0)
+		lea	ObjDat_HPZEncoreRobotnikShip(pc),a1
+		jsr	(SetUp_ObjAttributes).l
+		bra.w	HPZEncoreRobotnik_DrawChild
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnikArm:
+		move.l	#Obj_HPZEncoreRobotnikArm_WaitForJump,(a0)
+		lea	ObjDat_HPZEncoreRobotnikArm(pc),a1
+		jsr	(SetUp_ObjAttributes).l
+		lea	ChildObjDat_HPZEncoreRobotnikArm(pc),a2
+		jsr	(CreateChild1_Normal).l
+
+Obj_HPZEncoreRobotnikArm_WaitForJump:
+		movea.w	parent3(a0),a1
+		btst	#0,status(a1)
+		beq.w	HPZEncoreRobotnik_DrawChild
+		andi.w	#drawing_mask,art_tile(a0)
+		bra.w	HPZEncoreRobotnik_DrawChild
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnikJoint:
+		move.l	#HPZEncoreRobotnik_DrawChild,(a0)
+		lea	ObjDat3_HPZEncoreRobotnikJoint(pc),a1
+		jsr	(SetUp_ObjAttributes3).l
+		bra.w	HPZEncoreRobotnik_DrawChild
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnikHand:
+		move.l	#Obj_HPZEncoreRobotnikHand_WaitForCamera,(a0)
+		lea	ObjDat3_HPZEncoreRobotnikHand(pc),a1
+		jsr	(SetUp_ObjAttributes3).l
+		move.l	#byte_75194,$30(a0)
+		movea.w	parent3(a0),a1
+		move.w	parent3(a1),parent2(a0)
+		tst.b	subtype(a0)
+		beq.s	Obj_HPZEncoreRobotnikHand_WaitForCamera
+		move.b	#8,mapping_frame(a0)
+		move.w	#$200,priority(a0)
+		move.l	#byte_7519C,$30(a0)
+
+Obj_HPZEncoreRobotnikHand_WaitForCamera:
+		tst.b	(Boss_flag).w
+		beq.s	HPZEncoreRobotnik_DrawChild
+		move.l	#Obj_HPZEncoreRobotnikHand_WaitForJump,(a0)
+		move.b	#1,anim_frame(a0)
+
+Obj_HPZEncoreRobotnikHand_WaitForJump:
+		movea.w	parent2(a0),a1
+		btst	#0,status(a1)
+		beq.s	HPZEncoreRobotnik_AnimateChild
+		move.l	#Obj_HPZEncoreRobotnikHand_WaitForMove,(a0)
+		andi.w	#drawing_mask,art_tile(a0)
+
+Obj_HPZEncoreRobotnikHand_WaitForMove:
+		movea.w	parent2(a0),a1
+		btst	#2,status(a1)
+		beq.s	HPZEncoreRobotnik_AnimateChild
+		move.l	#Obj_HPZEncoreRobotnikHand_WaitForAnim,(a0)
+
+Obj_HPZEncoreRobotnikHand_WaitForAnim:
+		cmpi.b	#3,anim_frame(a0)
+		bne.s	HPZEncoreRobotnik_AnimateChild
+		move.l	#Obj_HPZEncoreRobotnikHand_WaitForGrab,(a0)
+
+Obj_HPZEncoreRobotnikHand_WaitForGrab:
+		movea.w	parent2(a0),a1
+		btst	#3,status(a1)
+		beq.s	HPZEncoreRobotnik_DrawChild
+		move.l	#HPZEncoreRobotnik_DrawChild,(a0)
+		move.b	#5,anim_frame(a0)
+		clr.b	anim_frame_timer(a0)
+
+HPZEncoreRobotnik_AnimateChild:
+		jsr	(Animate_Raw).l
+
+HPZEncoreRobotnik_DrawChild:
+		jsr	(Refresh_ChildPositionAdjusted).l
+		jmp	(Child_Draw_Sprite).l
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnikInside:
+		move.l	#HPZEncoreRobotnik_DrawChild,(a0)
+		lea	ObjDat_HPZEncoreRobotnikInside(pc),a1
+		jsr	(SetUp_ObjAttributes).l
+		bra.s	HPZEncoreRobotnik_DrawChild
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreRobotnikFire:
+		move.l	#Obj_HPZEncoreRobotnikFire_Main,(a0)
+		lea	ObjDat_HPZEncoreRobotnikFire(pc),a1
+		jsr	(SetUp_ObjAttributes).l
+
+Obj_HPZEncoreRobotnikFire_Main:
+		btst	#0,(V_int_run_count+3).w
+		beq.s	HPZEncoreRobotnik_DrawChild
+		rts
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreEmeraldDebris:
+		jsr	(loc_65226).l
+		subi.b	#$18,child_dy(a0)
+		move.w	#$100,priority(a0)
+		rts
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreTeleporter:
+		move.w	#$1640,x_pos(a0)
+		move.w	#$3C7,y_pos(a0)
+		addq.b	#1,(Current_zone).w
+		jsr	(Obj_SSZHPZTeleporter).l
+		move.l	#Obj_HPZEncoreTeleporter_Wait,(a0)
+		move.w	#make_art_tile(ArtTile_HPZEncoreTeleporter,0,0),art_tile(a0)
+		subq.b	#1,(Current_zone).w
+		rts
+; ---------------------------------------------------------------------------
+
+Obj_HPZEncoreTeleporter_Wait:
+		movea.w	parent3(a0),a1
+		tst.b	status(a1)
+		bmi.s	.done
+		jmp	(loc_455F8).l
+; ---------------------------------------------------------------------------
+
+	.done:
+		move.l	#Obj_HPZEncoreTeleporter_Move,(a0)
+		ori.w	#high_priority,art_tile(a0)
+
+Obj_HPZEncoreTeleporter_Move:
+		movea.w	parent3(a0),a1
+		move.w	$2E(a1),d0
+		andi.b	#3,d0
+		bne.s	Obj_HPZEncoreTeleporter_DisableLevelCollision
+		subq.w	#1,$16(a0)
+		cmpi.w	#$3B0,$16(a0)
+		bne.s	Obj_HPZEncoreTeleporter_DisableLevelCollision
+		move.l	#Obj_HPZEncoreTeleporter_DisableLevelCollision,(a0)
+		move.b	#$40,subtype(a0)
+		ori.b	#$80,(Update_HUD_timer).w
+
+Obj_HPZEncoreTeleporter_DisableLevelCollision:
+		movea.w	parent3(a0),a1
+		lea	y_vel(a1),a1
+		lea	(Player_1).w,a2
+		bsr.s	HPZEncoreTeleporter_ProcessPlayer
+		lea	(Player_2).w,a2
+		bsr.s	HPZEncoreTeleporter_ProcessPlayer
+		jsr	(loc_455CC).l
+		tst.b	$38(a0)
+		beq.s	HPZEncoreTeleporter_Return
+		movea.w	parent3(a0),a1
+		move.l	#Obj_HPZEncoreCutscene_StartNewLevel,(a1)
+		move.w	#210-1,$2E(a1)
+		rts
+; ---------------------------------------------------------------------------
+
+HPZEncoreTeleporter_ProcessPlayer:
+		move.w	(a1)+,y_vel(a2)
+		btst	#Status_InAir,status(a2)
+		beq.s	HPZEncoreTeleporter_Return
+		move.b	#$E,top_solid_bit(a2)
+		move.b	#$F,lrb_solid_bit(a2)
+
+HPZEncoreTeleporter_Return:
+		rts
+; ---------------------------------------------------------------------------
+ChildObjDat_HPZEncoreRobotnik:
+		dc.w 5-1
+		dc.l Obj_HPZEncoreRobotnikHead
+		dc.b    0,-$1C
+		dc.l Obj_HPZEncoreRobotnikArm
+		dc.b  $14, $22
+		dc.l Obj_HPZEncoreRobotnikShip
+		dc.b   $C,-$14
+		dc.l Obj_HPZEncoreRobotnikInside
+		dc.b    0,-$18
+		dc.l Obj_HPZEncoreRobotnikFire
+		dc.b  $38,-$14
+ChildObjDat_HPZEncoreRobotnikArm:
+		dc.w 3-1
+		dc.l Obj_HPZEncoreRobotnikHand
+		dc.b -$2A,  -2
+		dc.l Obj_HPZEncoreRobotnikHand
+		dc.b -$4A,  -2
+		dc.l Obj_HPZEncoreRobotnikJoint
+		dc.b   $D,-$17
+ChildObjDat_HPZEncoreEmeraldDebris:
+		dc.w 5-1
+		dc.l Obj_HPZEncoreEmeraldDebris
+ObjDat_HPZEncoreRobotnik:
+		dc.l Map_HPZEncoreRobotnik
+		dc.w make_art_tile(ArtTile_HPZEncoreRobotnik,0,1)
+		dc.w   $280
+		dc.b  $1C, $29,   2,   0
+ObjDat_HPZEncoreRobotnikHead:
+		dc.l Map_HPZEncoreRobotnik
+		dc.w make_art_tile(ArtTile_HPZEncoreRobotnik,0,1)
+		dc.w   $280
+		dc.b  $10,   8,   0,   0
+ObjDat_HPZEncoreRobotnikShip:
+		dc.l Map_LBZFinalBoss2
+		dc.w make_art_tile(ArtTile_SpikesSprings,1,1)
+		dc.w   $200
+		dc.b  $28, $28,   0,   0
+ObjDat_HPZEncoreRobotnikArm:
+		dc.l Map_LBZFinalBoss2
+		dc.w make_art_tile(ArtTile_SpikesSprings,1,1)
+		dc.w   $180
+		dc.b  $20, $10,   2,   0
+ObjDat3_HPZEncoreRobotnikHand:
+		dc.w   $100
+		dc.b  $14, $14,   4,   0
+ObjDat3_HPZEncoreRobotnikJoint:
+		dc.w   $180
+		dc.b    8,   8,   3,   0
+ObjDat_HPZEncoreRobotnikInside:
+		dc.l Map_LBZFinalBoss2
+		dc.w make_art_tile(ArtTile_SpikesSprings,1,1)
+		dc.w   $300
+		dc.b  $14,  $C,   1,   0
+ObjDat_HPZEncoreRobotnikFire:
+		dc.l Map_LBZFinalBoss2
+		dc.w make_art_tile(ArtTile_SpikesSprings,0,1)
+		dc.w   $300
+		dc.b   $C,  $C,  $C,   0
+Map_HPZEncoreRobotnik:
+		include "Levels/HPZ/Misc Object Data/Map - Encore Cutscene Robotnik.asm"
+; ---------------------------------------------------------------------------
+
 Obj_SSZ2EggRoboRun:
 		moveq	#0,d0
 		move.b	routine(a0),d0
@@ -2091,7 +2677,7 @@ loc_3D52A_S2:
 		move.w	#$280,priority(a0)
 		move.w	(Camera_max_Y_pos).w,objoff_3A(a0)
 		addi.w	#$64,objoff_3A(a0)
-		lea	(ChildObjDat_9067A).l,a2
+		lea	(ChildObjDat_703DE).l,a2
 		jsr	(CreateChild6_Simple).l
 		bne.w	DeathEggRobotSensor_Delete
 		subi.w	#$1F,x_pos(a1)

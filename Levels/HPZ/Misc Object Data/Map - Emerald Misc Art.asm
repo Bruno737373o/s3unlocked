@@ -36,7 +36,8 @@ Map_HPZEmeraldMisc_:
 		dc.w word_9140C-Map_HPZEmeraldMisc_
 		dc.w word_9144A-Map_HPZEmeraldMisc_
 		dc.w word_91470-Map_HPZEmeraldMisc_
-		dc.w Map_HPZSuperEmerald_EncoreShattered-Map_HPZEmeraldMisc_
+		dc.w Map_HPZEmeraldShattered-Map_HPZEmeraldMisc_
+		dc.w Map_HPZEmeraldShatteredMask-Map_HPZEmeraldMisc_
 word_91050:	dc.w 5
 		dc.b  $F0,   9, $40,   0, $FF, $E8
 		dc.b  $F0,   9, $48,   0,   0,   0
@@ -243,8 +244,11 @@ word_9144A:	dc.w 6
 word_91470:	dc.w 2
 		dc.b  $60,   7,   0, $62, $FF, $F0
 		dc.b  $60,   7,   8, $62,   0,   0
-Map_HPZSuperEmerald_EncoreShattered:
+Map_HPZEmeraldShattered:
 		dc.w 3
 		dc.b  $F0,  $A, $20, $BD, $FF, $E8
 		dc.b  $F0,  $A, $20, $C6,   0,   0
 		dc.b    8,  $C, $20, $CF, $FF, $F0
+Map_HPZEmeraldShatteredMask:
+		dc.w 1
+		dc.b  $F6,  $A,   2, $13, $FF, $F4

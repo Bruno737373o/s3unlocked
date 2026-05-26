@@ -1,11 +1,12 @@
-		dc.w Map_HPZKnucklesCutsceneDebris0-Map_HPZKnucklesCutsceneDebris
-		dc.w Map_HPZKnucklesCutsceneDebris1-Map_HPZKnucklesCutsceneDebris
-		dc.w Map_HPZKnucklesCutsceneDebris2-Map_HPZKnucklesCutsceneDebris
-		dc.w Map_HPZKnucklesCutsceneDebris3-Map_HPZKnucklesCutsceneDebris
-		dc.w Map_HPZKnucklesCutsceneDebris4-Map_HPZKnucklesCutsceneDebris
-		dc.w Map_HPZKnucklesCutsceneDebris0-Map_HPZKnucklesCutsceneDebris
-		dc.w Map_HPZKnucklesCutsceneDebris1-Map_HPZKnucklesCutsceneDebris
-		dc.w Map_HPZKnucklesCutsceneDebris2-Map_HPZKnucklesCutsceneDebris
+Map_HPZKnucklesCutsceneDebris_:
+		dc.w Map_HPZKnucklesCutsceneDebris0-Map_HPZKnucklesCutsceneDebris_
+		dc.w Map_HPZKnucklesCutsceneDebris1-Map_HPZKnucklesCutsceneDebris_
+		dc.w Map_HPZKnucklesCutsceneDebris2-Map_HPZKnucklesCutsceneDebris_
+		dc.w Map_HPZKnucklesCutsceneDebris3-Map_HPZKnucklesCutsceneDebris_
+		dc.w Map_HPZKnucklesCutsceneDebris4-Map_HPZKnucklesCutsceneDebris_
+		dc.w Map_HPZKnucklesCutsceneDebris0-Map_HPZKnucklesCutsceneDebris_
+		dc.w Map_HPZKnucklesCutsceneDebris1-Map_HPZKnucklesCutsceneDebris_
+		dc.w Map_HPZKnucklesCutsceneDebris2-Map_HPZKnucklesCutsceneDebris_
 Map_HPZKnucklesCutsceneDebris0:
 		dc.w 1
 		dc.b  $F8,   5, $44, $88, $FF, $F8

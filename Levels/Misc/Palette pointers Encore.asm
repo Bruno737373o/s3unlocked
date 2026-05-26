@@ -156,7 +156,7 @@
 		dc.l Pal_EMZ_Encore
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w bytesToLcnt($60)
-		dc.l Pal_LRZBoss_Encore
+		dc.l Pal_LRZBoss
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w bytesToLcnt($60)
 		dc.l Pal_HPZIntro_Encore

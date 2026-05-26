@@ -1470,6 +1470,8 @@ ArtTile_HPZKnuxBossDust               = $0500
 ArtTile_HPZTeleporter                 = $052E
 ArtTile_HPZBossDebris                 = $0488	; Liliam: Encore mode - LRZ2 boss
 ArtTile_HPZBossCrane                  = $04FB	; Liliam: HPZ - add Knuckles cutscene
+ArtTile_HPZEncoreRobotnik             = $05B8	; Liliam: HPZ - add Encore mode cutscene
+ArtTile_HPZEncoreTeleporter           = $05DC	;
 
 ArtTile_SSZMisc                       = $02D4
 ArtTile_SSZSpiralRamp                 = $0348
