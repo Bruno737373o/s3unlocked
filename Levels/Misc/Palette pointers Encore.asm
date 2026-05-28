@@ -159,12 +159,12 @@
 		dc.l Pal_LRZBoss
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w bytesToLcnt($60)
-		dc.l Pal_HPZIntro_Encore
+		dc.l Pal_HPZIntro
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w bytesToLcnt($60)
 		dc.l Pal_DEZBoss_Encore
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w bytesToLcnt($60)
-		dc.l Pal_HPZ_Encore
+		dc.l Pal_HPZIntro
 		dc.w Normal_palette_line_2&$FFFF
 		dc.w bytesToLcnt($60)

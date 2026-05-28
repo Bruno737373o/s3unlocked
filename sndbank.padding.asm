@@ -1897,12 +1897,12 @@ Obj_HPZEncoreCutscene:
 		move.w	#$300,(Camera_stored_min_Y_pos).w
 
 	.done:
-		lea	(Pal_HPZ_Encore).l,a1
+		lea	(Pal_HPZ).l,a1
 		lea	(Normal_palette_line_2).w,a2
 		moveq	#bytesToLcnt($20),d0
 		btst	#EncoreFlags_Palette,(Encore_mode).w
-		bne.s	.loop
-		lea	(Pal_HPZ).l,a1
+		beq.s	.loop
+		lea	(Pal_HPZIntro).l,a1
 
 	.loop:
 		move.l	(a1),Water_palette-Normal_palette(a2)
