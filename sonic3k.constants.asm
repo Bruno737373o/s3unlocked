@@ -1203,7 +1203,8 @@ ArtTile_Save_ZoneIcon                 = $05BA	; Liliam: data select - add extra 
 ; Blue Sphere.
 ArtTile_BlueSphere_Difficulty         = $0180
 ArtTile_BlueSphere_BG                 = $0197
-ArtTile_BlueSphere_MasterEmerald      = $019E	; Liliam: blue sphere - use S3 branding
+ArtTile_SSZMasterEmerald              = $019E	; Liliam: blue sphere - use S3 branding
+;ArtTile_SSZMasterEmerald             = $01EE	;
 ArtTile_BlueSphere_Emeralds           = $01DC
 ArtTile_BlueSphere_S3KLogo            = $01E2	; Liliam: blue sphere - use S3 branding
 ArtTile_BlueSphere_Misc               = $054E
