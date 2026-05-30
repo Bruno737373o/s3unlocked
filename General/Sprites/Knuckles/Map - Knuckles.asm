@@ -258,11 +258,11 @@ Map_CutsceneKnux:
 		dc.w Map_Knuckles_BalanceA-Map_CutsceneKnux
 		dc.w Map_Knuckles_BalanceB-Map_CutsceneKnux
 		dc.w Map_Knuckles_BalanceC-Map_CutsceneKnux
-		dc.w Map_Knuckles_Spin1-Map_CutsceneKnux
-		dc.w Map_Knuckles_Spin2-Map_CutsceneKnux
-		dc.w Map_Knuckles_Spin3-Map_CutsceneKnux
-		dc.w Map_Knuckles_Spin4-Map_CutsceneKnux
-		dc.w Map_Knuckles_Spin5-Map_CutsceneKnux
+		dc.w Map_Knuckles_Jump1-Map_CutsceneKnux
+		dc.w Map_Knuckles_Jump2-Map_CutsceneKnux
+		dc.w Map_Knuckles_Jump3-Map_CutsceneKnux
+		dc.w Map_Knuckles_Jump4-Map_CutsceneKnux
+		dc.w Map_Knuckles_Jump5-Map_CutsceneKnux
 		dc.w Map_Knuckles_Hurt-Map_CutsceneKnux
 		dc.w Map_Knuckles_Walk1-Map_CutsceneKnux
 		dc.w Map_Knuckles_Walk2-Map_CutsceneKnux
@@ -1383,6 +1383,13 @@ Map_Knuckles_GlideLand1:
 		dc.b  $FB,  $C,   0,   2, $FF, $F4
 		dc.b    3,  $C,   0,   6, $FF, $E4
 		dc.b    3,   8,   0,  $A,   0,   4
+Map_Knuckles_Jump1:
+Map_Knuckles_Jump2:
+Map_Knuckles_Jump3:
+Map_Knuckles_Jump4:
+Map_Knuckles_Jump5:
+		dc.w 1
+		dc.b  $F0,  $F,   8,   0, $FF, $F0
 Map_Knuckles_BombThrow1:
 		dc.w 2
 		dc.b  $EC,   9,   8,   0, $FF, $F9
