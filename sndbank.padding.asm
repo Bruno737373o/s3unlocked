@@ -2078,7 +2078,7 @@ Obj_HPZEncoreCutscene_WaitForFlyAway:
 		beq.s	HPZEncoreCutscene_Return
 		move.w	#$15A0,x_pos(a0)
 		move.w	#$3E0,y_pos(a0)
-		move.b	#$80,subtype(a0)
+		move.b	#$83,subtype(a0)
 		jsr	(Obj_SpriteMask).l
 		move.l	#Obj_HPZEncoreCutscene_WaitForCamera,(a0)
 		move.w	#$60-1,$2E(a0)
@@ -2109,7 +2109,7 @@ Obj_HPZEncoreCutscene_DisableSpriteCollision:
 Obj_HPZEncoreCutscene_StartNewLevel:
 		subq.w	#1,$2E(a0)
 		bpl.s	HPZEncoreCutscene_Return
-		jmp	(loc_45D98).l
+		jmp	(SSZ1_StartNewLevel).l
 ; ---------------------------------------------------------------------------
 
 Obj_HPZEncoreRobotnik:
