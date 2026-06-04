@@ -25,7 +25,7 @@ Obj_LevelSelect_Init:
 		bcs.s	Obj_LevelSelect_Return
 		move.w	#-$13*8,(H_scroll_buffer).w
 		move.w	#$90,x_pos(a0)
-		move.b	#$B,mapping_frame(a0)
+		subq.b	#1,mapping_frame(a0)
 		move.b	#8,routine(a0)
 
 Obj_LevelSelect_Return:
@@ -45,8 +45,8 @@ Obj_LevelSelect_LeftPage:
 		cmpi.b	#$1E,(Level_select_option+1).w
 		bcs.s	Obj_LevelSelect_Return
 		move.w	#$90,x_pos(a0)
-		move.b	#$B,mapping_frame(a0)
 		move.b	#6,routine(a0)
+		subq.b	#1,mapping_frame(a0)
 		subi.w	#8,(H_scroll_buffer).w
 		moveq	#signextendB(sfx_Switch),d0
 		jmp	(Play_SFX).l
@@ -65,8 +65,8 @@ Obj_LevelSelect_RightPage:
 		cmpi.b	#$12,(Level_select_option+1).w
 		bcc.s	Obj_LevelSelect_Return
 		move.w	#$1B8,x_pos(a0)
-		move.b	#$C,mapping_frame(a0)
 		move.b	#2,routine(a0)
+		addq.b	#1,mapping_frame(a0)
 		addi.w	#8,(H_scroll_buffer).w
 		moveq	#signextendB(sfx_Switch),d0
 		jmp	(Play_SFX).l
@@ -150,7 +150,7 @@ LevelSelectZoneIcon_LoadArt:
 		bcc.s	LevelSelectZoneIcon_LoadArt_Extra
 		mulu.w	#$46<<5,d1
 		ori.l	#RAM_start,d1
-		move.w	#tiles_to_bytes($132),d2
+		move.w	#tiles_to_bytes(ArtTile_LevelSelectBG-9*$46),d2
 		move.w	#$46<<4,d3
 		clr.w	art_tile(a0)
 		jsr	(Add_To_DMA_Queue).l
@@ -247,7 +247,7 @@ LevelSelectZoneIcon_LoadPalette:
 		move.b	(a4,d4.w),d1
 		cmpi.b	#$D,d1
 		bne.s	.notEnding
-		moveq	#$19,d1
+		moveq	#$1A,d1
 		bra.s	LevelSelectZoneIcon_LoadPalette_Extra
 ; ---------------------------------------------------------------------------
 
@@ -256,7 +256,7 @@ LevelSelectZoneIcon_LoadPalette:
 		bcs.s	LevelSelectZoneIcon_LoadPalette_Main
 		moveq	#$18,d1
 		move.w	(a4,d4.w),d0
-		bmi.s	LevelSelectZoneIcon_LoadPalette_Extra
+		bmi.s	LevelSelectZoneIcon_LoadPalette_SoundTest
 		moveq	#$17,d1
 		cmpi.w	#$4000,d0
 		beq.s	LevelSelectZoneIcon_LoadPalette_Extra
@@ -295,10 +295,22 @@ SaveScreen_CheckEncorePalette:
 		rts
 ; ---------------------------------------------------------------------------
 
+LevelSelectZoneIcon_LoadPalette_SoundTest:
+		tst.b	(Encore_mode).w
+		beq.s	LevelSelectZoneIcon_LoadPalette_Extra
+		addq.w	#1,d1
+
 LevelSelectZoneIcon_LoadPalette_Extra:
 		move.w	d1,d0
-		lsl.w	#2,d0
-		movea.l	LevelSelectZoneIcon_ExtraPalPtrs-$13<<2(pc,d0.w),a2
+		lea	(Pal_Save_FinishCard1).l,a2
+		subi.w	#$18,d0
+		bpl.s	.index
+		lea	(Pal_Save_ZoneCard_Bonus1).l,a2
+		addq.w	#5,d0
+
+	.index:
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2
 
 LevelSelectZoneIcon_LoadPalette_Copy:
 		moveq	#7,d0
@@ -314,14 +326,6 @@ LevelSelectZoneIcon_ExtraIcons:
 		dc.b  $15, $16
 		dc.b    9,  $D
 		dc.b   $B,  $D
-LevelSelectZoneIcon_ExtraPalPtrs:
-		dc.l Pal_Save_ZoneCard_Bonus1		; $13
-		dc.l Pal_Save_ZoneCard_Bonus2		; $14
-		dc.l Pal_Save_ZoneCard_Bonus3		; $15
-		dc.l Pal_Save_ZoneCard_EncoreBonus	; $16
-		dc.l Pal_Save_ZoneCard_SpecialStage	; $17
-		dc.l Pal_Save_FinishCard1		; $18
-		dc.l Pal_Save_FinishCard3		; $19
 ; ---------------------------------------------------------------------------
 
 Obj_PhotoPiece:
@@ -1704,6 +1708,7 @@ Obj_EncoreHandoff_SwapPlayers:
 		move.b	objoff_37(a0),d0
 		bsr.w	EncoreHandoff_LoadMappings
 		bset	#Status_Facing,status(a0)
+		clr.b	flip_angle(a0)
 		clr.b	anim(a0)
 
 Obj_EncoreHandoff_WalkOffScreen:

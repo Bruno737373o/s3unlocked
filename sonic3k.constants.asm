@@ -1186,6 +1186,7 @@ VRAM_Sprite_Table                     = $F800
 
 ; Menu background.
 ArtTile_S3MenuBG                      = $0001
+ArtTile_LevelSelectBG                 = $0362	; Liliam: level select - use data select background
 
 ; Competition mode.
 ArtTile_Competition_LevSel            = $029F
