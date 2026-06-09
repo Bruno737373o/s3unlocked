@@ -211,30 +211,32 @@ shield_art          = $38
 shield_plc          = $3C
 
 ; ---------------------------------------------------------------------------
-; Liliam: options menu
-Option_AccurateRollHeight = 0
-Option_SonicDropDash      = 1
-Option_TailsAscend        = 2
-Option_KnuxClimbDash      = 3
-Option_AmyDoubleJump      = 4
-Option_MightyWallJump     = 5
-Option_RayWallJump        = 6
-Option_SonicPeelOut       = 7
+; Liliam: hidden skills
+Skill_TailsAssist     = 0
+Skill_SonicDropDash   = 1
+Skill_TailsAscend     = 2
+Skill_KnuxClimbDash   = 3
+Skill_AmyDoubleJump   = 4
+Skill_MightyWallJump  = 5
+Skill_RayWallJump     = 6
+Skill_SonicPeelOut    = 7
+
+; ---------------------------------------------------------------------------
+; Liliam: Encore mode - palette
+EncoreFlags_Music     = 0
+EncoreFlags_Palette2  = 1
+EncoreFlags_Music2    = 2
+EncoreFlags_Palette   = 7
 
 ; ---------------------------------------------------------------------------
 ; Liliam: HUD - Encore mode HUD
-EncoreFlags_Enable        = 0
-EncoreFlags_Music         = 1
-EncoreFlags_Palette       = 2
-EncoreFlags_SwapHUD       = 7
-EncoreFlags_All           = (1<<EncoreFlags_Enable)|(1<<EncoreFlags_Music)|(1<<EncoreFlags_Palette)
-
 Encore_cursor_timer       = Reserved_object_3+$20
 Encore_stocks             = Reserved_object_3+$23
 Encore_HUD_player_frame   = Reserved_object_3+$2C
 Encore_HUD_stocks_frame   = Reserved_object_3+$2E
 Encore_HUD_stocks_timer   = Reserved_object_3+$30
 Encore_HUD_stocks_scroll  = Reserved_object_3+$32
+Encore_SwapHUD            = 7
 
 ; ---------------------------------------------------------------------------
 ; Clock equates
@@ -405,13 +407,13 @@ Competition_saved_data		ds.b $54		; saved data from Competition Mode
 Emerald_flicker_flag		ds.w 1			; controls the emerald flicker in save screen and special stage results.
 Save_pointer			ds.l 1			; pointer to the active save slot in 1 player mode
 Extra_saved_data =		*		; Liliam: options menu
-Collected_holograms_array	ds.l 1		; Liliam: Metal Sonic hologram object
+Encore_options			ds.b 1		; Liliam: options menu
 Collected_photo_piece_array	ds.b $F		; Liliam: museum - photo piece object
-			ds.b 1				; unused
-Unlock_flags			ds.w 1		; Liliam: options menu
-Options				ds.w 1		; Liliam: options menu
+Collected_holograms_array	ds.l 1		; Liliam: Metal Sonic hologram object
 Blue_spheres_saved_level	ds.l 1		; Liliam: blue sphere - load saved level on startup
-			ds.b 6				; unused
+			ds.b 7				; unused
+Skill_options			ds.b 1		; Liliam: hidden skills
+Unlock_flags			ds.w 1		; Liliam: options menu
 				ds.w 2		; Liliam: options menu
 Encore_saved_data		ds.b $22	; Liliam: Encore mode - save game
 Saved_data			ds.b $54		; saved data from 1 player mode
@@ -703,7 +705,8 @@ _unkF712			ds.b $1C		; ??? ; unknown object respawn table
 AIZ1_palette_cycle_flag		ds.b 1			; selects which palette cycles are used in AIZ1
 Bonus_stage_flag		ds.b 1		; Liliam: Encore mode - bonus stage
 Water_flag			ds.b 1
-			ds.b $D				; unused
+Encore_flags			ds.b 1		; Liliam: Encore mode - palette
+			ds.b $C				; unused
 Flying_carrying_Sonic_flag	ds.b 1			; set when Tails carries Sonic in a Sonic and Tails game
 Flying_picking_Sonic_timer	ds.b 1			; until this is 0 Tails can't pick Sonic up
 _unkF740			ds.w 1
@@ -1777,18 +1780,18 @@ sfx_Flying			ds.b 1		; $BA
 sfx_FlyTired			ds.b 1		; $BB
 sfx_HammerAttack		ds.b 1		; $BC	; Liliam: add extra characters
 sfx_HammerRush			ds.b 1		; $BD	; Liliam: add extra characters
-sfx_DropDash			ds.b 1		; $BE	; Liliam: hidden ability - drop dash
-sfx_PeelOut			ds.b 1		; $BF	; Liliam: hidden ability - peel out
+sfx_DropDash			ds.b 1		; $BE	; Liliam: hidden skill - drop dash
+sfx_PeelOut			ds.b 1		; $BF	; Liliam: hidden skill - peel out
 sfx_SpikeBounce			ds.b 1		; $C0	; Liliam: add extra characters
 sfx_HammerDrop			ds.b 1		; $C1	; Liliam: add extra characters
 sfx_MetalSonic			ds.b 1		; $C2	; Liliam: add extra characters
 sfx_MetalBarrier		ds.b 1		; $C3	; Liliam: add extra characters
 sfx_MetalCharge			ds.b 1		; $C4	; Liliam: add extra characters
 sfx_TimeStone			ds.b 1		; $C5	; Liliam: Metal Sonic hologram object
-sfx_AirCountdown		ds.b 1		; $C6	; Liliam: Encore mode - music
+sfx_AirCountdown		ds.b 1		; $C6	; Liliam: no drowning music in Encore mode
 
 sfx__FirstContinuous =		*		; ID of the first continuous sound effect
-sfx_PeelOutCharge		ds.b 1		; $C7	; Liliam: hidden ability - peel out
+sfx_PeelOutCharge		ds.b 1		; $C7	; Liliam: hidden skill - peel out
 sfx_MetalOverdrive		ds.b 1		; $C8	; Liliam: add extra characters
 sfx_LargeShip			ds.b 1		; $C9
 sfx_RobotnikSiren		ds.b 1		; $CA

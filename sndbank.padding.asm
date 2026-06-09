@@ -105,7 +105,7 @@ Obj_LevelSelectCharIcons_Main:
 		move.b	(Player_option+1).w,d0
 		subq.b	#1,d0
 		bpl.s	Obj_LevelSelectCharIcons_Draw
-		move.w	#3,mainspr_childsprites(a0)
+		addq.w	#2,mainspr_childsprites(a0)
 		moveq	#0,d0
 		bra.s	Obj_LevelSelectCharIcons_Draw
 ; ---------------------------------------------------------------------------
@@ -116,7 +116,7 @@ Obj_LevelSelectCharIcons_Encore:
 		move.b	(P2_character).w,d1
 		cmp.b	d0,d1
 		beq.s	Obj_LevelSelectCharIcons_Draw
-		move.w	#3,mainspr_childsprites(a0)
+		addq.w	#2,mainspr_childsprites(a0)
 		move.b	d1,sub4_mapframe(a0)
 
 Obj_LevelSelectCharIcons_Draw:
@@ -163,7 +163,7 @@ LevelSelectZoneIcon_LoadArt:
 		bne.w	LevelSelectZoneIcon_Draw
 
 LevelSelectZoneIcon_DrawBoss:
-		move.b	#8,mapping_frame(a0)
+		addq.b	#1,mapping_frame(a0)
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -181,7 +181,7 @@ LevelSelectZoneIcon_LoadArt_Extra:
 LevelSelectZoneIcon_CheckButtons:
 		tst.b	anim(a0)
 	if DevMode
-		beq.s	LevelSelectZoneIcon_CheckButtons_Encore
+		beq.s	LevelSelectZoneIcon_CheckButtons_EncorePalette
 	else
 		beq.s	LevelSelectZoneIcon_Draw
 	endif
@@ -227,18 +227,22 @@ LevelSelectZoneIcon_Draw:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-LevelSelectZoneIcon_CheckButtons_Encore:
-		move.b	(Encore_mode).w,d1
-		beq.s	LevelSelectZoneIcon_Draw
-		bclr	#EncoreFlags_Palette,d1
+LevelSelectZoneIcon_CheckButtons_EncorePalette:
+		jsr	(Encore_LoadFlags).l
+		bclr	#EncoreFlags_Palette,d2
 		btst	#button_A,(Ctrl_2_held).w
+		beq.s	.checkEncore
+		bset	#EncoreFlags_Palette,d2
+
+	.checkEncore:
+		tst.b	(Encore_mode).w
 		bne.s	.checkUpdate
-		bset	#EncoreFlags_Palette,d1
+		rol.b	#2,d2
 
 	.checkUpdate:
-		cmp.b	(Encore_mode).w,d1
+		cmp.b	(Encore_options).w,d2
 		beq.s	LevelSelectZoneIcon_Draw
-		move.b	d1,(Encore_mode).w
+		move.b	d2,(Encore_options).w
 		jsr	(Draw_Sprite).l
 
 LevelSelectZoneIcon_LoadPalette:
@@ -278,10 +282,9 @@ LevelSelectZoneIcon_CheckEncorePalette:
 		cmpi.b	#$E,d0
 		bcc.s	SaveScreen_CheckEncorePalette.encoreMode
 		lea	(Pal_Save_ZoneCard_AIZ).l,a2
-		move.b	(Encore_mode).w,d2
-		beq.s	SaveScreen_CheckEncorePalette.return
 
 SaveScreen_CheckEncorePalette:
+		jsr	(Encore_LoadFlags).l
 		btst	#EncoreFlags_Palette,d2
 		bne.s	.encoreMode
 		cmpi.b	#4,d0
@@ -1413,7 +1416,7 @@ EncoreCapsule_RotateStocks:
 	.append:
 		move.b	(Player_2+character_id).w,(a1)
 		move.l	#Obj_EncoreHandoff_Hurt,(a0)
-		bclr	#EncoreFlags_SwapHUD,(Encore_mode).w
+		bclr	#Encore_SwapHUD,(Encore_mode).w
 		jmp	(Encore_RepackStocks).l
 ; ---------------------------------------------------------------------------
 
@@ -1905,7 +1908,7 @@ Obj_HPZEncoreCutscene:
 		lea	(Pal_HPZ).l,a1
 		lea	(Normal_palette_line_2).w,a2
 		moveq	#bytesToLcnt($20),d0
-		btst	#EncoreFlags_Palette,(Encore_mode).w
+		btst	#EncoreFlags_Palette,(Encore_flags).w
 		beq.s	.loop
 		lea	(Pal_HPZIntro).l,a1
 

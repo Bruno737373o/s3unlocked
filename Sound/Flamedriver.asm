@@ -146,9 +146,9 @@ zTempoSpeedup:		ds.b 1
 zTempoSpeedupReq:	ds.b 1
 zNextSound:			ds.b 1
 ; The following 3 variables are used for M68K input
-zMusicNumber:		ds.b 1	; Play_Sound
-zSFXNumber0:		ds.b 1	; Play_Sound_2
-zSFXNumber1:		ds.b 1	; Play_Sound_2
+zMusicNumber:		ds.b 1	; Play_Music
+zSFXNumber0:		ds.b 1	; Play_SFX
+zSFXNumber1:		ds.b 1	; Play_SFX
 ;	shared zQueueVariables,zMusicNumber,zSFXNumber0,zSFXNumber1
 	if (zQueueVariables&1)<>0
 		fatal "zQueueVariables must be at an even address."
@@ -755,16 +755,16 @@ zUpdateMusic:
 		call	zDoMusicFadeOut				; Check if music should be faded out and fade if needed
 		call	zDoMusicFadeIn				; Check if music should be faded in and fade if needed
 		ld	a, (zFadeToPrevFlag)			; Get fade-to-prev flag
-		cp	MusID_ExtraLife-MusID__First			; Is it still 1-Up?
+		cp	MusID_ExtraLife-MusID__First	; Is it still 1-Up?
 		jr	nz, .check_fade_in				; Branch if not
 		ld	a, (zMusicNumber)				; Get next music to play
-		cp	FadeID__First-MusID__First	; Liliam: add extra music tracks
-		jr	c, .clr_sfx			;
-		cp	mus__FirstExtra-MusID__First	;
-		jr	c, .clr_queue			;
-;		cp	MusID_ExtraLife			;
-;		jr	z, .clr_queue			;
-		cp	MusID__End-MusID__First					; Is it music?
+		cp	FadeID__First-MusID__First			; Liliam: add extra music tracks
+		jr	c, .clr_sfx							;
+		cp	mus__FirstExtra-MusID__First		;
+		jr	c, .clr_queue						;
+;		cp	MusID_ExtraLife						;
+;		jr	z, .clr_queue						;
+		cp	MusID__End-MusID__First			; Is it music?
 		jr	c, .clr_sfx						; Branch if not
 
 .clr_queue:
@@ -1688,13 +1688,13 @@ zPlaySoundByIndex:
 		jp	z, zPlaySegaSound				; Branch if yes
 		cp	MusID__End						; Is this a music?
 		jp	c, zPlayMusic					; Branch if yes
-		cp	mus__FirstExtra			; Liliam: add extra music tracks
-		jp	c, zMusicFade			;
+		cp	mus__FirstExtra						; Liliam: add extra music tracks
+		jp	c, zMusicFade						;
 		cp	FadeID__First					; Is it before the first fade effect?
-		jp	c, zPlayExtraMusic		; Liliam: add extra music tracks
-;		jp	c, zMusicFade			;
-;		cp	FadeID__End			;
-;		jp	nc, zMusicFade			;
+		jp	c, zPlayExtraMusic					; Liliam: add extra music tracks
+;		jp	c, zMusicFade						;
+;		cp	FadeID__End							;
+;		jp	nc, zMusicFade						;
 		sub	FadeID__First					; If none of the checks passed, do fade effects.
 		ld	hl, zFadeEffects				; hl = switch table pointer
 		rst	PointerTableOffset				; Get address of function that handles the fade effect
@@ -1707,8 +1707,8 @@ zFadeEffects:
 		dw	zMusicFade						; FBh
 		dw	zPSGSilenceAll					; FCh
 		dw	zStopSFX						; FDh
-		dw	zMusicFade			; Liliam: add extra music tracks
-;		dw	zFadeOutMusic			;
+		dw	zMusicFade							; Liliam: add extra music tracks
+;		dw	zFadeOutMusic						;
 ; ---------------------------------------------------------------------------
 ;sub_52E
 zStopSFX:
@@ -1725,7 +1725,11 @@ zStopSFX:
 		add	ix, de							; ix = pointer to next track
 		pop	bc								; Restore bc
 		djnz	.loop						; Loop for each track
-		jp	zClearNextSound
+		xor	a									; Liliam: bugfix - clear continuous SFX
+		ld	(zContinuousSFX), a					;
+		ld	(zNextSound), a						;
+;		jp	zClearNextSound						;
+		ret										;
 
 ; =============== S U B	R O U T	I N E =======================================
 ; Writes hl to stack twice and stops track, silencing it. The two hl pushes
@@ -1741,23 +1745,26 @@ zSilenceStopTrack:
 
 ;loc_552
 zPlayExtraMusic:
-		sub	a, mus__Gap			; Liliam: add extra music tracks
-;		ld	a, 32h				;
+		sub	a, mus__Gap							; Liliam: add extra music tracks
+;		ld	a, 32h								;
 		push	af							; Save af
-		cp	mus_HighFive-mus__Gap		; Liliam: kill SFX for High Five music
-		jp	nz, zPlayMusic_DoFade		;
-		call	zMusicFade			;
+		cp	mus_ExtraLifeK-mus__Gap				; Liliam: Encore mode - music
+		jp	z, zPlayExtraLifeMusic				;
+		cp	mus_HighFive-mus__Gap				; Liliam: kill SFX for High Five music
+		jp	nz, zPlayMusic_DoFade				;
+		call	zMusicFade						;
 		jp	zPlayMusic_DoFade				; Continue as music
 ; ---------------------------------------------------------------------------
 
 ;loc_558
 zPlayMusic:
-
 		sub	MusID__First					; Remap index from 1h-33h to 0h-32h
 		ret	m								; Return if negative (id = 0)
 		push	af							; Save af
-		cp	MusID_ExtraLife-MusID__First		; Is it the 1-up music?
+		cp	MusID_ExtraLife-MusID__First	; Is it the 1-up music?
 		jp	nz, zPlayMusic_DoFade			; Branch if not
+
+zPlayExtraLifeMusic:
 		ld	a, (zFadeInTimeout)				; Fading timeout
 		or	a								; Is music being faded?
 		jp	z, .no_fade						; Branch if not
@@ -1774,7 +1781,7 @@ zPlayMusic:
 ; ---------------------------------------------------------------------------
 .no_fade:
 		ld	a, (zFadeToPrevFlag)			; Get fade-to-prev flag
-		cp	MusID_ExtraLife-MusID__First				; Was it triggered by the 1-up song?
+		cp	MusID_ExtraLife-MusID__First	; Was it triggered by the 1-up song?
 		jp	z, zBGMLoad						; Branch if yes
 		xor	a								; a = 0
 		ld	(zMusicNumber), a				; Clear M68K input queue...
@@ -2462,8 +2469,8 @@ zMusicFade:
 		ld	(hl), a							; Initial value of zero
 		ldir								; while (--length) *de++ = *hl++
 		ld	a, (zTempoSpeedupReq)			; Get flag indicating if tempo is to be kept
-;		or	a				; Liliam: bugfix - keep correct tempo
-;		jr	nz, .keep_tempo			;
+;		or	a									; Liliam: bugfix - keep correct tempo
+;		jr	nz, .keep_tempo						;
 		ld	(zTempoSpeedup), a				; Fade in normal speed
 
 .keep_tempo:
@@ -4605,33 +4612,33 @@ z80_MusicBanks:
 	db zmake68kBank(Snd_Results)
 	db zmake68kBank(Snd_1UP)
 	db zmake68kBank(Snd_Emerald)
-	db zmake68kBank(Snd_Invic)
+	db zmake68kBank(Snd_Invinc)
 	db zmake68kBank(Snd_2PMenu)
-	db zmake68kBank(Snd_Minib)			; Liliam: add extra music tracks
-;	db zmake68kBank(Snd_Minib_SK)			;
+	db zmake68kBank(Snd_Minib)					; Liliam: add extra music tracks
+;	db zmake68kBank(Snd_Minib_SK)				;
 	db zmake68kBank(Snd_Menu)
 	db zmake68kBank(Snd_FinalBoss)
 	db zmake68kBank(Snd_Drown)
 	db zmake68kBank(Snd_PresSega)
-	db zmake68kBank(Snd_3CCredits)			;
+	db zmake68kBank(Snd_3CCredits)				;
 	db zmake68kBank(Snd_SKCredits)
-	db zmake68kBank(Snd_SKKnux)			;
-	db zmake68kBank(Snd_SK1UP)			;
-	db zmake68kBank(Snd_SKInvic)			;
-	db zmake68kBank(Snd_Unused)			;
-	db zmake68kBank(Snd_S1Boss)			;
-	db zmake68kBank(Snd_S2Boss)			;
-	db zmake68kBank(Snd_EncoreBonus)		;
-	db zmake68kBank(Snd_HighFive)			;
-	db zmake68kBank(Snd_ProtoMenu)			;
-	db zmake68kBank(Snd_ProtoKnux)			;
-	db zmake68kBank(Snd_ProtoCNZ1)			;
-	db zmake68kBank(Snd_ProtoCNZ2)			;
-	db zmake68kBank(Snd_ProtoICZ1)			;
-	db zmake68kBank(Snd_ProtoICZ2)			;
-	db zmake68kBank(Snd_ProtoLBZ1)			;
-	db zmake68kBank(Snd_ProtoLBZ2)			;
-	db zmake68kBank(Snd_ProtCredits)		;
+	db zmake68kBank(Snd_SKKnux)					;
+	db zmake68kBank(Snd_SK1UP)					;
+	db zmake68kBank(Snd_SKInvinc)				;
+	db zmake68kBank(Snd_Unused)					;
+	db zmake68kBank(Snd_S1Boss)					;
+	db zmake68kBank(Snd_S2Boss)					;
+	db zmake68kBank(Snd_EncoreBonus)			;
+	db zmake68kBank(Snd_HighFive)				;
+	db zmake68kBank(Snd_ProtoMenu)				;
+	db zmake68kBank(Snd_ProtoKnux)				;
+	db zmake68kBank(Snd_ProtoCNZ1)				;
+	db zmake68kBank(Snd_ProtoCNZ2)				;
+	db zmake68kBank(Snd_ProtoICZ1)				;
+	db zmake68kBank(Snd_ProtoICZ2)				;
+	db zmake68kBank(Snd_ProtoLBZ1)				;
+	db zmake68kBank(Snd_ProtoLBZ2)				;
+	db zmake68kBank(Snd_ProtoCredits)			;
 ; ---------------------------------------------------------------------------
 	if $ > z80_stack_top
 		fatal "Your Z80 tables won't fit before the z80 stack. It's \{$-z80_stack_top}h bytes past the start of the bottom of the stack, at \{z80_stack_top}h"
@@ -4817,33 +4824,33 @@ MusicPointers label *
 	declsong Snd_Results
 	declsong Snd_1UP
 	declsong Snd_Emerald
-	declsong Snd_Invic
+	declsong Snd_Invinc
 	declsong Snd_2PMenu
-	declsong Snd_Minib				; Liliam: add extra music tracks
-;	declsong Snd_Minib_SK				;
+	declsong Snd_Minib							; Liliam: add extra music tracks
+;	declsong Snd_Minib_SK						;
 	declsong Snd_Menu
 	declsong Snd_FinalBoss
 	declsong Snd_Drown
 	declsong Snd_PresSega
-	declsong Snd_3CCredits				;
+	declsong Snd_3CCredits						;
 	declsong Snd_SKCredits
-	declsong Snd_SKKnux				;
-	declsong Snd_SK1UP				;
-	declsong Snd_SKInvic				;
-	declsong Snd_Unused				;
-	declsong Snd_S1Boss				;
-	declsong Snd_S2Boss				;
-	declsong Snd_EncoreBonus			;
-	declsong Snd_HighFive				;
-	declsong Snd_ProtoMenu				;
-	declsong Snd_ProtoKnux				;
-	declsong Snd_ProtoCNZ1				;
-	declsong Snd_ProtoCNZ2				;
-	declsong Snd_ProtoICZ1				;
-	declsong Snd_ProtoICZ2				;
-	declsong Snd_ProtoLBZ1				;
-	declsong Snd_ProtoLBZ2				;
-	declsong Snd_ProtCredits			;
+	declsong Snd_SKKnux							;
+	declsong Snd_SK1UP							;
+	declsong Snd_SKInvinc						;
+	declsong Snd_Unused							;
+	declsong Snd_S1Boss							;
+	declsong Snd_S2Boss							;
+	declsong Snd_EncoreBonus					;
+	declsong Snd_HighFive						;
+	declsong Snd_ProtoMenu						;
+	declsong Snd_ProtoKnux						;
+	declsong Snd_ProtoCNZ1						;
+	declsong Snd_ProtoCNZ2						;
+	declsong Snd_ProtoICZ1						;
+	declsong Snd_ProtoICZ2						;
+	declsong Snd_ProtoLBZ1						;
+	declsong Snd_ProtoLBZ2						;
+	declsong Snd_ProtoCredits					;
 	ifndef zMusIDPtr__End
 zMusIDPtr__End label *
 	endif
@@ -5358,18 +5365,18 @@ Sound_E6:	include "Sound/SFX/E6 - Water Skid.asm"
 Snd_Bank1_Start:	startBank
 	Music_Master_Table
 z80_UniVoiceBank:	include "Sound/UniBank.asm"
-Snd_ProtoKnux:	include "Sound/Music/Knuckles (Prototype).asm"
-Snd_AIZ1:	include "Sound/Music/AIZ1.asm"
-Snd_AIZ2:	include "Sound/Music/AIZ2.asm"
-Snd_HCZ1:	include "Sound/Music/HCZ1.asm"
-Snd_HCZ2:	include "Sound/Music/HCZ2.asm"
-Snd_MGZ1:	include "Sound/Music/MGZ1.asm"
-Snd_MGZ2:	include "Sound/Music/MGZ2.asm"
-Snd_CNZ1:	include "Sound/Music/CNZ1.asm"
-Snd_CNZ2:	include "Sound/Music/CNZ2.asm"
-Snd_FBZ1:	include "Sound/Music/FBZ1.asm"
-Snd_FBZ2:	include "Sound/Music/FBZ2.asm"
-Snd_Results:	include "Sound/Music/Level Outro.asm"
+Snd_ProtoKnux:		include "Sound/Music/Knuckles (Prototype).asm"
+Snd_AIZ1:			include "Sound/Music/AIZ1.asm"
+Snd_AIZ2:			include "Sound/Music/AIZ2.asm"
+Snd_HCZ1:			include "Sound/Music/HCZ1.asm"
+Snd_HCZ2:			include "Sound/Music/HCZ2.asm"
+Snd_MGZ1:			include "Sound/Music/MGZ1.asm"
+Snd_MGZ2:			include "Sound/Music/MGZ2.asm"
+Snd_CNZ1:			include "Sound/Music/CNZ1.asm"
+Snd_CNZ2:			include "Sound/Music/CNZ2.asm"
+Snd_FBZ1:			include "Sound/Music/FBZ1.asm"
+Snd_FBZ2:			include "Sound/Music/FBZ2.asm"
+Snd_Results:		include "Sound/Music/Level Outro.asm"
 
 	finishBank
 
@@ -5378,26 +5385,26 @@ Snd_Results:	include "Sound/Music/Level Outro.asm"
 ; ---------------------------------------------------------------------------
 Snd_Bank2_Start:	startBank
 	Music_Master_Table
-			include "Sound/UniBank.asm"
-Snd_ICZ1:	include "Sound/Music/ICZ1.asm"
-Snd_ICZ2:	include "Sound/Music/ICZ2.asm"
-Snd_LBZ1:	include "Sound/Music/LBZ1.asm"
-Snd_LBZ2:	include "Sound/Music/LBZ2.asm"
-Snd_MHZ1:	include "Sound/Music/MHZ1.asm"
-Snd_MHZ2:	include "Sound/Music/MHZ2.asm"
-Snd_SOZ1:	include "Sound/Music/SOZ1.asm"
-Snd_SOZ2:	include "Sound/Music/SOZ2.asm"
-Snd_LRZ1:	include "Sound/Music/LRZ1.asm"
-Snd_LRZ2:	include "Sound/Music/LRZ2.asm"
-Snd_SSZ:	include "Sound/Music/SSZ.asm"
-Snd_DEZ1:	include "Sound/Music/DEZ1.asm"
-Snd_DEZ2:	include "Sound/Music/DEZ2.asm"
-Snd_Minib_SK:	include "Sound/Music/Miniboss (Sonic & Knuckles).asm"
-Snd_Boss:	include "Sound/Music/Zone Boss.asm"
-Snd_FinalBoss:	include "Sound/Music/Final Boss.asm"
-Snd_DDZ:	include "Sound/Music/DDZ.asm"
-Snd_PachBonus:	include "Sound/Music/Pachinko.asm"
-Snd_SpecialS:	include "Sound/Music/Special Stage.asm"
+					include "Sound/UniBank.asm"
+Snd_ICZ1:			include "Sound/Music/ICZ1.asm"
+Snd_ICZ2:			include "Sound/Music/ICZ2.asm"
+Snd_LBZ1:			include "Sound/Music/LBZ1.asm"
+Snd_LBZ2:			include "Sound/Music/LBZ2.asm"
+Snd_MHZ1:			include "Sound/Music/MHZ1.asm"
+Snd_MHZ2:			include "Sound/Music/MHZ2.asm"
+Snd_SOZ1:			include "Sound/Music/SOZ1.asm"
+Snd_SOZ2:			include "Sound/Music/SOZ2.asm"
+Snd_LRZ1:			include "Sound/Music/LRZ1.asm"
+Snd_LRZ2:			include "Sound/Music/LRZ2.asm"
+Snd_SSZ:			include "Sound/Music/SSZ.asm"
+Snd_DEZ1:			include "Sound/Music/DEZ1.asm"
+Snd_DEZ2:			include "Sound/Music/DEZ2.asm"
+Snd_Minib_SK:		include "Sound/Music/Miniboss (Sonic & Knuckles).asm"
+Snd_Boss:			include "Sound/Music/Zone Boss.asm"
+Snd_FinalBoss:		include "Sound/Music/Final Boss.asm"
+Snd_DDZ:			include "Sound/Music/DDZ.asm"
+Snd_PachBonus:		include "Sound/Music/Pachinko.asm"
+Snd_SpecialS:		include "Sound/Music/Special Stage.asm"
 
 	finishBank
 
@@ -5406,21 +5413,21 @@ Snd_SpecialS:	include "Sound/Music/Special Stage.asm"
 ; ---------------------------------------------------------------------------
 Snd_Bank3_Start:	startBank
 	Music_Master_Table
-			include "Sound/UniBank.asm"
-Snd_SlotBonus:	include "Sound/Music/Slots.asm"
-Snd_GumBonus:	include "Sound/Music/Gum Ball Machine.asm"
-Snd_Knux:	include "Sound/Music/Knuckles (Sonic 3).asm"
-Snd_ALZ:	include "Sound/Music/Azure Lake.asm"
-Snd_BPZ:	include "Sound/Music/Balloon Park.asm"
-Snd_DPZ:	include "Sound/Music/Desert Palace.asm"
-Snd_CGZ:	include "Sound/Music/Chrome Gadget.asm"
-Snd_EMZ:	include "Sound/Music/Endless Mine.asm"
-Snd_GameOver:	include "Sound/Music/Game Over.asm"
-Snd_Emerald:	include "Sound/Music/Chaos Emerald.asm"
-Snd_Invic:	include "Sound/Music/Invincible (Sonic 3).asm"
-Snd_Menu:	include "Sound/Music/Menu.asm"
-Snd_2PMenu:	include "Sound/Music/Competition Menu.asm"
-Snd_Drown:	include "Sound/Music/Countdown.asm"
+					include "Sound/UniBank.asm"
+Snd_SlotBonus:		include "Sound/Music/Slots.asm"
+Snd_GumBonus:		include "Sound/Music/Gum Ball Machine.asm"
+Snd_Knux:			include "Sound/Music/Knuckles (Sonic 3).asm"
+Snd_ALZ:			include "Sound/Music/Azure Lake.asm"
+Snd_BPZ:			include "Sound/Music/Balloon Park.asm"
+Snd_DPZ:			include "Sound/Music/Desert Palace.asm"
+Snd_CGZ:			include "Sound/Music/Chrome Gadget.asm"
+Snd_EMZ:			include "Sound/Music/Endless Mine.asm"
+Snd_GameOver:		include "Sound/Music/Game Over.asm"
+Snd_Emerald:		include "Sound/Music/Chaos Emerald.asm"
+Snd_Invinc:			include "Sound/Music/Invincible (Sonic 3).asm"
+Snd_Menu:			include "Sound/Music/Menu.asm"
+Snd_2PMenu:			include "Sound/Music/Competition Menu.asm"
+Snd_Drown:			include "Sound/Music/Countdown.asm"
 
 	finishBank
 
@@ -5429,23 +5436,23 @@ Snd_Drown:	include "Sound/Music/Countdown.asm"
 ; ---------------------------------------------------------------------------
 Snd_Bank4_Start:	startBank
 	Music_Master_Table
-			include "Sound/UniBank.asm"
-;Snd_SKTitle:	include "Sound/Music/Title (Sonic & Knuckles).asm"
-;Snd_SKPresSega:include "Sound/Music/Game Complete (Sonic & Knuckles).asm"
-Snd_Continue:	include "Sound/Music/Continue.asm"
-Snd_1UP:	include "Sound/Music/1UP (Sonic 3).asm"
-Snd_Minib:	include "Sound/Music/Miniboss (Sonic 3).asm"
-Snd_S3Credits:	include "Sound/Music/Credits (Sonic 3).asm"
-Snd_3CCredits:	include "Sound/Music/Credits (Sonic 3C).asm"
-Snd_SKCredits:	include "Sound/Music/Credits (Sonic & Knuckles).asm"
-Snd_SKKnux:	include "Sound/Music/Knuckles (Sonic & Knuckles).asm"
-Snd_SK1UP:	include "Sound/Music/1UP (Sonic & Knuckles).asm"
-Snd_SKInvic:	include "Sound/Music/Invincible (Sonic & Knuckles).asm"
-Snd_Unused:	include "Sound/Music/Unused (Prototype).asm"
-Snd_S1Boss:	include "Sound/Music/Miniboss (Sonic 1).asm"
-Snd_S2Boss:	include "Sound/Music/Miniboss (Sonic 2).asm"
-Snd_ProtoMenu:	include "Sound/Music/Competition Menu (Prototype).asm"
-Snd_ProtCredits:include "Sound/Music/Credits (Prototype).asm"
+					include "Sound/UniBank.asm"
+;Snd_SKTitle:		include "Sound/Music/Title (Sonic & Knuckles).asm"
+;Snd_SKPresSega:	include "Sound/Music/Game Complete (Sonic & Knuckles).asm"
+Snd_Continue:		include "Sound/Music/Continue.asm"
+Snd_1UP:			include "Sound/Music/1UP (Sonic 3).asm"
+Snd_Minib:			include "Sound/Music/Miniboss (Sonic 3).asm"
+Snd_S3Credits:		include "Sound/Music/Credits (Sonic 3).asm"
+Snd_3CCredits:		include "Sound/Music/Credits (Sonic 3C).asm"
+Snd_SKCredits:		include "Sound/Music/Credits (Sonic & Knuckles).asm"
+Snd_SKKnux:			include "Sound/Music/Knuckles (Sonic & Knuckles).asm"
+Snd_SK1UP:			include "Sound/Music/1UP (Sonic & Knuckles).asm"
+Snd_SKInvinc:		include "Sound/Music/Invincible (Sonic & Knuckles).asm"
+Snd_Unused:			include "Sound/Music/Unused (Prototype).asm"
+Snd_S1Boss:			include "Sound/Music/Miniboss (Sonic 1).asm"
+Snd_S2Boss:			include "Sound/Music/Miniboss (Sonic 2).asm"
+Snd_ProtoMenu:		include "Sound/Music/Competition Menu (Prototype).asm"
+Snd_ProtoCredits:	include "Sound/Music/Credits (Prototype).asm"
 
 	finishBank
 
@@ -5454,16 +5461,16 @@ Snd_ProtCredits:include "Sound/Music/Credits (Prototype).asm"
 ; ---------------------------------------------------------------------------
 Snd_Bank5_Start:	startBank
 	Music_Master_Table
-			include "Sound/UniBank (Prototype).asm"
-Snd_Title:	include "Sound/Music/Title (Sonic 3).asm"
-Snd_PresSega:	include "Sound/Music/Game Complete (Sonic 3).asm"
-Snd_EncoreBonus:include "Sound/Music/Encore Bonus.asm"
-Snd_HighFive:	include "Sound/Music/High Five.asm"
-Snd_ProtoCNZ1:	include "Sound/Music/CNZ1 (Prototype).asm"
-Snd_ProtoCNZ2:	include "Sound/Music/CNZ2 (Prototype).asm"
-Snd_ProtoICZ1:	include "Sound/Music/ICZ1 (Prototype).asm"
-Snd_ProtoICZ2:	include "Sound/Music/ICZ2 (Prototype).asm"
-Snd_ProtoLBZ1:	include "Sound/Music/LBZ1 (Prototype).asm"
-Snd_ProtoLBZ2:	include "Sound/Music/LBZ2 (Prototype).asm"
+					include "Sound/UniBank (Prototype).asm"
+Snd_Title:			include "Sound/Music/Title (Sonic 3).asm"
+Snd_PresSega:		include "Sound/Music/Game Complete (Sonic 3).asm"
+Snd_EncoreBonus:	include "Sound/Music/Encore Bonus.asm"
+Snd_HighFive:		include "Sound/Music/High Five.asm"
+Snd_ProtoCNZ1:		include "Sound/Music/CNZ1 (Prototype).asm"
+Snd_ProtoCNZ2:		include "Sound/Music/CNZ2 (Prototype).asm"
+Snd_ProtoICZ1:		include "Sound/Music/ICZ1 (Prototype).asm"
+Snd_ProtoICZ2:		include "Sound/Music/ICZ2 (Prototype).asm"
+Snd_ProtoLBZ1:		include "Sound/Music/LBZ1 (Prototype).asm"
+Snd_ProtoLBZ2:		include "Sound/Music/LBZ2 (Prototype).asm"
 
 	finishBank
