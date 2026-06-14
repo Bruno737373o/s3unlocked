@@ -1778,20 +1778,20 @@ sfx_Signpost			ds.b 1		; $B8
 sfx_RingLoss			ds.b 1		; $B9
 sfx_Flying			ds.b 1		; $BA
 sfx_FlyTired			ds.b 1		; $BB
+sfx_DropDash			ds.b 1		; $BE	; Liliam: hidden skill - drop dash
+sfx_DashRelease			ds.b 1		; $BF	; Liliam: hidden skill - peel out
 sfx_HammerAttack		ds.b 1		; $BC	; Liliam: add extra characters
 sfx_HammerRush			ds.b 1		; $BD	; Liliam: add extra characters
-sfx_DropDash			ds.b 1		; $BE	; Liliam: hidden skill - drop dash
-sfx_PeelOut			ds.b 1		; $BF	; Liliam: hidden skill - peel out
 sfx_SpikeBounce			ds.b 1		; $C0	; Liliam: add extra characters
 sfx_HammerDrop			ds.b 1		; $C1	; Liliam: add extra characters
-sfx_MetalSonic			ds.b 1		; $C2	; Liliam: add extra characters
+sfx_MetalCharge			ds.b 1		; $C2	; Liliam: add extra characters
 sfx_MetalBarrier		ds.b 1		; $C3	; Liliam: add extra characters
-sfx_MetalCharge			ds.b 1		; $C4	; Liliam: add extra characters
+sfx_TrickAction			ds.b 1		; $C4	; Liliam: add extra characters
 sfx_TimeStone			ds.b 1		; $C5	; Liliam: Metal Sonic hologram object
 sfx_AirCountdown		ds.b 1		; $C6	; Liliam: no drowning music in Encore mode
 
 sfx__FirstContinuous =		*		; ID of the first continuous sound effect
-sfx_PeelOutCharge		ds.b 1		; $C7	; Liliam: hidden skill - peel out
+sfx_PeelOut			ds.b 1		; $C7	; Liliam: hidden skill - peel out
 sfx_MetalOverdrive		ds.b 1		; $C8	; Liliam: add extra characters
 sfx_LargeShip			ds.b 1		; $C9
 sfx_RobotnikSiren		ds.b 1		; $CA

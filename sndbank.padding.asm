@@ -1471,7 +1471,7 @@ Obj_EncoreCapsuleButton_Main:
 		andi.b	#standing_mask,d0
 		beq.s	Obj_EncoreCapsuleButton_Pressed
 		move.l	#Obj_EncoreCapsuleButton_MoveCamera,(a0)
-		move.b	#2,mapping_frame(a0)
+		addq.b	#1,mapping_frame(a0)
 		movea.w	parent3(a0),a1
 		bset	#1,$38(a1)
 
@@ -1504,7 +1504,7 @@ Obj_EncoreCapsuleAnimal_Animate:
 		move.b	#3,mapping_frame(a0)
 		btst	#5,(Level_frame_counter+1).w
 		beq.s	.done
-		move.b	#4,mapping_frame(a0)
+		addq.b	#1,mapping_frame(a0)
 
 	.done:
 		jmp	(Child_Draw_Sprite).l
