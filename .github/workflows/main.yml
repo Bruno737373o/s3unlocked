@@ -1,0 +1,49 @@
+name: Compilar ROM - S3 Unlocked
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+  workflow_dispatch: # Permite rodar manualmente pela aba Actions do GitHub
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    # 1. Baixa o código do repositório
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive # Caso o repositório use submódulos Git
+
+    # 2. Configura o ambiente .NET (necessário para compilar as ferramentas em C# na pasta build_tools)
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # Altere caso as ferramentas exijam outra versão do .NET
+
+    # 3. Compila as ferramentas de build em C# (se necessário)
+    - name: Build C# Tools
+      run: |
+        if (Test-Path "build_tools") {
+          dotnet build build_tools/ -c Release
+        }
+
+    # 4. Executa o script de compilação da ROM
+    # Nota: Substitua "build.bat" pelo nome exato do script de build contido na raiz do repositório (ex: build.bat, make.bat, etc.)
+    - name: Compile ROM
+      run: |
+        .\build.bat
+
+    # 5. Salva a ROM gerada como um artefato para download
+    # Nota: Substitua "*.bin" ou "*.md" pelo nome/extensão do arquivo final gerado (ex: sonic3k.bin)
+    - name: Upload ROM Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: S3-Unlocked-ROM
+        path: |
+          *.bin
+          *.md
+          
