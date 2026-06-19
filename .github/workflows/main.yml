@@ -1,11 +1,11 @@
-name: Compilar ROM - S3 Unlocked
+name: .NET Core & ROM Build
 
 on:
   push:
-    branches: [ "master", "main" ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "master", "main" ]
-  workflow_dispatch: # Permite rodar manualmente pela aba Actions do GitHub
+    branches: [ "main", "master" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,33 +13,37 @@ jobs:
 
     steps:
     # 1. Baixa o código do repositório
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v4
       with:
-        submodules: recursive # Caso o repositório use submódulos Git
+        fetch-depth: 0
 
-    # 2. Configura o ambiente .NET (necessário para compilar as ferramentas em C# na pasta build_tools)
-    - name: Setup .NET Core
+    # 2. Instala o .NET para que as ferramentas em C# na pasta build_tools possam ser compiladas
+    - name: Install .NET Core
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x' # Altere caso as ferramentas exijam outra versão do .NET
+        dotnet-version: 8.0.x
 
-    # 3. Compila as ferramentas de build em C# (se necessário)
+    # 3. Procura e compila ferramentas C# (.csproj) se elas existirem, sem quebrar se não houver solução global
     - name: Build C# Tools
       run: |
-        if (Test-Path "build_tools") {
-          dotnet build build_tools/ -c Release
+        $projects = Get-ChildItem -Recurse -Filter *.csproj
+        if ($projects) {
+          foreach ($project in $projects) {
+            Write-Host "Compilando ferramenta: $($project.FullName)"
+            dotnet build "$($project.FullName)" -c Release
+          }
+        } else {
+          Write-Host "Nenhum projeto C# encontrado em build_tools. Pulando etapa."
         }
 
-    # 4. Executa o script de compilação da ROM
-    # Nota: Substitua "build.bat" pelo nome exato do script de build contido na raiz do repositório (ex: build.bat, make.bat, etc.)
+    # 4. Executa o script que monta a ROM do Sonic 3 Unlocked
     - name: Compile ROM
       run: |
         .\build.bat
 
-    # 5. Salva a ROM gerada como um artefato para download
-    # Nota: Substitua "*.bin" ou "*.md" pelo nome/extensão do arquivo final gerado (ex: sonic3k.bin)
-    - name: Upload ROM Artifact
+    # 5. Salva o arquivo final da ROM (.bin ou .md) para você baixar
+    - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: S3-Unlocked-ROM
